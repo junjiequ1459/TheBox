@@ -1,14 +1,15 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import SignUpPage from "./component/SignUpPage/SignupPage";
+import SignInPage from "./component/SignInPage/SignInPage";
 
 function App() {
   return (
     <>
       <Switch>
-        {/* <Route path="/login">
-          <LoginFormPage />
-        </Route> */}
+        <Route path="/login">
+          <SignInPage />
+        </Route>
         <Route path="/signup">
           <SignUpPage />
         </Route>
