@@ -2,6 +2,8 @@ import "./SignInPage.css";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
+import ConsoleNavBar from "../ConsoleNavBar/ConsoleNavBar";
+import { NavLink } from "react-router-dom";
 
 function SignInForm() {
   // const dispatch = useDispatch();
@@ -34,33 +36,64 @@ function SignInForm() {
 
   return (
     <div>
-      <button onClick={demoLogin}> Demo Login </button>
+      <ConsoleNavBar name={"login"} />
       <form onSubmit={handleSubmit}>
         <ul className="errors">
           {errors.map((error) => (
             <li key={error}>{error}</li>
           ))}
         </ul>
-        <label>
-          Username for 'https://the-box.com':
-          <input
-            className="input"
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </label>
-        <br></br>
-        <label>
-          Password for 'https://the-box.com':
-          <input
-            className="input"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <button type="submit"> Login </button>
+
+        <div className="sign-up-page-container">
+          <img
+            className="thebox-image"
+            src="https://the-box-project.s3.amazonaws.com/final.png"
+            alt="noimg"
+          ></img>
+          <div className="all-input-container">
+            <div className="input-container">
+              <label>
+                <span id="label-green">Username for</span>:
+                <span id="label-blue">~https://the-box.com</span>${" "}
+                <input
+                  className="input"
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </label>
+            </div>
+            <div className="input-container">
+              <label>
+                <span id="label-green">Password for</span>:
+                <span id="label-blue">~https://the-box.com</span>${" "}
+                <input
+                  className="input"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </label>
+            </div>
+            <button className="signin-button" type="submit">
+              {" "}
+              Login
+            </button>
+            <button className="signin-button" onClick={demoLogin}>
+              {" "}
+              Demo Login{" "}
+            </button>
+            <div id="new">
+              {" "}
+              New to theBox?
+              <br></br>
+              <NavLink to="signup" id="navlink">
+                {" "}
+                Create an account
+              </NavLink>
+            </div>
+          </div>
+        </div>
       </form>
     </div>
   );
