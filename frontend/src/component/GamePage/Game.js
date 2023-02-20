@@ -34,10 +34,13 @@ function Game() {
         ctx.drawImage(image, x, y, width, height);
       };
 
-      let scale = 40;
+      let scale = 80;
       const interval = setInterval(() => {
-        scale -= 0.01;
-        if (scale <= 3) {
+        scale -= 0.02;
+        if (
+          image.width * scale <= canvas.width ||
+          image.height * scale <= canvas.height
+        ) {
           clearInterval(interval);
         }
         draw(scale);
@@ -46,8 +49,14 @@ function Game() {
   }, [image]);
 
   return (
-    <div id="canvas-div">
-      <canvas ref={canvasRef} className="canvas" />
+    <div id="game-page">
+      <div id="canvas-div">
+        <canvas ref={canvasRef} className="canvas" />
+        <form id="answer-div">
+          <input type="text"></input>
+          <button> Submit Answer</button>
+        </form>
+      </div>
       <Chat />
     </div>
   );

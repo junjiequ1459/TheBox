@@ -6,4 +6,12 @@
 #canvas-div{
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    padding: 30px;
+    border: black solid 2px;
+}
+
+#answer-div{
+    display:flex;
+    justify-content: center;
 }
