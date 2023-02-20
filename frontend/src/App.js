@@ -1,6 +1,19 @@
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import SignUpPage from "./component/SignUpPage/SignupPage";
+
 function App() {
   return (
-    <h1>Hello from App</h1>
+    <>
+      <Switch>
+        {/* <Route path="/login">
+          <LoginFormPage />
+        </Route> */}
+        <Route path="/signup">
+          <SignUpPage />
+        </Route>
+      </Switch>
+    </>
   );
 }
 
