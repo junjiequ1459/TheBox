@@ -4,12 +4,14 @@ const logger = require('morgan');
 const debug = require('debug'); 
 require("./models/Game")
 require('./models/User');
+require('./models/Room')
 require('./config/passport'); 
 const passport = require('passport');
 
 const cors = require('cors');
 const csurf = require('csurf');
 const { isProduction } = require('./config/keys');
+const roomsRouter = require('./routes/api/rooms')
 const usersRouter = require('./routes/api/users');
 const csrfRouter = require('./routes/api/csrf');
 const gameRouter = require('./routes/api/games')
@@ -38,6 +40,7 @@ app.use(
 );
 
 app.use('/api/users', usersRouter);
+app.use('/api/rooms', roomsRouter);
 app.use('/api/csrf', csrfRouter);
 app.use('/api/games', gameRouter)
 
