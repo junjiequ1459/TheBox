@@ -4,6 +4,7 @@ const logger = require('morgan');
 const debug = require('debug'); 
 
 require('./models/User');
+require('./models/Room')
 require('./config/passport'); 
 const passport = require('passport');
 
