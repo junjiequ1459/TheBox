@@ -2,7 +2,7 @@ const express = require("express");
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const debug = require('debug'); 
-
+require("./models/Game")
 require('./models/User');
 require('./config/passport'); 
 const passport = require('passport');
@@ -12,7 +12,7 @@ const csurf = require('csurf');
 const { isProduction } = require('./config/keys');
 const usersRouter = require('./routes/api/users');
 const csrfRouter = require('./routes/api/csrf');
-
+const gameRouter = require('./routes/api/games')
 
 const app = express();
 
@@ -39,6 +39,7 @@ app.use(
 
 app.use('/api/users', usersRouter);
 app.use('/api/csrf', csrfRouter);
+app.use('/api/games', gameRouter)
 
 app.use((req, res, next) => {
   const err = new Error('Not Found');
