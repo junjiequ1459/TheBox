@@ -9,15 +9,18 @@
     padding-top: 5px;
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .nav-bar-button{
     background-color: rgba(51,51,51,1);
     color:white;
     border:none;
-    font-size: 28px;
+    font-size: 25px;
     width: 50px;
+    border-radius: 10px;
+    margin-bottom: 0.3vh;
+    margin-left: 0.3vw;
 }
 
 .nav-bar-button:hover{

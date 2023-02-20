@@ -15,30 +15,27 @@
     overflow: hidden;
 }
 
-.all-input-container{
-
-}
-input{
+.sign-up-page-container input{
     background-color: black;
     color: white;
     border:none;
     font-size: 20px;
 }
 
-input:focus{
+.sign-up-page-container input:focus{
     outline: none;
 }
 
 
-label {
+.sign-up-page-container label {
     color: white;
     font-size: 20px;
 }
-#label-green{
+.sign-up-page-container #label-green{
     color: #8eff1e;
 }
 
-#label-blue{
+.sign-up-page-container #label-blue{
     color:#008df8
 }
 
@@ -53,7 +50,7 @@ label {
     height: 80px;
   }
   
-  button:hover {
+  .signup-button:hover,.sign-button:hover {
     background-color: green;
   }
   

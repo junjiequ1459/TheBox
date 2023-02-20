@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom";
 function SignInForm() {
   // const dispatch = useDispatch();
   // const sessionUser = useSelector(state => state.session.user);
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
@@ -53,13 +53,14 @@ function SignInForm() {
           <div className="all-input-container">
             <div className="input-container">
               <label>
-                <span id="label-green">Username for</span>:
+                <span id="label-green">Email for</span>:
                 <span id="label-blue">~https://the-box.com</span>${" "}
                 <input
                   className="input"
                   type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
               </label>
             </div>
@@ -72,6 +73,7 @@ function SignInForm() {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
               </label>
             </div>
