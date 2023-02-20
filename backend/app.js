@@ -11,6 +11,7 @@ const passport = require('passport');
 const cors = require('cors');
 const csurf = require('csurf');
 const { isProduction } = require('./config/keys');
+const roomsRouter = require('./routes/api/rooms')
 const usersRouter = require('./routes/api/users');
 const csrfRouter = require('./routes/api/csrf');
 
@@ -39,6 +40,7 @@ app.use(
 );
 
 app.use('/api/users', usersRouter);
+app.use('/api/rooms', roomsRouter);
 app.use('/api/csrf', csrfRouter);
 
 app.use((req, res, next) => {

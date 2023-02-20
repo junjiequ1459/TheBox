@@ -22,4 +22,17 @@ const roomSchema = new Schema(
   }
 );
 
+roomSchema.pre("save", async function (next) {
+  const room = this;
+
+  // Check if there is another Room with the same host value
+  const existingRoom = await Room.findOne({ host: room.host });
+  if (existingRoom && !existingRoom._id.equals(room._id)) {
+    const err = new Error("A host can only have one room");
+    return next(err);
+  }
+
+  return next();
+});
+
 module.exports = mongoose.model('Room', roomSchema);
