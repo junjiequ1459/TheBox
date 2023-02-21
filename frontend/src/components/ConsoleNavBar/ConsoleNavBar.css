@@ -1,0 +1,49 @@
+
+.nav-bar-name{
+    color:white;
+    margin-left: 20px;
+    background-color: black;
+    padding-bottom: 13px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    font-size: 15px;
+}
+
+.nav-bar-button{
+    background-color: rgba(51,51,51,1);
+    color:white;
+    border:none;
+    font-size: 25px;
+    width: 50px;
+    border-radius: 10px;
+    margin-bottom: 0.3vh;
+    margin-left: 0.3vw;
+}
+
+.nav-bar-button:hover{
+    background-color: rgba(51,51,51,0.3);
+}
+
+
+.nav-bar-button:active{
+    background-color: rgba(51,51,51,1);
+}
+
+.console-navbar{
+    display: flex;
+    background-color: rgba(51,51,51,0.8);
+    width: 85vw;
+    height: 5vh;
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    z-index: 1;
+    justify-content: flex-start;
+    align-items: flex-end;
+}

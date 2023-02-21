@@ -1,4 +1,6 @@
-
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { Switch } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Switch } from 'react-router-dom';
@@ -21,7 +23,7 @@ function App() {
   }, [dispatch]);
   return (
     <>
-      <Video/>
+      <Video />
       <NavBar />
       <Switch>
         <AuthRoute exact path="/login" component={LoginForm} />
