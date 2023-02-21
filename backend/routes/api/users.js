@@ -3,7 +3,6 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
-const Game = mongoose.model("Game");
 const passport = require('passport');
 const { loginUser, restoreUser } = require('../../config/passport');
 const { isProduction } = require('../../config/keys');
@@ -12,14 +11,11 @@ const validateLoginInput = require('../../validations/login');
 
 
 //index leaderboards
-router.get('/', function(req, res, next) {
-  res.json({
-    message: "GET /api/users"
-  });
-});
-
-//index match history
-// router.get('/:id/games/')
+// router.get('/', function(req, res, next) {
+//   res.json({
+//     message: "GET /api/users"
+//   });
+// });
 
 router.post('/register', validateRegisterInput, async (req, res, next) => {
   // Check to make sure no one has already registered with the proposed email or
