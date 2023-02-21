@@ -4,5 +4,3 @@ import { sessionErrorsReducer } from './session';
 export default combineReducers({
   session: sessionErrorsReducer
 });
-
-

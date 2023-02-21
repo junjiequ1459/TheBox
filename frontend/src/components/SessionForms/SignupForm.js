@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// import './SessionForm.css';
 import { signup, clearSessionErrors } from '../../store/session';
 
 function SignupForm () {
@@ -10,6 +9,8 @@ function SignupForm () {
   const [password2, setPassword2] = useState('');
   const errors = useSelector(state => state.errors.session);
   const dispatch = useDispatch();
+
+  console.log(errors)
 
   useEffect(() => {
     return () => {
@@ -52,7 +53,14 @@ function SignupForm () {
   }
 
   return (
+    <>
+      <img
+        className="thebox-image"
+        src="https://the-box-project.s3.amazonaws.com/final.png"
+        alt="noimg"
+      ></img>
     <form className="session-form" onSubmit={handleSubmit}>
+
       <h2>Sign Up Form</h2>
       <div className="errors">{errors?.email}</div>
       <label>
@@ -98,6 +106,7 @@ function SignupForm () {
         disabled={!email || !username || !password || password !== password2}
       />
     </form>
+  </>
   );
 }
 

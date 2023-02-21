@@ -1,34 +1,35 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
-import SignUpPage from "./component/SignUpPage/SignupPage";
-import SignInPage from "./component/SignInPage/SignInPage";
-import Video from "./component/VideoBackground/Video";
-import Game from "./component/GamePage/Game";
-import AboutPage from "./component/AboutPage/AboutPage";
-import SplashPage from "./SplashPage/SplashPage";
+
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Switch } from 'react-router-dom';
+
+import { AuthRoute, ProtectedRoute } from './components/Routes/Routes';
+import NavBar from './components/NavBar/NavBar';
+import Video from './components/VideoBackground/Video';
+import MainPage from './components/MainPage/MainPage';
+import LoginForm from './components/SessionForms/LoginForm';
+import SignupForm from './components/SessionForms/SignupForm';
+
+import { getCurrentUser } from './store/session';
 
 function App() {
+  const [loaded, setLoaded] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCurrentUser()).then(() => setLoaded(true));
+  }, [dispatch]);
   return (
     <>
-      <Video />
+      <Video/>
+      <NavBar />
       <Switch>
-        <Route path="/about">
-          <AboutPage />
-        </Route>
-        <Route path="/login">
-          <SignInPage />
-        </Route>
-        <Route path="/signup">
-          <SignUpPage />
-        </Route>
-        <Route path="/play">
-          <Game />
-        </Route>
-        <Route exact path="/">
-          <SplashPage />
-        </Route>
+        <AuthRoute exact path="/" component={MainPage} />
+        <AuthRoute exact path="/login" component={LoginForm} />
+        <AuthRoute exact path="/signup" component={SignupForm} />
       </Switch>
     </>
   );
 }
+
 export default App;
