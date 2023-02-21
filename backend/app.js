@@ -52,6 +52,7 @@ app.get("/CSRF-TOKEN", (req, res) => {
 
 app.use((req, res, next) => {
   const err = new Error("Not Found");
+  
   err.statusCode = 404;
   next(err);
 });
@@ -68,5 +69,6 @@ app.use((err, req, res, next) => {
     errors: err.errors,
   });
 });
+
 
 module.exports = app;
