@@ -4,14 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import ConsoleNavBar from "../ConsoleNavBar/ConsoleNavBar";
 import { NavLink } from "react-router-dom";
-import { login, clearSessionErrors } from '../../store/session';
+import { login, clearSessionErrors } from "../../store/session";
+// import jwtFetch from ".  ./../store/jwt";
+import getCookie from "../../store/jwt";
 
 function SignInForm() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
-  const errors = useSelector(state => state.errors.session);
+
+  const errors = useSelector((state) => state.errors.session);
 
   useEffect(() => {
     return () => {
@@ -21,19 +23,20 @@ function SignInForm() {
 
   const demoLogin = (e) => {
     e.preventDefault();
-    dispatch(login({email: "zaus@zaus.zaus", password: "zausbaus"}))
+
+    dispatch(login({ email: "zaus@zaus.zaus", password: "zausbaus" }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(login({ email, password })); 
+    dispatch(login({ email, password }));
   };
 
   return (
     <div>
       <ConsoleNavBar name={"login"} />
       <form onSubmit={handleSubmit}>
-      <div className="errors">{errors?.email}</div>
+        <div className="errors">{errors?.email}</div>
 
         <div className="sign-up-page-container">
           <img

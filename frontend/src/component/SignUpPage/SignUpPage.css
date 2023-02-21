@@ -50,7 +50,7 @@
     height: 80px;
   }
   
-  .signup-button:hover,.sign-button:hover {
+  .signup-button:hover,.signin-button:hover {
     background-color: green;
   }
   
