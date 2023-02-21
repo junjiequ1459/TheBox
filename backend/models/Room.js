@@ -16,11 +16,11 @@ const roomSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    players: Array
+    players: Array,
   },
   {
     timesstamps: true,
   }
 );
 
-module.exports = mongoose.model('Room', roomSchema);
+module.exports = mongoose.model("Room", roomSchema);
