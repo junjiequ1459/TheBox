@@ -9,13 +9,15 @@ const { isProduction } = require('../../config/keys');
 const validateRegisterInput = require('../../validations/register');
 const validateLoginInput = require('../../validations/login');
 
-
 //index leaderboards
-// router.get('/', function(req, res, next) {
-//   res.json({
-//     message: "GET /api/users"
-//   });
-// });
+router.get('/', async (req, res, next) => {
+  try {
+    const users = await User.find()
+    return res.json(users);
+  } catch (err) {
+    return res.json([]);
+  }
+});
 
 router.post('/register', validateRegisterInput, async (req, res, next) => {
   // Check to make sure no one has already registered with the proposed email or
@@ -61,7 +63,6 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
   });
 });
 
-
 router.post('/login', validateLoginInput, async (req, res, next) => {
   passport.authenticate('local', async function(err, user) {
     if (err) return next(err);
@@ -87,7 +88,5 @@ router.get('/current', restoreUser, (req, res) => {
     email: req.user.email
   });
 });
-
-
 
 module.exports = router;

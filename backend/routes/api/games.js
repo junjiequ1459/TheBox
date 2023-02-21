@@ -2,13 +2,11 @@ const express = require("express")
 const { default: mongoose } = require("mongoose")
 const router = express.Router()
 const Game = mongoose.model("Game")
-const User = mongoose.model("User");
-
 
 //show
 router.get('/:id', async(req, res , next) => {
     try {
-        const game = await Game.findById(req.params.id).populate("winner", "_id username");
+        const game = await Game.findById(req.params.id).populate("winnerId", "_id username");
         return res.json(game);
     }
     catch(err) {
