@@ -8,6 +8,7 @@ function getCookie(cookieName) {
 }
 
 async function jwtFetch(url, options = {}) {
+  debugger
   // Set options.method to 'GET' if there is no method.
   options.method = options.method || "GET";
   // Set options.headers to an empty object if there is no headers.
@@ -16,7 +17,6 @@ async function jwtFetch(url, options = {}) {
   // Remember to add 'Bearer ' to the front of the token.
   const jwtToken = localStorage.getItem("jwtToken");
   if (jwtToken) options.headers["Authorization"] = 'Bearer ' + jwtToken;
-  
   // If the options.method is not 'GET', then set the "Content-Type" header to
   // "application/json".
   if (options.method.toUpperCase() !== "GET") {

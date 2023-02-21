@@ -1,48 +1,39 @@
 import "./SignInPage.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import ConsoleNavBar from "../ConsoleNavBar/ConsoleNavBar";
 import { NavLink } from "react-router-dom";
+import { login, clearSessionErrors } from '../../store/session';
 
 function SignInForm() {
-  // const dispatch = useDispatch();
-  // const sessionUser = useSelector(state => state.session.user);
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  
+  const errors = useSelector(state => state.errors.session);
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearSessionErrors());
+    };
+  }, [dispatch]);
 
   const demoLogin = (e) => {
     e.preventDefault();
-    // dispatch(sessionActions.login({email: "demo@user.io", password: "password"}))
+    dispatch(login({email: "zaus@zaus.zaus", password: "zausbaus"}))
   };
 
   const handleSubmit = (e) => {
-    //   e.preventDefault();
-    //   setErrors([]);
-    //   return dispatch(sessionActions.login({ username, password }))
-    //     .catch(async (res) => {
-    //       let data;
-    //       try {
-    //         data = await res.clone().json();
-    //       } catch {
-    //         data = await res.text(); // Will hit this case if the server is down
-    //       }
-    //       if (data?.errors) setErrors(data.errors);
-    //       else if (data) setErrors([data]);
-    //       else setErrors([res.statusText]);
-    //     });
+    e.preventDefault();
+    dispatch(login({ email, password })); 
   };
 
   return (
     <div>
       <ConsoleNavBar name={"login"} />
       <form onSubmit={handleSubmit}>
-        <ul className="errors">
-          {errors.map((error) => (
-            <li key={error}>{error}</li>
-          ))}
-        </ul>
+      <div className="errors">{errors?.email}</div>
 
         <div className="sign-up-page-container">
           <img
