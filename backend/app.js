@@ -44,15 +44,15 @@ app.use("/api/rooms", roomsRouter);
 app.use("/api/csrf", csrfRouter);
 app.use("/api/games", gameRouter);
 
-app.get("/CSRF-TOKEN", (req, res) => {
-  const csrfToken = req.csrfToken();
-  res.cookie("CSRF-TOKEN", csrfToken);
-  res.json({ "CSRF-Token": csrfToken });
-});
+// app.get("/CSRF-TOKEN", (req, res) => {
+//   const csrfToken = req.csrfToken();
+//   res.cookie("CSRF-TOKEN", csrfToken);
+//   res.json({ "CSRF-Token": csrfToken });
+// });
 
 app.use((req, res, next) => {
   const err = new Error("Not Found");
-  
+
   err.statusCode = 404;
   next(err);
 });
