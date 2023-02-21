@@ -18,7 +18,12 @@ function NavBar () {
       return (
         <div className="links-nav">
           <h1>Welcome {currentUser.username}</h1>
+          <Link to={`/`}>Home</Link>
+          <br></br>
           <Link to={`/profile/${currentUser._id}`}>Profile</Link>
+          <br></br>
+          <Link to={'/play'}>Game</Link>
+          <br></br>
           <button onClick={logoutUser}>Logout</button>
         </div>
       );
