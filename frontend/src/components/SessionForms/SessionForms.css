@@ -1,5 +1,5 @@
 .console-container{
-    background-color: black;
+    background-color: rgba(0,0,0,0.8);
     display: flex;
     height: 85vh;
     width: 85vw;

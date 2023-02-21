@@ -39,7 +39,6 @@ function NavBar () {
 
   return (
     <>
-      <h1>The Box</h1>
       { getLinks() }
     </>
   );
