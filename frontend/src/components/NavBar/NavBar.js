@@ -5,6 +5,7 @@ import { logout } from '../../store/session';
 
 function NavBar () {
   const loggedIn = useSelector(state => !!state.session.user);
+  const currentUser = useSelector(state => state.session.user);
   const dispatch = useDispatch();
   
   const logoutUser = e => {
@@ -16,9 +17,13 @@ function NavBar () {
     if (loggedIn) {
       return (
         <div className="links-nav">
-          <Link to={'/tweets'}>All Tweets</Link>
-          <Link to={'/profile'}>Profile</Link>
-          <Link to={'/tweets/new'}>Write a Tweet</Link>
+          <h1>Welcome {currentUser.username}</h1>
+          <Link to={`/`}>Home</Link>
+          <br></br>
+          <Link to={`/profile/${currentUser._id}`}>Profile</Link>
+          <br></br>
+          <Link to={'/play'}>Game</Link>
+          <br></br>
           <button onClick={logoutUser}>Logout</button>
         </div>
       );
