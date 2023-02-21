@@ -3,7 +3,7 @@ const http = require("http");
 const socketIO = require("socket.io");
 const app = express();
 const server = http.createServer(app);
-const io = socketIO(server);
+
 
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
@@ -17,6 +17,15 @@ const passport = require("passport");
 const cors = require("cors");
 const csurf = require("csurf");
 const { isProduction } = require("./config/keys");
+
+const io = require('socket.io')(server, {
+    cors: {
+        origin: ["http://localhost:3000", "https://pictophone.herokuapp.com/"],
+        transports: ["websocket", "polling"]
+
+    }
+})
+
 const roomsRouter = require("./routes/api/rooms");
 const usersRouter = require("./routes/api/users");
 const csrfRouter = require("./routes/api/csrf");
@@ -81,15 +90,14 @@ io.on("connection", (socket) => {
     console.log(`user left room ${room}`);
   });
 
-  // socket.on("message", (data) => {
-  //   io.to(data.room).emit("message", data.message);
-  //   console.log(`user sent message to room ${data.room}`);
-  // });
+  socket.on("send_message", (data) => {
+    socket.broadcast.emit("receive_message", data)
+  });
 
 });
 
-server.listen(3000, () => {
-  console.log("listening on *:3000");
+server.listen(3001, () => {
+  console.log("listening on *:3001");
 });
 
 module.exports = app;
