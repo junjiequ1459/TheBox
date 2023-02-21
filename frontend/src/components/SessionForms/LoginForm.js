@@ -20,6 +20,11 @@ function LoginForm () {
     return e => setState(e.currentTarget.value);
   }
 
+  const demoLogin = (e) => {
+    e.preventDefault();
+    dispatch(login({ email: "zaus@zaus.zaus", password: "zausbaus" }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(login({ email, password })); 
@@ -51,6 +56,10 @@ function LoginForm () {
         value="Log In"
         disabled={!email || !password}
       />
+      <button className="demo-button" onClick={demoLogin}>
+        {" "}
+        Demo Login{" "}
+      </button>
     </form>
   );
 }

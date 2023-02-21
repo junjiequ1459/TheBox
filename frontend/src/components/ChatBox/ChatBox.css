@@ -1,0 +1,16 @@
+#chat-div{
+    border-radius: 5px;
+    border: 1px solid gray;
+    padding: 10px;
+    margin-left: 50px;
+    width: 20%;
+    background-color: black;
+}
+
+#chat-div p {
+    color: #8eff1e;
+}
+#game-page {
+    display: flex;
+    justify-content: center;
+}
