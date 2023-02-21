@@ -17,3 +17,11 @@
     justify-content: center;
     padding: 30px;
 }
+
+.game-container{
+    width: 85vw;
+    height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

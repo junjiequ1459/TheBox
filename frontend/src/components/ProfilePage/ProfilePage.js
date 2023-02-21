@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import './ProfilePage.css'
 import io from 'socket.io-client';
 const socket = io('http://localhost:3001');
-
-function ProfilePage () {
+import ConsoleNavBar from "../ConsoleNavBar/ConsoleNavBar";
+function ProfilePage() {
   const { userId } = useParams();
 
 
@@ -26,6 +26,8 @@ function ProfilePage () {
     <>
       <h1>Profile</h1>
       <button onClick={handleClick}>TESTING</button>
+      <ConsoleNavBar name={"about"} />
+      <div className="console-container"> </div>
     </>
   );
 }
