@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.3",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "react": "^18.2.0",
+    "react-dedux": "^0.4.0-beta.4",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^5.3.4",
@@ -38,5 +40,5 @@
   "devDependencies": {
     "redux-logger": "^3.0.6"
   },
-  "proxy": "http://localhost:5000/"
+  "proxy": "http://localhost:5000"
 }

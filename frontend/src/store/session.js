@@ -1,4 +1,3 @@
-
 import jwtFetch from './jwt';
 
 const RECEIVE_CURRENT_USER = "session/RECEIVE_CURRENT_USER";

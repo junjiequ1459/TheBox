@@ -1,6 +1,6 @@
 .canvas {
-    border: black solid 1px;
-    border-radius: 5px;
+    border: #8eff1e solid 1px;
+    border-radius: 100px;
 }
 
 #canvas-div{
@@ -8,10 +8,12 @@
     justify-content: center;
     flex-direction: column;
     padding: 30px;
-    border: black solid 2px;
+    border: gray solid 2px;
+    background: black;
 }
 
 #answer-div{
     display:flex;
     justify-content: center;
+    padding: 30px;
 }

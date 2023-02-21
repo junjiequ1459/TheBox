@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// import './SessionForm.css';
 
 import { login, clearSessionErrors } from '../../store/session';
 
@@ -20,6 +19,11 @@ function LoginForm () {
     const setState = field === 'email' ? setEmail : setPassword;
     return e => setState(e.currentTarget.value);
   }
+
+  const demoLogin = (e) => {
+    e.preventDefault();
+    dispatch(login({ email: "zaus@zaus.zaus", password: "zausbaus" }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -52,6 +56,10 @@ function LoginForm () {
         value="Log In"
         disabled={!email || !password}
       />
+      <button className="demo-button" onClick={demoLogin}>
+        {" "}
+        Demo Login{" "}
+      </button>
     </form>
   );
 }
