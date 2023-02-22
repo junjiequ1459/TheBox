@@ -26,13 +26,7 @@ function ProfilePage() {
     e.preventDefault();
     socket.emit("send_message", { message: `hello from ${userId}` });
   };
-
-  useEffect(() => {
-    socket.on("receive_message", (data) => {
-      alert(data.message);
-    });
-  }, [socket]);
-
+  
   useEffect(() => {}, [currentImageUrl]);
 
   const handleImageUpload = async (e) => {
