@@ -7,7 +7,8 @@ import io from "socket.io-client";
 import { updateUser } from "../../store/users";
 import jwtFetch from "../../store/jwt";
 
-const socket = io("http://localhost:3001");
+const socket = io('http://localhost:3001');
+
 function ProfilePage() {
   const { userId } = useParams();
   const [image, setImage] = useState(null);
