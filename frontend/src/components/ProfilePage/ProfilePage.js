@@ -1,9 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import './ProfilePage.css'
-import io from 'socket.io-client';
-const socket = io('http://localhost:3001');
 import ConsoleNavBar from "../ConsoleNavBar/ConsoleNavBar";
+import io from 'socket.io-client';
+
+const socket = io('http://localhost:3001');
 function ProfilePage() {
   const { userId } = useParams();
 
