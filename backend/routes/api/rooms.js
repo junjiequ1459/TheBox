@@ -12,6 +12,7 @@ router.get("/:id", async (req, res, next) => {
       "host",
       "_id username"
     );
+    console.log(room.players);
     return res.json(room);
   } catch (err) {
     const error = new Error("Room not found");
@@ -34,12 +35,12 @@ router.get("/", async (req, res) => {
 });
 
 //create
-router.post("/", requireUser, validateRoomInput, async (req, res, next) => {
+router.post("/", validateRoomInput, async (req, res, next) => {
   try {
     const newRoom = new Room({
       name: req.body.name,
       size: req.body.size,
-      host: req.user._id,
+      host: req.body.host,
     });
 
     const existingRoom = await Room.findOne({ host: newRoom.host });
@@ -49,6 +50,7 @@ router.post("/", requireUser, validateRoomInput, async (req, res, next) => {
       throw err;
     }
 
+    newRoom.players.push(req.body.host);
     let room = await newRoom.save();
     room = await room.populate("host", "_id username");
     return res.json(room);
@@ -62,19 +64,15 @@ router.patch("/:id", requireUser, validateRoomInput, async (req, res, next) => {
   try {
     const roomId = req.params.id;
     const roomToUpdate = await Room.findById(roomId);
-
     if (!roomToUpdate) {
       return res.status(404).json({ message: "Room not found'" });
     }
-    if (String(roomToUpdate.host) !== String(req.user_id)) {
-      return res.status(403).json({ message: "Unauthorized" });
+    
+    if(!roomToUpdate.includes(req.body.playerId) && roomToUpdate.players.length < roomToUpdate.size){
+      roomToUpdate.players.push(req.body.playerId)
+      roomToUpdate.save({players: roomToUpdate.players}).then(res.json(roomToUpdate));
     }
 
-    roomToUpdate.name = req.body.name;
-    const updatedRoom = await roomToUpdate.save();
-    const populatedRoom = await updatedRoom.populate("host", "_id username");
-
-    return res.json(populatedRoom);
   } catch (err) {
     next(err);
   }

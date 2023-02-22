@@ -2,6 +2,7 @@ const express = require("express")
 const { default: mongoose } = require("mongoose")
 const router = express.Router()
 const Game = mongoose.model("Game")
+const Room = mongoose.model("Room")
 
 //show
 router.get('/:id', async(req, res , next) => {
@@ -37,6 +38,7 @@ router.post('/', async (req, res, next) => {
     try {
         room = await Room.findById(req.params.roomId);
     } catch(err) {
+        console.log(req.params.roomId)
         const error = new Error('Room not found');
         error.statusCode = 404;
         error.errors = { message: "No room found with that id"};
@@ -44,6 +46,7 @@ router.post('/', async (req, res, next) => {
     }
 
     try {
+        console.log(room)
         const newGame = new Game( {
             roomId: req.body.roomId,
             winnerId: req.body.winnerId,
