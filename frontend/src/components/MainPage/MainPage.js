@@ -19,24 +19,29 @@ function MainPage() {
 
   return (
     <>
-      <div className="ripple"></div>
       <ConsoleNavBar name={"mainpage"} />
       <div className="console-container">
-        <div></div>
         <div className="create-game-container">
           <div className="main-page-button-container">
             <div>
-              <button className="signup-button" onClick={handleJoinRoom}>
+              <button
+                id="join-lobby-button"
+                className="signup-button"
+                onClick={handleJoinRoom}
+              >
                 Join Lobby
               </button>
+              <div className="ripple-join"></div>
             </div>
             <div>
               <button
+                id="create-lobby-button"
                 className="signup-button"
                 onClick={() => history.push("/roomform")}
               >
                 Create Lobby
               </button>
+              <div className="ripple-create"></div>
             </div>
           </div>
         </div>
