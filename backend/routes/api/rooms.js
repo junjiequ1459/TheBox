@@ -60,14 +60,14 @@ router.post("/", requireUser, validateRoomInput, async (req, res, next) => {
 });
 
 //update
-router.patch("/:id", validateRoomInput, async (req, res, next) => {
+router.patch("/:id", requireUser, validateRoomInput, async (req, res, next) => {
   try {
     const roomId = req.params.id;
     const roomToUpdate = await Room.findById(roomId);
     if (!roomToUpdate) {
       return res.status(404).json({ message: "Room not found'" });
     }
-    const playerinfo = { playerId: req.body.id, username: req.body.username };
+    const playerinfo = { playerId: req.user._id, username: req.user.username };
     // Check if the player is already in the room
     const playerIndex = roomToUpdate.players.findIndex(
       (player) => player.playerId === req.body.id
@@ -96,9 +96,13 @@ router.delete("/:id", requireUser, async (req, res, next) => {
     const roomToDelete = await Room.findById(roomId);
 
     if (!roomToDelete) {
-      return res.status(404).json({ message: "Unauthorized" });
+      return res.status(404).json({ message: "Room not found" });
     }
 
+    if(roomToDelete.host._id !== req.user._id){
+      return res.status(401).json({message: "Unnauthorized" })
+    }
+    
     await roomToDelete.remove();
 
     return res.json({ message: "Deleted room successfully" });
