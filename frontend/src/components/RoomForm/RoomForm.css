@@ -1,0 +1,9 @@
+.create-room-container{
+    height: 85vh;
+    width: 85vw;
+    /* background-color: green; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}

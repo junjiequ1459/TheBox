@@ -20,8 +20,13 @@ function RoomList() {
       <ConsoleNavBar name={"room-list"} />
       <div className="console-container">
         <div className="room-list-container">
-          <div className="room-list-style">
-            <ul className="rooms-list">{roomItems}</ul>
+          <div>
+            <div className="roomlist-title">
+              <h1>ROOMS</h1>
+            </div>
+            <div className="room-list-style">
+              <ul className="rooms-list">{roomItems}</ul>
+            </div>
           </div>
         </div>
       </div>

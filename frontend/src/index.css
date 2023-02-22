@@ -8,3 +8,22 @@
 h2{
     color: white;
 }
+
+a{
+    text-decoration: none;
+}
+a:link {
+    color: #8eff1e;
+  }
+  
+  a:visited {
+    color: #8eff1e;
+  }
+  
+  a:hover {
+    color: #8eff1e;
+  }
+  
+  a:active {
+    color: #8eff1e;
+  }
