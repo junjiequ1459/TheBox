@@ -126,14 +126,6 @@ function SignupForm() {
               />
             </label>
           </div>
-          <label>
-            Profile Image
-            <input
-              type="file"
-              accept=".jpg, .jpeg, .png"
-              onChange={updateFile}
-            />
-          </label>
           <input
             className="signup-button"
             type="submit"

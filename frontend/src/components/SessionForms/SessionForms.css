@@ -22,8 +22,13 @@
     border:none;
     font-size: 20px;
 }
+
+
+
 .console-container input:focus{
     outline: none;
+    border-bottom: 2px solid #8eff1e;
+    transition: border-color 0.5s ease;
 }
 
 .console-container label{

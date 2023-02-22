@@ -1,20 +1,23 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useRef } from "react";
 import "./ProfilePage.css";
 import ConsoleNavBar from "../ConsoleNavBar/ConsoleNavBar";
 import io from "socket.io-client";
 import { updateUser } from "../../store/users";
 import jwtFetch from "../../store/jwt";
 
-const socket = io('http://localhost:3001');
+const socket = io("http://localhost:3001");
 
 function ProfilePage() {
   const { userId } = useParams();
   const [image, setImage] = useState(null);
-  const [currentImageUrl, setcurrentImageUrl] = useState("");
-
   const user = useSelector((state) => state.session.user);
+  const fileInput = useRef(null);
+
+  const [currentImageUrl, setcurrentImageUrl] = useState(user.profileImageUrl);
+
   const dispatch = useDispatch();
 
   socket.emit("join", `${userId}`);
@@ -55,7 +58,11 @@ function ProfilePage() {
   };
 
   //Start of a profile page, need users in the store
-  const updateFile = (e) => setImage(e.target.files[0]);
+  function updateFile(e) {
+    var fileName = e.target.files[0].name;
+    document.getElementById("file-name").textContent = fileName;
+    setImage(e.target.files[0]);
+  }
   return (
     <>
       <h1>Profile</h1>
@@ -70,15 +77,26 @@ function ProfilePage() {
           ></img>
           <form onSubmit={handleImageUpload}>
             <label>
-              Profile Image
+              <button
+                className="signup-button"
+                onClick={() => fileInput.current.click()}
+              >
+                Choose File
+              </button>
               <input
                 type="file"
                 accept=".jpg, .jpeg, .png"
+                ref={fileInput}
+                style={{ display: "none" }}
                 onChange={updateFile}
               />
             </label>
-            <button type="submit">Upload</button>
+            <button className="signup-button" type="submit">
+              Upload
+            </button>
           </form>
+          <span id="file-name"></span>
+
         </div>
       </div>
     </>
