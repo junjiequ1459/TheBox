@@ -1,5 +1,6 @@
 const RECEIVE_ROOM = "rooms/RECEIVE_ROOM";
 const RECEIVE_ROOMS = "rooms/RECEIVE_ROOMS";
+const REMOVE_ROOM = "rooms/REMOVE_ROOM";
 
 const receiveRoom = (room) => ({
   type: RECEIVE_ROOM,
@@ -10,6 +11,11 @@ const receiveRooms = (rooms) => ({
   type: RECEIVE_ROOMS,
   rooms,
 });
+
+const removeRoom = (roomId) => ({
+  type: REMOVE_ROOM,
+  roomId
+})
 
 export const fetchRoom = (roomId) => async (dispatch) => {
   const res = await fetch(`/api/rooms/${roomId}`);
@@ -57,11 +63,15 @@ export const deleteRoom = (roomId) => async dispatch => {
 }
 
 const roomsReducer = (state = {}, action) => {
+  const newState = {...state};
   switch (action.type) {
     case RECEIVE_ROOM:
       return { ...state, [action.room.id]: action.room };
     case RECEIVE_ROOMS:
       return { ...state, ...action.rooms };
+    case REMOVE_ROOM:
+      delete newState[action.roomId]
+      return newState
     default:
       return state;
   }
