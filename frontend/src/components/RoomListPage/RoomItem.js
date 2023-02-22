@@ -1,22 +1,22 @@
 import "./RoomList.css";
-import { Redirect } from "react-router";
+import { Link } from "react-router-dom";
 
 function RoomItem({ room }) {
-  const handleJoinRoom = () => {
-    return <Redirect to={`/room/${room.id}`} />;
-  };
+  debugger;
 
   return (
-    <li className="room-item" onClick={handleJoinRoom}>
-      <div>
-        <span>{room.name}</span>
-        <br></br>
-        <span>Hosted by: {room.host.username}</span>
-      </div>
-      <div>
-        {room.players.length}/{room.size}
-      </div>
-    </li>
+    <Link to={`/room/${room._id}`}>
+      <li className="room-item">
+        <div>
+          <span>{room.name}</span>
+          <br></br>
+          <span>Hosted by: {room.host.username}</span>
+        </div>
+        <div>
+          {room.players.length}/{room.size}
+        </div>
+      </li>
+    </Link>
   );
 }
 
