@@ -12,7 +12,8 @@ users.push(
   new User ({
     username: 'demo-user',
     email: 'demo-user@appacademy.io',
-    hashedPassword: bcrypt.hashSync('starwars', 10)
+    hashedPassword: bcrypt.hashSync('starwars', 10),
+    profileImageUrl: ''
   })
 )
 
@@ -23,7 +24,8 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
     new User ({
       username: faker.internet.userName(firstName, lastName),
       email: faker.internet.email(firstName, lastName),
-      hashedPassword: bcrypt.hashSync(faker.internet.password(), 10)
+      hashedPassword: bcrypt.hashSync(faker.internet.password(), 10),
+      profileImageUrl: ''
     })
   )
 }
