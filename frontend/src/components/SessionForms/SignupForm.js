@@ -13,8 +13,6 @@ function SignupForm() {
   const dispatch = useDispatch();
   const emailInputRef = useRef(null);
 
-  console.log(errors);
-
   useEffect(() => {
     emailInputRef.current.focus();
   }, []);
