@@ -1,26 +1,30 @@
 
 .nav-bar-name{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 4vh;
     color:white;
     margin-left: 20px;
     background-color: black;
-    padding-bottom: 13px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 5px;
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
     font-size: 15px;
+    min-width: 275px;
+    overflow: hidden    ;
 }
 
 .nav-bar-button{
+
     background-color: rgba(51,51,51,1);
     color:white;
     border:none;
     font-size: 25px;
-    width: 50px;
-    border-radius: 10px;
-    margin-bottom: 0.3vh;
+    width: auto;
+    border-radius: 10px;    
     margin-left: 0.3vw;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .nav-bar-button:hover{
@@ -46,4 +50,27 @@
     z-index: 1;
     justify-content: flex-start;
     align-items: flex-end;
+}
+
+.console-nav-link-container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 40vw
+
+}
+
+
+.user-console-name{
+    color: white;
+}
+
+.name-container{
+    width: 45vw;
+    height: 5vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    /* background-color: green; */
+    margin-right: 1vw;
 }

@@ -52,19 +52,23 @@ function GamePage() {
   }, [image]);
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-  }
+    e.preventDefault();
+  };
 
   return (
-    <div id="game-page">
-      <div id="canvas-div">
-        <canvas ref={canvasRef} className="canvas" />
-        <form id="answer-div" onSubmit={handleSubmit}>
-          <input type="text"></input>
-          <button> Submit Answer</button>
-        </form>
+    <div className="console-container">
+      <div className="game-container">
+        <div id="game-page">
+          <div id="canvas-div">
+            <canvas ref={canvasRef} className="canvas" />
+            <form id="answer-div" onSubmit={handleSubmit}>
+              <input type="text"></input>
+              <button> Submit Answer</button>
+            </form>
+          </div>
+          <Chat />
+        </div>
       </div>
-      <Chat />
     </div>
   );
 }

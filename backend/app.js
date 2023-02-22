@@ -3,7 +3,7 @@ const http = require("http");
 const socketIO = require("socket.io");
 const app = express();
 const server = http.createServer(app);
-const io = socketIO(server);
+
 
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
@@ -17,10 +17,38 @@ const passport = require("passport");
 const cors = require("cors");
 const csurf = require("csurf");
 const { isProduction } = require("./config/keys");
+
+const io = require('socket.io')(server, {
+    cors: {
+        origin: ["http://localhost:3000", "https://pictophone.herokuapp.com/"],
+        transports: ["websocket", "polling"]
+
+    }
+})
+
 const roomsRouter = require("./routes/api/rooms");
 const usersRouter = require("./routes/api/users");
 const csrfRouter = require("./routes/api/csrf");
 const gameRouter = require("./routes/api/games");
+
+if (isProduction) {
+  const path = require('path');
+  app.get('/', (req, res) => {
+    res.cookie('CSRF-TOKEN', req.csrfToken());
+    res.sendFile(
+      path.resolve(__dirname, '../frontend', 'build', 'index.html')
+    );
+  });
+
+  app.use(express.static(path.resolve("../frontend/build")));
+
+  app.get(/^(?!\/?api).*/, (req, res) => {
+    res.cookie('CSRF-TOKEN', req.csrfToken());
+    res.sendFile(
+      path.resolve(__dirname, '../frontend', 'build', 'index.html')
+    );
+  });
+}
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -81,10 +109,10 @@ io.on("connection", (socket) => {
     console.log(`user left room ${room}`);
   });
 
-  // socket.on("message", (data) => {
-  //   io.to(data.room).emit("message", data.message);
-  //   console.log(`user sent message to room ${data.room}`);
-  // });
+  socket.on("send_message", (data) => {
+    socket.broadcast.emit("receive_message", data)
+  });
+  
 });
 
 server.listen(3001, () => {

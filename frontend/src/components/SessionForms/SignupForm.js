@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { signup, clearSessionErrors } from "../../store/session";
 import ConsoleNavBar from "../ConsoleNavBar/ConsoleNavBar";
@@ -11,8 +11,11 @@ function SignupForm() {
   const [password2, setPassword2] = useState("");
   const errors = useSelector((state) => state.errors.session);
   const dispatch = useDispatch();
+  const emailInputRef = useRef(null);
 
-  console.log(errors);
+  useEffect(() => {
+    emailInputRef.current.focus();
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -73,6 +76,8 @@ function SignupForm() {
                 value={email}
                 onChange={update("email")}
                 required
+                ref={emailInputRef}
+                autocomplete="new-email"
               />
             </label>
           </div>
@@ -85,6 +90,7 @@ function SignupForm() {
                 value={username}
                 onChange={update("username")}
                 required
+                autocomplete="new-username"
               />
             </label>
           </div>
@@ -97,7 +103,7 @@ function SignupForm() {
                 value={password}
                 onChange={update("password")}
                 required
-                
+                autocomplete="new-password"
               />
             </label>
           </div>
@@ -113,6 +119,7 @@ function SignupForm() {
                 value={password2}
                 onChange={update("password2")}
                 required
+                autocomplete="new-password2"
               />
             </label>
           </div>
