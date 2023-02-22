@@ -1,7 +1,13 @@
 import "./RoomList.css";
+import { Redirect } from "react-router";
+
 function RoomItem({ room }) {
+  const handleJoinRoom = () => {
+    return <Redirect to={`/room/${room.id}`} />;
+  };
+
   return (
-    <li className="room-item">
+    <li className="room-item" onClick={handleJoinRoom}>
       <div>
         <span>{room.name}</span>
         <br></br>

@@ -13,6 +13,8 @@ import { getCurrentUser } from "./store/session";
 import AboutPage from "./components/AboutPage/AboutPage";
 import RoomList from "./components/RoomListPage/RoomList";
 import RoomForm from "./components/RoomForm/RoomForm";
+import RoomShowPage from "./components/RoomShowPage/RoomShowPage";
+
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
@@ -30,6 +32,7 @@ function App() {
         <Route exact path="/about" component={AboutPage} />
         <Route exact path="/roomform" component={RoomForm} />
         <Route exact path="/roomlist" component={RoomList} />
+        <Route path="/room/:roomId" component={RoomShowPage} />
         <Route exact path="/" component={MainPage} />
         <ProtectedRoute exact path="/play" component={GamePage} />
         <ProtectedRoute path="/profile/:userId" component={ProfilePage} />
