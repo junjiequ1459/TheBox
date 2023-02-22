@@ -10,6 +10,7 @@ const userSchema = new Schema(
     profileImageUrl: {
       type: String,
       required: true,
+      default: 'a'
     },
     email: {
       type: String,

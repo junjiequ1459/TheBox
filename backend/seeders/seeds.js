@@ -10,9 +10,9 @@ const users = [];
 
 users.push(
   new User ({
-    username: 'demo-user',
-    email: 'demo-user@appacademy.io',
-    hashedPassword: bcrypt.hashSync('starwars', 10)
+    username: 'zaus',
+    email: 'zaus@zaus.zaus',
+    hashedPassword: bcrypt.hashSync('zausbaus', 10)
   })
 )
 
