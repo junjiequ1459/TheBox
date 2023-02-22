@@ -12,7 +12,7 @@ const receiveRooms = (rooms) => ({
 });
 
 export const fetchRoom = (roomId) => async (dispatch) => {
-  const res = await fetch(`/rooms/${roomId}`);
+  const res = await fetch(`/api/rooms/${roomId}`);
   const room = await res.json();
   return dispatch(receiveRoom(room));
 };
@@ -24,6 +24,37 @@ export const fetchRooms = () => async (dispatch) => {
     dispatch(receiveRooms(rooms));
   }
 };
+
+export const createRoom = (room) => async dispatch => {
+  const res = await fetch ('/api/rooms', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(room)
+  })
+  const newRoom = await res.json();
+  dispatch(receiveRoom(newRoom))
+}
+
+export const updateRoom = (room) => async dispatch => {
+  const res = await fetch(`/api/rooms/${room._id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(room)
+  })
+  const updatedRoom = await res.json();
+  dispatch(receiveRoom(updatedRoom))
+}
+
+export const deleteRoom = (roomId) => async dispatch => {
+  const res = await fetch(`/api/rooms${roomId}`, {
+    method: "DELETE",
+  })
+  dispatch(removeRoom(roomId));
+}
 
 const roomsReducer = (state = {}, action) => {
   switch (action.type) {
