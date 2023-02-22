@@ -9,12 +9,10 @@ function RoomList() {
   const dispatch = useDispatch();
 
   const rooms = useSelector((state) => Object.values(state.rooms));
-  const roomItems = rooms.map((room) => <RoomItem room={room} />);
+  const roomItems = rooms.map((room, i) => <RoomItem key={i} room={room} />);
 
   useEffect(() => {
-    return () => {
       dispatch(fetchRooms());
-    };
   }, [dispatch]);
 
   return (
