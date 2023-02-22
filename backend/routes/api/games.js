@@ -1,46 +1,66 @@
 const express = require("express")
 const { default: mongoose } = require("mongoose")
 const router = express.Router()
-const passport = require("passport")
-const { requireUser } = require("../../config/passport")
 const Game = mongoose.model("Game")
+const Room = mongoose.model("Room")
 
-router.get('/', function(req, res, next) {
-  res.json({
-    message: "GET /api/games"
-  });
-});
-
-router.get("/:gameId", requireUser ,(req, res, next) => {
-    Game.find({ gameId: req.params.gameId }, (err, games) => {
-        if (err) {
-            const error = new Error("Game is not found")
-            error.statusCode = 404
-            error.errors = { message: "No game is found with this ID"}
-            return next(error);
-        }
-        if (games.length === 0) {
-            const error = new Error("Game is not found")
-            error.statusCode = 404
-            error.errors = { message: "No game is found with this ID"}
-            return next(error);
-        }
-        res.json(games[0])
-    })
-})
-
-
-router.post("/", requireUser, async (req, res, next) => {
+//show
+router.get('/:id', async(req, res , next) => {
     try {
-        const newGame = new Game({
-            gameId: req.body.gameId
-        })
-
-        const game = await newGame.save()
-        return res.json(game)
-    } catch(err) {
-        next(err)
+        const game = await Game.findById(req.params.id).populate("winnerId", "_id username");
+        return res.json(game);
+    }
+    catch(err) {
+        const error = new Error('Game not found')
+        error.statusCode = 404;
+        error.errors = { message: "No game found with that id" };
+        return next(error);
     }
 })
+
+//index match history
+router.get("/:userId", async (req, res, next) => {
+  try {
+    const userId = req.params.userId;
+    const games = await Game.find({ players: { $in: [userId] } }).exec();
+    return res.json(games);
+  } catch (err) {
+    next(err);
+  }
+});
+
+module.exports = router;
+
+
+// create
+router.post('/', async (req, res, next) => {
+    let room;
+    try {
+        room = await Room.findById(req.params.roomId);
+    } catch(err) {
+        console.log(req.params.roomId)
+        const error = new Error('Room not found');
+        error.statusCode = 404;
+        error.errors = { message: "No room found with that id"};
+        return next(error);
+    }
+
+    try {
+        console.log(room)
+        const newGame = new Game( {
+            roomId: req.body.roomId,
+            winnerId: req.body.winnerId,
+            players: room.players
+        })
+
+        let game = await newGame.save();
+        game = await game.populate("roomId", "_id name").populate("winnerId", "_id username")
+        return res.json(game);
+    }
+    catch(err) {
+        next(err);
+    } 
+})
+
 
 module.exports = router;
