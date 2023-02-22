@@ -6,7 +6,7 @@ const { requireUser } = require("../../config/passport");
 const validateRoomInput = require("../../validations/rooms");
 
 //show
-router.get("/:id", requireUser, async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
     const room = await Room.findById(req.params.id).populate(
       "host",
@@ -23,7 +23,7 @@ router.get("/:id", requireUser, async (req, res, next) => {
 });
 
 //index
-router.get("/", requireUser, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const rooms = await Room.find()
       .populate("host", "_id username")
@@ -102,7 +102,7 @@ router.delete("/:id", requireUser, async (req, res, next) => {
     if(roomToDelete.host._id !== req.user._id){
       return res.status(401).json({message: "Unnauthorized" })
     }
-    
+
     await roomToDelete.remove();
 
     return res.json({ message: "Deleted room successfully" });
