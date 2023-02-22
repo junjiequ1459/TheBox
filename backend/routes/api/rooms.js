@@ -6,7 +6,7 @@ const { requireUser } = require("../../config/passport");
 const validateRoomInput = require("../../validations/rooms");
 
 //show
-router.get("/:id", async (req, res, next) => {
+router.get("/:id", requireUser, async (req, res, next) => {
   try {
     const room = await Room.findById(req.params.id).populate(
       "host",
@@ -23,7 +23,7 @@ router.get("/:id", async (req, res, next) => {
 });
 
 //index
-router.get("/", async (req, res) => {
+router.get("/", requireUser, async (req, res) => {
   try {
     const rooms = await Room.find()
       .populate("host", "_id username")
@@ -35,12 +35,12 @@ router.get("/", async (req, res) => {
 });
 
 //create
-router.post("/", validateRoomInput, async (req, res, next) => {
+router.post("/", requireUser, validateRoomInput, async (req, res, next) => {
   try {
     const newRoom = new Room({
       name: req.body.name,
       size: req.body.size,
-      host: req.body.host,
+      host: req.user._id,
     });
 
     const existingRoom = await Room.findOne({ host: newRoom.host });
@@ -50,7 +50,7 @@ router.post("/", validateRoomInput, async (req, res, next) => {
       throw err;
     }
 
-    newRoom.players.push(req.body.host);
+    newRoom.players.push({playerId: req.user._id, username: req.user.username});
     let room = await newRoom.save();
     room = await room.populate("host", "_id username");
     return res.json(room);
@@ -60,23 +60,34 @@ router.post("/", validateRoomInput, async (req, res, next) => {
 });
 
 //update
-router.patch("/:id", requireUser, validateRoomInput, async (req, res, next) => {
+router.patch("/:id", validateRoomInput, async (req, res, next) => {
   try {
     const roomId = req.params.id;
     const roomToUpdate = await Room.findById(roomId);
     if (!roomToUpdate) {
       return res.status(404).json({ message: "Room not found'" });
     }
-    
-    if(!roomToUpdate.includes(req.body.playerId) && roomToUpdate.players.length < roomToUpdate.size){
-      roomToUpdate.players.push(req.body.playerId)
-      roomToUpdate.save({players: roomToUpdate.players}).then(res.json(roomToUpdate));
+    const playerinfo = { playerId: req.body.id, username: req.body.username };
+    // Check if the player is already in the room
+    const playerIndex = roomToUpdate.players.findIndex(
+      (player) => player.playerId === req.body.id
+    );
+    if (playerIndex === -1 && roomToUpdate.players.length < roomToUpdate.size) {
+      // If the player is not already in the room and the room has space
+      roomToUpdate.players.push(playerinfo);
+      await roomToUpdate.save();
     }
-
+    // Populate the updated room object with host information and return it
+    const updatedRoom = await Room.findById(roomId).populate(
+      "host",
+      "_id username"
+    );
+    return res.json(updatedRoom);
   } catch (err) {
     next(err);
   }
 });
+
 
 //destroy
 router.delete("/:id", requireUser, async (req, res, next) => {
