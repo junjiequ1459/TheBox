@@ -31,6 +31,25 @@ const usersRouter = require("./routes/api/users");
 const csrfRouter = require("./routes/api/csrf");
 const gameRouter = require("./routes/api/games");
 
+if (isProduction) {
+  const path = require('path');
+  app.get('/', (req, res) => {
+    res.cookie('CSRF-TOKEN', req.csrfToken());
+    res.sendFile(
+      path.resolve(__dirname, '../frontend', 'build', 'index.html')
+    );
+  });
+
+  app.use(express.static(path.resolve("../frontend/build")));
+
+  app.get(/^(?!\/?api).*/, (req, res) => {
+    res.cookie('CSRF-TOKEN', req.csrfToken());
+    res.sendFile(
+      path.resolve(__dirname, '../frontend', 'build', 'index.html')
+    );
+  });
+}
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
