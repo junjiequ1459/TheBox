@@ -2,7 +2,7 @@ import "./RoomForm.css";
 import ConsoleNavBar from "../ConsoleNavBar/ConsoleNavBar";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import createRoom from "../../store/rooms";
+import { createRoom } from "../../store/rooms";
 
 function RoomForm() {
   const dispatch = useDispatch();
@@ -15,15 +15,16 @@ function RoomForm() {
     const roomObj = {
       name,
       size,
-      host: user._id,
+      host: user,
     };
-    // dispatch(createRoom(roomObj));
+    debugger;
+    dispatch(createRoom(roomObj));
   };
   return (
     <div>
       {/* <ConsoleNavBar name={"room-form"} /> */}
       <div className="console-container">
-        <form>
+        <form onSubmit={handleSubmit}>
           <label>
             <span id="label-green">AA-Laptop</span>:
             <span id="label-blue">~/the-box/TheBox/CreateRoom/name</span>${" "}
