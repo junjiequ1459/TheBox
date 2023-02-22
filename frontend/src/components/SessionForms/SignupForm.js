@@ -80,7 +80,7 @@ function SignupForm() {
                 onChange={update("email")}
                 required
                 ref={emailInputRef}
-                autocomplete="new-email"
+                autoComplete="new-email"
               />
             </label>
           </div>
@@ -93,7 +93,7 @@ function SignupForm() {
                 value={username}
                 onChange={update("username")}
                 required
-                autocomplete="new-username"
+                autoComplete="new-username"
               />
             </label>
           </div>
@@ -106,7 +106,7 @@ function SignupForm() {
                 value={password}
                 onChange={update("password")}
                 required
-                autocomplete="new-password"
+                autocCmplete="new-password"
               />
             </label>
           </div>
@@ -122,7 +122,7 @@ function SignupForm() {
                 value={password2}
                 onChange={update("password2")}
                 required
-                autocomplete="new-password2"
+                autoComplete="new-password2"
               />
             </label>
           </div>

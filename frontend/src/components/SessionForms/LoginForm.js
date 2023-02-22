@@ -56,7 +56,7 @@ function LoginForm() {
                 onChange={update("email")}
                 required
                 ref={emailInputRef}
-                autocomplete="new-email"
+                autoComplete="new-email"
               />
             </label>
           </div>
@@ -68,7 +68,7 @@ function LoginForm() {
                 type="password"
                 value={password}
                 onChange={update("password")}
-                autocomplete="new-password"
+                autoComplete="new-password"
                 required
               />
             </label>
