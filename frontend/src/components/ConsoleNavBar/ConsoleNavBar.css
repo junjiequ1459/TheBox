@@ -29,7 +29,9 @@
 }
 
 .nav-bar-button:hover{
-    background-color: rgba(51,51,51,0.3);
+    background-color: #008df8;
+    transition: background-color 0.2s ease;
+
 }
 
 
@@ -66,6 +68,12 @@
     color: white;
 }
 
+.user-console-name:hover{
+    color: #008df8;
+    transition: color 0.2s ease;
+
+}
+
 .name-container{
     width: 45vw;
     height: 5vh;
@@ -74,4 +82,14 @@
     align-items: center;
     /* background-color: green; */
     margin-right: 1vw;
+}
+
+.fa-solid{
+    margin-top:10px;
+    font-size: 20px;
+}
+
+#console-logout-button:hover{
+    background-color: red;
+    transition: background-color 0.2s ease;
 }
