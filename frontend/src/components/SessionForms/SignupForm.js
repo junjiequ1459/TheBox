@@ -9,6 +9,7 @@ function SignupForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
+  const [image, setImage] = useState(null);
   const errors = useSelector((state) => state.errors.session);
   const dispatch = useDispatch();
   const emailInputRef = useRef(null);
@@ -51,12 +52,14 @@ function SignupForm() {
     const user = {
       email,
       username,
+      image,
       password,
     };
 
     dispatch(signup(user));
   };
 
+  const updateFile = (e) => setImage(e.target.files[0]);
   return (
     <>
       <ConsoleNavBar name={"signup"} />
@@ -123,6 +126,14 @@ function SignupForm() {
               />
             </label>
           </div>
+          <label>
+            Profile Image
+            <input
+              type="file"
+              accept=".jpg, .jpeg, .png"
+              onChange={updateFile}
+            />
+          </label>
           <input
             className="signup-button"
             type="submit"
