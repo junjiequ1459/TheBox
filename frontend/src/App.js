@@ -23,7 +23,6 @@ function App() {
   return (
     <>
       <Video />
-      <NavBar />
       <Switch>
         <AuthRoute exact path="/login" component={LoginForm} />
         <AuthRoute exact path="/signup" component={SignupForm} />
