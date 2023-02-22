@@ -19,8 +19,10 @@ function MainPage() {
 
   return (
     <>
+      <div className="ripple"></div>
       <ConsoleNavBar name={"mainpage"} />
       <div className="console-container">
+        <div></div>
         <div className="create-game-container">
           <div className="main-page-button-container">
             <div>

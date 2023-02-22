@@ -39,7 +39,11 @@ function ConsoleNavBar({ name }) {
           >
             Game
           </button>
-          <button className="nav-bar-button" onClick={logoutUser}>
+          <button
+            id="console-logout-button"
+            className="nav-bar-button"
+            onClick={logoutUser}
+          >
             Logout
           </button>
         </div>

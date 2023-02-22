@@ -7,22 +7,90 @@ function AboutPage() {
       <ConsoleNavBar name={"about"} />
       <div className="console-container">
         <div className="team-member-container">
-          <img
-            src="https://the-box-project.s3.amazonaws.com/pfp/37ab184e003b034a4fa821b24849a0d4.png"
-            alt="no img"
-          ></img>
-          <img
-            src="https://the-box-project.s3.amazonaws.com/pfp/37ab184e003b034a4fa821b24849a0d4.png"
-            alt="no img"
-          ></img>{" "}
-          <img
-            src="https://the-box-project.s3.amazonaws.com/pfp/37ab184e003b034a4fa821b24849a0d4.png"
-            alt="no img"
-          ></img>{" "}
-          <img
-            src="https://the-box-project.s3.amazonaws.com/pfp/37ab184e003b034a4fa821b24849a0d4.png"
-            alt="no img"
-          ></img>
+          <div className="image-icon-container">
+            <img
+              src="https://the-box-project.s3.amazonaws.com/pfp/37ab184e003b034a4fa821b24849a0d4.png"
+              alt="no img"
+            ></img>
+            <div>
+              <a href="https://github.com/junjiequ1459/TheBox" target="_blank">
+                <i className="fa-brands fa-github"></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/junjie-qu-239070169/"
+                target="_blank"
+              >
+                <i class="fa-brands fa-linkedin"></i>
+              </a>
+              <a href="https://angel.co/" target="_blank">
+                <i class="fa-brands fa-angellist"></i>
+              </a>
+            </div>
+            <h2>Team Lead</h2>
+          </div>
+          <div className="image-icon-container">
+            <img
+              src="https://the-box-project.s3.amazonaws.com/pfp/37ab184e003b034a4fa821b24849a0d4.png"
+              alt="no img"
+            ></img>{" "}
+            <div>
+              <a href="https://github.com/junjiequ1459/TheBox" target="_blank">
+                <i className="fa-brands fa-github"></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/junjie-qu-239070169/"
+                target="_blank"
+              >
+                <i class="fa-brands fa-linkedin"></i>
+              </a>
+              <a href="https://angel.co/" target="_blank">
+                <i class="fa-brands fa-angellist"></i>
+              </a>
+            </div>
+            <h2>Team Lead</h2>
+          </div>
+          <div className="image-icon-container">
+            <img
+              src="https://the-box-project.s3.amazonaws.com/pfp/37ab184e003b034a4fa821b24849a0d4.png"
+              alt="no img"
+            ></img>{" "}
+            <div>
+              <a href="https://github.com/junjiequ1459/TheBox" target="_blank">
+                <i className="fa-brands fa-github"></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/junjie-qu-239070169/"
+                target="_blank"
+              >
+                <i class="fa-brands fa-linkedin"></i>
+              </a>
+              <a href="https://angel.co/" target="_blank">
+                <i class="fa-brands fa-angellist"></i>
+              </a>
+            </div>
+            <h2>Team Lead</h2>
+          </div>
+          <div className="image-icon-container">
+            <img
+              src="https://the-box-project.s3.amazonaws.com/pfp/37ab184e003b034a4fa821b24849a0d4.png"
+              alt="no img"
+            ></img>
+            <div>
+              <a href="https://github.com/junjiequ1459/TheBox" target="_blank">
+                <i className="fa-brands fa-github"></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/junjie-qu-239070169/"
+                target="_blank"
+              >
+                <i class="fa-brands fa-linkedin"></i>
+              </a>
+              <a href="https://angel.co/" target="_blank">
+                <i class="fa-brands fa-angellist"></i>
+              </a>
+            </div>
+            <h2>Team Lead</h2>
+          </div>
         </div>
         <div className="team-member-description">
           <div className="about-description">
