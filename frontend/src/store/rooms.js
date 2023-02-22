@@ -12,7 +12,7 @@ const receiveRooms = (rooms) => ({
 });
 
 export const fetchRoom = (roomId) => async (dispatch) => {
-  const res = await fetch(`/rooms/${roomId}`);
+  const res = await fetch(`/api/rooms/${roomId}`);
   const room = await res.json();
   return dispatch(receiveRoom(room));
 };
@@ -28,9 +28,9 @@ export const fetchRooms = () => async (dispatch) => {
 const roomsReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_ROOM:
-      return { ...state, [action.room.id]: action.room };
+      return {[action.room._id]: action.room };
     case RECEIVE_ROOMS:
-      return { ...state, ...action.rooms };
+      return { ...action.rooms };
     default:
       return state;
   }
