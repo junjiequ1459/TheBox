@@ -66,9 +66,9 @@ const roomsReducer = (state = {}, action) => {
   const newState = {...state};
   switch (action.type) {
     case RECEIVE_ROOM:
-      return { ...state, [action.room.id]: action.room };
+      return {[action.room._id]: action.room };
     case RECEIVE_ROOMS:
-      return { ...state, ...action.rooms };
+      return { ...action.rooms };
     case REMOVE_ROOM:
       delete newState[action.roomId]
       return newState
