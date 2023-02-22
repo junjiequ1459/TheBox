@@ -2,8 +2,6 @@ import "./RoomList.css";
 import { Link } from "react-router-dom";
 
 function RoomItem({ room }) {
-  debugger;
-
   return (
     <Link to={`/room/${room._id}`}>
       <li className="room-item">
@@ -19,5 +17,4 @@ function RoomItem({ room }) {
     </Link>
   );
 }
-
 export default RoomItem;

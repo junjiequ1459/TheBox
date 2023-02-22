@@ -2,13 +2,14 @@ import "./ChatBox.css";
 import React, { useEffect } from "react";
 import { useState } from "react";
 
-function Chat({socket, username}) {
+function Chat({socket, username, room}) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [allMessages, setMessageArray] = useState([]);
 
   const sendMessage = () => {
     if (currentMessage !== "") {
       const message = {
+        room: room,
         username: username,
         message: currentMessage,
         time:
