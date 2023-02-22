@@ -66,7 +66,7 @@ function GamePage() {
               <button> Submit Answer</button>
             </form>
           </div>
-          <Chat />
+          {/* <Chat /> */}
         </div>
       </div>
     </div>

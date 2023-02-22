@@ -72,7 +72,7 @@ function ConsoleNavBar({ name }) {
     <>
       <div className="console-navbar">
         <div className="nav-bar-name">
-          <i class="fa-solid fa-terminal"></i> AA-Laptop: the-box/TheBox/{name}/
+          <i className="fa-solid fa-terminal"></i> AA-Laptop: the-box/TheBox/{name}/
         </div>
         <HandleAboutPage />
         {getLinks()}
