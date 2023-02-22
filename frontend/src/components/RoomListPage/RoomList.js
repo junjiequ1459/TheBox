@@ -12,14 +12,18 @@ function RoomList() {
   const roomItems = rooms.map((room, i) => <RoomItem key={i} room={room} />);
 
   useEffect(() => {
-      dispatch(fetchRooms());
+    dispatch(fetchRooms());
   }, [dispatch]);
 
   return (
     <>
-      {/* <ConsoleNavBar name={"room-list"} /> */}
+      <ConsoleNavBar name={"room-list"} />
       <div className="console-container">
-        <ul className="rooms-list">{roomItems}</ul>
+        <div className="room-list-container">
+          <div className="room-list-style">
+            <ul className="rooms-list">{roomItems}</ul>
+          </div>
+        </div>
       </div>
     </>
   );

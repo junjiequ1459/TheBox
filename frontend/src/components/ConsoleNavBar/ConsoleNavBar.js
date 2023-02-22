@@ -18,6 +18,12 @@ function ConsoleNavBar({ name }) {
     if (loggedIn) {
       return (
         <div className="console-nav-link-container">
+          <button
+            className="nav-bar-button"
+            onClick={() => history.push("/about")}
+          >
+            About
+          </button>
           <button className="nav-bar-button" onClick={() => history.push("/")}>
             Home
           </button>
@@ -44,6 +50,12 @@ function ConsoleNavBar({ name }) {
           <div className="console-nav-link-container">
             <button
               className="nav-bar-button"
+              onClick={() => history.push("/about")}
+            >
+              About
+            </button>
+            <button
+              className="nav-bar-button"
               onClick={() => history.push("/signup")}
             >
               Signup
@@ -60,23 +72,14 @@ function ConsoleNavBar({ name }) {
     }
   }
 
-  function HandleAboutPage() {
-    return (
-      <NavLink to="about" id="navlink">
-        <button className="nav-bar-button">About</button>
-      </NavLink>
-    );
-  }
-
   return (
     <>
       <div className="console-navbar">
         <div className="nav-bar-name">
-          <i className="fa-solid fa-terminal"></i> AA-Laptop: the-box/TheBox/{name}/
+          <i className="fa-solid fa-terminal"></i> AA-Laptop: the-box/TheBox/
+          {name}/
         </div>
-        <HandleAboutPage />
         {getLinks()}
-
         <div className="name-container">
           <h1 className="user-console-name">
             {currentUser && currentUser.username}

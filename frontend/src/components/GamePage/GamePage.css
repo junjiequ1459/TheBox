@@ -1,6 +1,6 @@
 .canvas {
     border: #8eff1e solid 1px;
-    border-radius: 100px;
+    border-radius: 5%;
 }
 
 #canvas-div{
@@ -8,8 +8,8 @@
     justify-content: center;
     flex-direction: column;
     padding: 30px;
-    border: gray solid 2px;
     background: black;
+    margin-top:15vh;
 }
 
 #answer-div{
@@ -22,6 +22,6 @@
     width: 85vw;
     height: 85vh;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }

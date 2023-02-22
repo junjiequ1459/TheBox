@@ -67,7 +67,9 @@ function ProfilePage() {
     <>
       <h1>Profile</h1>
       <button onClick={handleClick}>TESTING</button>
-      <ConsoleNavBar name={"about"} />
+      
+      <ConsoleNavBar name={"profilePage"} />
+
       <div className="console-container">
         <div className="user-profile-container">
           <img
@@ -96,7 +98,6 @@ function ProfilePage() {
             </button>
           </form>
           <span id="file-name"></span>
-
         </div>
       </div>
     </>

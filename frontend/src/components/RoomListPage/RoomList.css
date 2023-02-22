@@ -1,7 +1,21 @@
 .rooms-list {
-    color: green;
+    color: #8eff1e;
 }
 
 .room-item {
     cursor: pointer;
+}
+
+.room-list-container{
+    width: 85vw;
+    height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.room-list-style{
+    height: 600px;
+    width: 800px;
+    border: 1px solid #8eff1e;
 }
