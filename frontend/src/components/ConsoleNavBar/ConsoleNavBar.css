@@ -11,7 +11,8 @@
     border-top-left-radius: 15px;
     font-size: 15px;
     min-width: 275px;
-    overflow: hidden    ;
+    overflow: hidden;
+    min-height: 30px;
 }
 
 .nav-bar-button{
