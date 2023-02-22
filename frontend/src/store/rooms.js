@@ -34,7 +34,6 @@ export const fetchRooms = () => async (dispatch) => {
 };
 
 export const createRoom = (room) => async (dispatch) => {
-  debugger;
   const res = await jwtFetch("/api/rooms", {
     method: "POST",
     headers: {
@@ -46,7 +45,7 @@ export const createRoom = (room) => async (dispatch) => {
   dispatch(receiveRoom(newRoom));
 };
 
-export const updateRoom = (room) => async (dispatch) => {
+export const joinRoom = (room) => async (dispatch) => {
   const res = await jwtFetch(`/api/rooms/${room._id}`, {
     method: "PATCH",
     headers: {

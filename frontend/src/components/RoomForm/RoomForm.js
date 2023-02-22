@@ -15,7 +15,6 @@ function RoomForm() {
     const roomObj = {
       name,
       size,
-      host: user,
     };
     debugger;
     dispatch(createRoom(roomObj));
