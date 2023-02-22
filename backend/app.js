@@ -20,7 +20,7 @@ const { isProduction } = require("./config/keys");
 
 const io = require('socket.io')(server, {
     cors: {
-        origin: ["http://localhost:3000", "https://pictophone.herokuapp.com/"],
+        origin: ["http://localhost:3000"],
         transports: ["websocket", "polling"]
 
     }
@@ -78,14 +78,13 @@ app.use((err, req, res, next) => {
 });
 
 io.on("connection", (socket) => {
-  console.log("a user connected");
 
   socket.on("join", (room) => {
     socket.join(room);
     console.log(`user joined room ${room}`);
   });
 
-  socket.on("leave", (room) => {
+  socket.on("disconnect", (room) => {
     socket.leave(room);
     console.log(`user left room ${room}`);
   });
