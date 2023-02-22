@@ -11,7 +11,7 @@ import GamePage from "./components/GamePage/GamePage";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
 import { getCurrentUser } from "./store/session";
 import AboutPage from "./components/AboutPage/AboutPage";
-import RoomListPage from "./components/RoomListPage/RoomList";
+import RoomList from "./components/RoomListPage/RoomList";
 import RoomForm from "./components/RoomForm/RoomForm";
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -29,7 +29,7 @@ function App() {
         <AuthRoute exact path="/signup" component={SignupForm} />
         <Route exact path="/about" component={AboutPage} />
         <Route exact path="/roomform" component={RoomForm} />
-        <Route exact path="/roomlist" component={RoomListPage} />
+        <Route exact path="/roomlist" component={RoomList} />
         <Route exact path="/" component={MainPage} />
         <ProtectedRoute exact path="/play" component={GamePage} />
         <ProtectedRoute path="/profile/:userId" component={ProfilePage} />
