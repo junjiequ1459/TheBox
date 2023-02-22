@@ -14,6 +14,7 @@ function RoomShowPage() {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    // dispatch(updateRoom)
     dispatch(fetchRoom(roomId))
   }, [roomId])
 
