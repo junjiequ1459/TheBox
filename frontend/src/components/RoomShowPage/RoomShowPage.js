@@ -16,10 +16,13 @@ function RoomShowPage() {
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const room = useSelector((state) => state.rooms[0]);
-  const players = room.players.map((player, i) => (
+  const ifPlayer = room ? room.players : []
+
+  const players = ifPlayer.length === 0 ? [] : ifPlayer.map((player, i) => (
     <li key={i}> {player.username} </li>
   ));
   const [socket2, setSocket] = useState(1);
+
   useEffect(() => {
     socket.emit("join", roomId);
     socket.on("start-game", () => {
@@ -32,6 +35,9 @@ function RoomShowPage() {
     dispatch(fetchRoom(roomId))
   }, [roomId])
   
+  useEffect(() => {
+    dispatch(fetchRoom(roomId));
+  }, [roomId])
 
   if (user === undefined) {
     return <>still loading...</>;
@@ -53,8 +59,9 @@ function RoomShowPage() {
     dispatch(fetchRooms());
   };
 
-  const leaveOrDelete =
-    room.host._id === user._id ? (
+  const leaveOrDelete = 
+    
+      room ? room.host._id === user._id ? (
       <Link to="/" onClick={handleDelete}>
         {" "}
         Delete Room{" "}
@@ -64,15 +71,16 @@ function RoomShowPage() {
         {" "}
         Leave Room{" "}
       </Link>
-    );
+    ) : null
+
 
   return (
     <>
       <div className="room-show">
-        <h1> {room.name}</h1>
-        <h1> Hosted by: {room.host.username}</h1>
+        <h1> {room ? room.name : null}</h1>
+        <h1> Hosted by: {room ? room.host.username : null}</h1>
         <ul>
-          Players in room ({players.length}/{room.size}){players}
+          Players in room ({players ? players.length : null }/{room ? room.size : null}){players ? players : null}
         </ul>
       </div>
       ;<button onClick={handleStartGame}>START GAME</button>
