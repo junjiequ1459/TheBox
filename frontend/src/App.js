@@ -43,7 +43,7 @@ function App() {
             <Route exact path="/roomlist" component={RoomList} />
             <Route path="/room/:roomId" component={RoomShowPage} />
             <ProtectedRoute exact path="/" component={MainPage} />
-            {/* <ProtectedRoute exact path="/play" component={GamePage} /> */}
+            <ProtectedRoute exact path="/play" component={GamePage} />
             <ProtectedRoute path="/profile/:userId" component={ProfilePage} />
           </Switch>
         </>

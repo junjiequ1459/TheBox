@@ -5,7 +5,7 @@ import { fetchRoom } from "../../store/rooms";
 import Chat from "../ChatBox/ChatBox";
 import io from "socket.io-client";
 import "./RoomShowPage.css";
-import { updateRoom, deleteRoom } from "../../store/rooms";
+import { updateRoom, deleteRoom, fetchRooms } from "../../store/rooms";
 import { Link } from "react-router-dom";
 import GameModal from "../GamePage/GamePage.js";
 import ConsoleNavBar from "../ConsoleNavBar/ConsoleNavBar";
@@ -18,24 +18,29 @@ function RoomShowPage() {
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const room = useSelector((state) => state.rooms[0]);
-  const players = room.players.map((player, i) => (
-    <li key={i}> {player.username} </li>
-  ));
+  const ifPlayer = room ? room.players : [];
+
+  const players =
+    ifPlayer.length === 0
+      ? []
+      : ifPlayer.map((player, i) => <li key={i}> {player.username} </li>);
   const [socket2, setSocket] = useState(1);
   const [hidden, setHidden] = useState(true);
   const game = hidden ? null : <GameModal />;
 
+  socket.emit("join", roomId);
   useEffect(() => {
-    socket.emit("join", roomId);
+    const intervalId = setInterval(() => {
+      dispatch(fetchRoom(roomId));
+    }, 500);
     socket.on("start-game", () => {
       setHidden(false);
       console.log("started game");
     });
-  }, [roomId, socket, socket2, players]);
-
-  useEffect(() => {
-    dispatch(fetchRoom(roomId));
-  }, [roomId]);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
   if (user === undefined) {
     return <>still loading...</>;
@@ -54,9 +59,10 @@ function RoomShowPage() {
 
   const handleDelete = (e) => {
     dispatch(deleteRoom(room));
+    dispatch(fetchRooms());
   };
 
-  const leaveOrDelete =
+  const leaveOrDelete = room ? (
     room.host._id === user._id ? (
       <button
         className="signup-button"
@@ -68,7 +74,6 @@ function RoomShowPage() {
         Delete Room
       </button>
     ) : (
-
       <button
         className="signup-button"
         onClick={() => {
@@ -108,10 +113,6 @@ function RoomShowPage() {
             </div>
           </div>
         </div>
-        <button onClick={handleStartGame}>START GAME</button>
-        {leaveOrDelete}
-        <Chat socket={socket} username={user.username} room={roomId} />
-        {game}
       </div>
     </>
   );

@@ -108,8 +108,9 @@ router.delete("/:id", requireUser, async (req, res, next) => {
       
       return res.status(401).json({message: "Unnauthorized" })
     }
-
-    await roomToDelete.remove();
+    
+    await roomToDelete.remove()
+    
 
     return res.json({ message: "Deleted room successfully" });
   } catch (err) {
