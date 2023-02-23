@@ -5,6 +5,8 @@
     margin-left: 50px;
     width: 20vw;
     background-color: black;
+    max-height: 500px;
+    overflow: auto;
 }
 
 #chat-div p {

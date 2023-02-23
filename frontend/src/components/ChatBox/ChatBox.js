@@ -1,10 +1,11 @@
 import "./ChatBox.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 
 function Chat({socket, username, room}) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [allMessages, setMessageArray] = useState([]);
+  const messageUlRef = useRef(null);
 
   const sendMessage = () => {
     if (currentMessage !== "") {
@@ -21,6 +22,7 @@ function Chat({socket, username, room}) {
       socket.emit("send_message", message);
       setMessageArray(array => [...array, message]);
       setCurrentMessage("");
+      scrollToBottom();
     }
   };
 
@@ -29,6 +31,10 @@ function Chat({socket, username, room}) {
       setMessageArray((array) => [...array, data]);
     });
   }, [socket]);
+
+  const scrollToBottom = () => {
+    messageUlRef.current.scrollTop = messageUlRef.current.scrollHeight;
+  };
 
   return (
     <div id="chat-div">
