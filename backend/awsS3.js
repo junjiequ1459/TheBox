@@ -8,6 +8,9 @@ const NAME_OF_BUCKET = "the-box-project"; // <-- Use your bucket name here
 // backend/awsS3.js
 
 const singleFileUpload = async ({ file, public = false }) => {
+  if (!file) {
+    throw new Error("No file in request");
+  }
   const { originalname, buffer } = file;
   const path = require("path");
 

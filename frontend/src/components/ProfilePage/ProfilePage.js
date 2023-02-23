@@ -26,11 +26,15 @@ function ProfilePage() {
     e.preventDefault();
     socket.emit("send_message", { message: `hello from ${userId}` });
   };
-  
+
   useEffect(() => {}, [currentImageUrl]);
 
   const handleImageUpload = async (e) => {
     e.preventDefault();
+    if (!image) {
+      console.error("No file selected");
+      return;
+    }
     const formData = new FormData();
     formData.append("image", image);
     try {
@@ -51,17 +55,22 @@ function ProfilePage() {
     }
   };
 
-  //Start of a profile page, need users in the store
   function updateFile(e) {
-    var fileName = e.target.files[0].name;
-    document.getElementById("file-name").textContent = fileName;
-    setImage(e.target.files[0]);
+    if (e.target.files[0]) {
+      var fileName = e.target.files[0].name;
+      document.getElementById("file-name").textContent = fileName;
+      setImage(e.target.files[0]);
+    } else {
+      document.getElementById("file-name").textContent = "";
+      setImage(null);
+    }
   }
+  
   return (
     <>
       <h1>Profile</h1>
       <button onClick={handleClick}>TESTING</button>
-      
+
       <ConsoleNavBar name={"profilePage"} />
 
       <div className="console-container">
