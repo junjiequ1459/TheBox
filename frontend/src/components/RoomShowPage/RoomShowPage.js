@@ -5,7 +5,7 @@ import { fetchRoom } from "../../store/rooms";
 import Chat from "../ChatBox/ChatBox";
 import io from "socket.io-client";
 import "./RoomShowPage.css";
-import { updateRoom, deleteRoom, fetchRooms } from "../../store/rooms";
+import { updateRoom, deleteRoom } from "../../store/rooms";
 import { Link } from "react-router-dom";
 import GameModal from "../GamePage/GamePage.js";
 
@@ -17,9 +17,7 @@ function RoomShowPage() {
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const room = useSelector((state) => state.rooms[0]);
-  const ifPlayer = room ? room.players : []
-
-  const players = ifPlayer.length === 0 ? [] : ifPlayer.map((player, i) => (
+  const players = room.players.map((player, i) => (
     <li key={i}> {player.username} </li>
   ));
   const [socket2, setSocket] = useState(1);
@@ -55,12 +53,10 @@ function RoomShowPage() {
 
   const handleDelete = (e) => {
     dispatch(deleteRoom(room));
-    dispatch(fetchRooms());
   };
 
-  const leaveOrDelete = 
-    
-      room ? room.host._id === user._id ? (
+  const leaveOrDelete =
+    room.host._id === user._id ? (
       <Link to="/" onClick={handleDelete}>
         {" "}
         Delete Room{" "}
@@ -70,24 +66,23 @@ function RoomShowPage() {
         {" "}
         Leave Room{" "}
       </Link>
-    ) : null
-
+    );
 
   return (
     <>
-    <div>
-      <div className="room-show">
-        <h1> {room ? room.name : null}</h1>
-        <h1> Hosted by: {room ? room.host.username : null}</h1>
-        <ul>
-          Players in room ({players ? players.length : null }/{room ? room.size : null}){players ? players : null}
-        </ul>
+      <div>
+        <div className="room-show">
+          <h1> {room.name}</h1>
+          <h1> Hosted by: {room.host.username}</h1>
+          <ul>
+            Players in room ({players.length}/{room.size}){players}
+          </ul>
+        </div>
+        ;<button onClick={handleStartGame}>START GAME</button>
+        {leaveOrDelete}
+        <Chat socket={socket} username={user.username} room={roomId} />
+        {game}
       </div>
-      ;<button onClick={handleStartGame}>START GAME</button>
-      {leaveOrDelete}
-      <Chat socket={socket} username={user.username} room={roomId} />
-      {game}
-    </div>
     </>
   );
 }
