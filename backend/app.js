@@ -103,13 +103,19 @@ io.on("connection", (socket) => {
     console.log(`user joined room ${room}`);
   });
 
+  socket.on('start-game', room => {
+    socket.to(room).emit('start-game',() => {
+      console.log('game started')
+    })
+  })
+
   socket.on("disconnect", (room) => {
     socket.leave(room);
     console.log(`user left room ${room}`);
   });
 
   socket.on("send_message", (data) => {
-    socket.broadcast.emit("receive_message", data)
+    socket.to(data.room).emit("receive_message", data)
   });
   
 });
