@@ -14,7 +14,6 @@ function MainPage() {
 
   const handleJoinRoom = () => {
     history.push("/roomlist");
-    return <Redirect to="/roomlist" />;
   };
 
   return (

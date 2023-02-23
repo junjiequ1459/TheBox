@@ -4,17 +4,18 @@ import { useEffect } from "react";
 import { fetchRoom } from "../../store/rooms";
 import Chat from "../ChatBox/ChatBox";
 import io from "socket.io-client";
+import './RoomShowPage.css'
+import { updateRoom } from "../../store/rooms";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 const socket = io('http://localhost:3001');
 
 function RoomShowPage() {
   const { roomId } = useParams();
-  console.log(roomId)
   const user = useSelector((state) => state.session.user);
-  console.log(user)
   const dispatch = useDispatch()
-
+  const room = useSelector((state) => state.rooms[0])
+  const players = room.players.map((player) => <li> {player.username} </li>)
   useEffect(() => {
-    // dispatch(updateRoom)
     dispatch(fetchRoom(roomId))
   }, [roomId])
 
@@ -25,12 +26,20 @@ function RoomShowPage() {
     )
   }
 
+  const handleLeave = (e) => {
+    dispatch(updateRoom(room))
+  }
+
   return (
   <>
-    <div>
-      <h1>SHOW PAGE</h1>
+    <div className='room-show'>
+      <h1> {room.name}</h1>
+      <h1> Hosted by: {room.host.username}</h1>
+      <ul>Players in room ({players.length}/{room.size})
+        {players}
+      </ul>
     </div>;
-
+    <Link to="/roomlist" onClick={handleLeave}> Leave Room </Link>
     <Chat socket={socket} username={user.username} room={roomId}/>
   </>
   )
