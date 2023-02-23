@@ -96,12 +96,20 @@ app.use((err, req, res, next) => {
   });
 });
 
+
+
 io.on("connection", (socket) => {
 
-  socket.on("join", (room) => {
+  socket.on("join", (room, username) => {
+
     socket.join(room);
-    console.log(`user joined room ${room}`);
   });
+
+  socket.on('start-game', room => {
+    socket.to(room).emit('start-game',() => {
+      console.log('game started')
+    })
+  })
 
   socket.on("disconnect", (room) => {
     socket.leave(room);
@@ -109,7 +117,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("send_message", (data) => {
-    socket.broadcast.emit("receive_message", data)
+    socket.to(data.room).emit("receive_message", data)
   });
   
 });

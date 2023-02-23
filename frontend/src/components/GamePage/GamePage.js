@@ -5,7 +5,7 @@ import Chat from "../ChatBox/ChatBox";
 import io from "socket.io-client";
 import ConsoleNavBar from "../ConsoleNavBar/ConsoleNavBar";
 
-function GamePage() {
+function GameModal() {
   const canvasRef = useRef(null);
   const [image, setImage] = useState(null);
   const answerInputRef = useRef(null);
@@ -16,8 +16,7 @@ function GamePage() {
 
   useEffect(() => {
     const img = new Image(50, 50);
-    img.src = "chak.png";
-    console.log(img);
+    img.src = "../../chak.png";
     img.onload = () => {
       setImage(img);
     };
@@ -63,24 +62,14 @@ function GamePage() {
   };
 
   return (
-    <>
-      <ConsoleNavBar />
-      <div className="console-container">
-        <div className="game-container">
-          <div id="game-page">
-            <div id="canvas-div">
-              <canvas ref={canvasRef} className="canvas" />
-              <form id="answer-div" onSubmit={handleSubmit}>
-                <input type="text" ref={answerInputRef}></input>
-                <button className="signup-button"> Submit Answer</button>
-              </form>
-            </div>
-            {/* <Chat /> */}
-          </div>
-        </div>
+      <div id="canvas-div">
+        <canvas ref={canvasRef} className="canvas" />
+        <form id="answer-div" onSubmit={handleSubmit}>
+          <input type="text" ref={answerInputRef}></input>
+          <button className="signup-button"> Submit Answer</button>
+        </form>
       </div>
-    </>
   );
 }
 
-export default GamePage;
+export default GameModal;
