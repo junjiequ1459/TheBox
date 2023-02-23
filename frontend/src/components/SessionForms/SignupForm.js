@@ -106,7 +106,7 @@ function SignupForm() {
                 value={password}
                 onChange={update("password")}
                 required
-                autoComplete="new-password"
+                autocCmplete="new-password"
               />
             </label>
           </div>
