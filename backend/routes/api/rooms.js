@@ -72,16 +72,16 @@ router.patch("/:id", requireUser, validateRoomInput, async (req, res, next) => {
     const playerIndex = roomToUpdate.players.findIndex(
       (player) => player.playerId === req.user._id
     );
+    
     if (playerIndex === -1 && roomToUpdate.players.length < roomToUpdate.size) {
       // If the player is not already in the room and the room has space
       roomToUpdate.players.push(playerinfo);
-      await roomToUpdate.save();
-    } else {
-      const index = roomToUpdate.players.indexOf(playerinfo);
-      roomToUpdate.players.splice(index, 1);
-      await roomToUpdate.save();
+    } else if (playerIndex !== -1) {
+      // If the player is already in the room, remove them
+      roomToUpdate.players.splice(playerIndex, 1);
     }
-
+    
+    await roomToUpdate.save();
     // Populate the updated room object with host information and return it
     const updatedRoom = await Room.findById(roomId).populate(
       "host",
@@ -104,7 +104,8 @@ router.delete("/:id", requireUser, async (req, res, next) => {
       return res.status(404).json({ message: "Room not found" });
     }
 
-    if(roomToDelete.host._id !== req.user._id){
+    if(roomToDelete.host.toString() !== req.user._id.toString()){
+      
       return res.status(401).json({message: "Unnauthorized" })
     }
 
