@@ -43,9 +43,11 @@ export const createRoom = (room) => async (dispatch) => {
   });
   const newRoom = await res.json();
   dispatch(receiveRoom(newRoom));
+  return newRoom._id
 };
 
 export const updateRoom = (room) => async (dispatch) => {
+  console.log('hit thunk')
   const res = await jwtFetch(`/api/rooms/${room._id}`, {
     method: "PATCH",
     headers: {
@@ -68,7 +70,7 @@ const roomsReducer = (state = {}, action) => {
   const newState = { ...state };
   switch (action.type) {
     case RECEIVE_ROOM:
-      return { [action.room._id]: action.room };
+      return { 0: action.room };
     case RECEIVE_ROOMS:
       return { ...action.rooms };
     case REMOVE_ROOM:

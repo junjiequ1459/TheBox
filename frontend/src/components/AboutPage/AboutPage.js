@@ -107,9 +107,9 @@ function AboutPage() {
             hope we can work together to achieve great things.
           </div>
           <div className="about-description">
-            Welcome! My name is [Your Name], and I am [Your Age] years old. I am
-            [Your Occupation or Current Pursuit], and I am passionate about
-            [Your Interests or Goals]. Throughout my life, I have been driven by
+            Welcome! My name is [Kevin Liu], and I am [Your Age] years old. I am
+            [Aspiring Software Engineer], and I am passionate about
+            [life]. Throughout my life, I have been driven by
             a desire to learn, grow, and make a positive impact on the world
             around me. [Add any personal details, achievements, or experiences
             that you feel are relevant]. I am excited to [Connect with/Provide

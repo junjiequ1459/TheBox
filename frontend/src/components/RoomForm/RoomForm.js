@@ -3,26 +3,32 @@ import ConsoleNavBar from "../ConsoleNavBar/ConsoleNavBar";
 import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createRoom } from "../../store/rooms";
+import { Redirect, useHistory } from "react-router-dom";
 
 function RoomForm() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const user = useSelector((state) => state.session.user);
   const [name, setName] = useState("");
   const [size, setSize] = useState(4);
+  const [room, setRoom] = useState(null)
   const createInputRef = useRef(null);
 
   useEffect(() => {
     createInputRef.current.focus();
   }, []);
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const roomObj = {
       name,
       size,
     };
-    debugger;
-    dispatch(createRoom(roomObj));
+    dispatch(createRoom(roomObj))
+    history.push(`/roomlist`)
   };
+
+  if (!user) return <Redirect to="/login" />
   return (
     <div>
       <ConsoleNavBar name={"room-form"} />
