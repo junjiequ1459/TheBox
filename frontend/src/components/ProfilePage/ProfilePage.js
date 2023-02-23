@@ -65,15 +65,22 @@ function ProfilePage() {
       setImage(null);
     }
   }
-  
+
   return (
     <>
-      <h1>Profile</h1>
-      <button onClick={handleClick}>TESTING</button>
-
       <ConsoleNavBar name={"profilePage"} />
 
       <div className="console-container">
+        <div className="wins-and-losses">
+          <div className="win-losses-container">
+            <h1>WINS</h1><h1>1</h1>
+            <h1>LOSSES</h1><h1>0</h1>
+          </div>
+          <div className="win-percent">
+            <h1>WIN PERCENTAGE</h1>
+            <h1>100%</h1>
+          </div>
+        </div>
         <div className="user-profile-container">
           <img
             className="profile-image"

@@ -10,6 +10,7 @@ h1 {
     align-items: flex-end;
     justify-content: top;
     margin-top: 10vh;
+    /* background-color: green; */
 }
 
 .profile-image{
@@ -19,4 +20,29 @@ h1 {
 
 #file-name{
     color: white;
+}
+
+.wins-and-losses{
+    /* background-color: purple;        */
+    margin-top: 20vh;
+    width: 40vw;
+    height: 30vh;
+    display: flex;
+    position: absolute;
+    justify-content: space-around;
+    align-items: top;
+    flex-direction: column;
+}
+
+.win-percent{
+    /* background-color: green; */
+    height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.win-losses-container{
+    display: flex;
+    justify-content: space-around;
 }

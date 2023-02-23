@@ -1,6 +1,9 @@
 import "./GamePage.css";
 import React, { useRef } from "react";
 import { useState, useEffect } from "react";
+import Chat from "../ChatBox/ChatBox";
+import io from "socket.io-client";
+import ConsoleNavBar from "../ConsoleNavBar/ConsoleNavBar";
 
 function GameModal() {
   const canvasRef = useRef(null);
