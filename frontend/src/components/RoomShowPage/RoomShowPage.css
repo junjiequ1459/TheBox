@@ -1,3 +1,19 @@
 .room-show {
     color: #8eff1e
 }
+
+.gameroom-container{
+    width: 85vw;
+    height: 65vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.socket-container{
+    margin-top: 20vh;
+    width: 85vw;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
