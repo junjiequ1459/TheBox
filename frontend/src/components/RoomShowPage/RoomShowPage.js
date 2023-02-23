@@ -5,11 +5,13 @@ import { fetchRoom } from "../../store/rooms";
 import Chat from "../ChatBox/ChatBox";
 import io from "socket.io-client";
 import './RoomShowPage.css'
-import { updateRoom } from "../../store/rooms";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { updateRoom, deleteRoom } from "../../store/rooms";
+import { Link } from "react-router-dom";
+
 const socket = io('http://localhost:3001');
 
 function RoomShowPage() {
+  
   const { roomId } = useParams();
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch()
@@ -30,6 +32,10 @@ function RoomShowPage() {
     dispatch(updateRoom(room))
   }
 
+  const handleDelete = (e) => {
+    dispatch(deleteRoom(room))
+  }
+
   return (
   <>
     <div className='room-show'>
@@ -40,6 +46,7 @@ function RoomShowPage() {
       </ul>
     </div>;
     <Link to="/roomlist" onClick={handleLeave}> Leave Room </Link>
+    <Link to="/roomlist" onClick={handleDelete}> Delete Room </Link>
     <Chat socket={socket} username={user.username} room={roomId}/>
   </>
   )

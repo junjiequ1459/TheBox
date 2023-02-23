@@ -14,9 +14,9 @@ const receiveRooms = (rooms) => ({
   rooms,
 });
 
-const removeRoom = (roomId) => ({
+const removeRoom = (room) => ({
   type: REMOVE_ROOM,
-  roomId,
+  room,
 });
 
 export const fetchRoom = (roomId) => async (dispatch) => {
@@ -43,11 +43,9 @@ export const createRoom = (room) => async (dispatch) => {
   });
   const newRoom = await res.json();
   dispatch(receiveRoom(newRoom));
-  return newRoom._id
 };
 
 export const updateRoom = (room) => async (dispatch) => {
-  console.log('hit thunk')
   const res = await jwtFetch(`/api/rooms/${room._id}`, {
     method: "PATCH",
     headers: {
@@ -59,11 +57,11 @@ export const updateRoom = (room) => async (dispatch) => {
   dispatch(receiveRoom(updatedRoom));
 };
 
-export const deleteRoom = (roomId) => async (dispatch) => {
-  const res = await jwtFetch(`/api/rooms${roomId}`, {
+export const deleteRoom = (room) => async (dispatch) => {
+  const res = await jwtFetch(`/api/rooms/${room._id}`, {
     method: "DELETE",
   });
-  dispatch(removeRoom(roomId));
+  dispatch(removeRoom(room));
 };
 
 const roomsReducer = (state = {}, action) => {
@@ -74,7 +72,7 @@ const roomsReducer = (state = {}, action) => {
     case RECEIVE_ROOMS:
       return { ...action.rooms };
     case REMOVE_ROOM:
-      delete newState[action.roomId];
+      delete newState[action.room];
       return newState;
     default:
       return state;

@@ -9,7 +9,6 @@ function RoomItem({ room }) {
   const linkRef = useRef();
 
   function handleDivClick(e) {
-    console.log('hit click')
     dispatch(updateRoom(room))
   }
   return (

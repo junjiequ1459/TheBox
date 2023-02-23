@@ -13,7 +13,7 @@ function RoomList() {
   const roomItems = rooms.map((room, i) => <RoomItem key={i} room={room} />);
   useEffect(() => {
     dispatch(fetchRooms());
-  }, [dispatch]);
+  }, [dispatch, rooms.length]);
 
   if (!currentUser) return <Redirect to="login"></Redirect>
   return (
