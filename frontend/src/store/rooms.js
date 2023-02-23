@@ -25,11 +25,14 @@ export const fetchRoom = (roomId) => async (dispatch) => {
   return dispatch(receiveRoom(room));
 };
 
-export const fetchRooms = () => async (dispatch) => {
+export const fetchRooms = (search='') => async (dispatch) => {
   const res = await jwtFetch("/api/rooms");
   if (res.ok) {
     const rooms = await res.json();
-    dispatch(receiveRooms(rooms));
+    const filteredRooms = rooms.filter((room) =>
+    room.name.toLowerCase().includes(search.toLocaleLowerCase())
+  );
+    dispatch(receiveRooms(filteredRooms));
   }
 };
 

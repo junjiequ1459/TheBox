@@ -70,7 +70,7 @@ router.patch("/:id", requireUser, validateRoomInput, async (req, res, next) => {
     const playerinfo = { playerId: req.user._id, username: req.user.username };
     // Check if the player is already in the room
     const playerIndex = roomToUpdate.players.findIndex(
-      (player) => player.playerId === req.body._id
+      (player) => player.playerId === req.user._id
     );
     if (playerIndex === -1 && roomToUpdate.players.length < roomToUpdate.size) {
       // If the player is not already in the room and the room has space
