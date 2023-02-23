@@ -8,6 +8,7 @@ import "./RoomShowPage.css";
 import { updateRoom, deleteRoom } from "../../store/rooms";
 import { Link } from "react-router-dom";
 import GameModal from "../GamePage/GamePage.js";
+import ConsoleNavBar from "../ConsoleNavBar/ConsoleNavBar";
 
 const socket = io("http://localhost:3001");
 
@@ -78,7 +79,7 @@ function RoomShowPage() {
             Players in room ({players.length}/{room.size}){players}
           </ul>
         </div>
-        ;<button onClick={handleStartGame}>START GAME</button>
+        <button onClick={handleStartGame}>START GAME</button>
         {leaveOrDelete}
         <Chat socket={socket} username={user.username} room={roomId} />
         {game}

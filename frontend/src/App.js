@@ -6,7 +6,7 @@ import Video from "./components/VideoBackground/Video";
 import MainPage from "./components/MainPage/MainPage";
 import LoginForm from "./components/SessionForms/LoginForm";
 import SignupForm from "./components/SessionForms/SignupForm";
-// import GamePage from "./components/GamePage/GamePage";
+import GamePage from "./components/GamePage/GamePage";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
 import { getCurrentUser } from "./store/session";
 import AboutPage from "./components/AboutPage/AboutPage";

@@ -3,11 +3,16 @@
     border: 1px solid gray;
     padding: 10px;
     margin-left: 50px;
-    width: 20vw;
+    width: auto;
     background-color: black;
     max-height: 500px;
     overflow: auto;
 }
+
+.chat-div::-webkit-scrollbar {
+    width: 0;
+    display: none;
+  }
 
 #chat-div p {
     color: #8eff1e;
