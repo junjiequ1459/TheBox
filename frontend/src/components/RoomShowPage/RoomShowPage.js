@@ -58,26 +58,55 @@ function RoomShowPage() {
 
   const leaveOrDelete =
     room.host._id === user._id ? (
-      <Link to="/" onClick={handleDelete}>
-        {" "}
-        Delete Room{" "}
-      </Link>
+      <button
+        className="signup-button"
+        onClick={() => {
+          handleDelete();
+          history.push("/");
+        }}
+      >
+        Delete Room
+      </button>
     ) : (
-      <Link to="/" onClick={handleLeave}>
-        {" "}
-        Leave Room{" "}
-      </Link>
-    );
+
+      <button
+        className="signup-button"
+        onClick={() => {
+          handleLeave();
+          history.push("/");
+        }}
+      >
+        Leave Room
+      </button>
+    )
+  ) : null;
 
   return (
     <>
       <div>
-        <div className="room-show">
-          <h1> {room.name}</h1>
-          <h1> Hosted by: {room.host.username}</h1>
-          <ul>
-            Players in room ({players.length}/{room.size}){players}
-          </ul>
+        <ConsoleNavBar name="gameroom" />
+        <div className="console-container">
+          <div className="gameroom-container">
+            <div>
+              <div className="room-show">
+                <h1> {room ? room.name : null}</h1>
+                <h1> Hosted by: {room ? room.host.username : null}</h1>
+                <ul>
+                  Players in room ({players ? players.length : null}/
+                  {room ? room.size : null}){players ? players : null}
+                </ul>
+              </div>
+              ;
+              <button className="signup-button" onClick={handleStartGame}>
+                START GAME
+              </button>
+              {leaveOrDelete}
+            </div>
+            <div className="socket-container">
+              <Chat socket={socket} username={user.username} room={roomId} />
+              {game}
+            </div>
+          </div>
         </div>
         <button onClick={handleStartGame}>START GAME</button>
         {leaveOrDelete}
