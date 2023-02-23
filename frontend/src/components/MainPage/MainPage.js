@@ -7,10 +7,10 @@ function MainPage() {
   const user = useSelector((state) => state.session.user);
   const history = useHistory();
 
-  if (!user) {
-    history.push("/login");
-    return null;
-  }
+  // if (!user) {
+  //   history.push("/login");
+  //   return null;
+  // }
 
   const handleJoinRoom = () => {
     history.push("/roomlist");
