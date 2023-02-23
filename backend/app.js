@@ -96,6 +96,8 @@ app.use((err, req, res, next) => {
   });
 });
 
+const rooms = {};
+
 io.on("connection", (socket) => {
 
   socket.on("join", (room) => {
