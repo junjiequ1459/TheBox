@@ -12,7 +12,7 @@ router.get("/:id", async (req, res, next) => {
       "host",
       "_id username"
     );
-    console.log(room.players);
+
     return res.json(room);
   } catch (err) {
     const error = new Error("Room not found");

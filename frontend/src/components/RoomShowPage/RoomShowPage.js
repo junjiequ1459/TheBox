@@ -24,10 +24,11 @@ function RoomShowPage() {
     dispatch(fetchRoom(roomId));
     socket.emit("join", roomId);
     socket.on("start-game", () => {
-      history.push("/play");
-      console.log("started game");
-    });
-  }, [roomId, socket, socket2]);
+      history.push("/play")
+      console.log("started game")
+    })
+  }, [roomId, socket, socket2, players])
+  
 
   if (user === undefined) {
     return <>still loading...</>;

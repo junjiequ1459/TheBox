@@ -96,11 +96,13 @@ app.use((err, req, res, next) => {
   });
 });
 
+
+
 io.on("connection", (socket) => {
 
-  socket.on("join", (room) => {
+  socket.on("join", (room, username) => {
+
     socket.join(room);
-    console.log(`user joined room ${room}`);
   });
 
   socket.on('start-game', room => {
