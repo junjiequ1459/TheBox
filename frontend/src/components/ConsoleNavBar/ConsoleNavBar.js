@@ -27,18 +27,7 @@ function ConsoleNavBar({ name }) {
           <button className="nav-bar-button" onClick={() => history.push("/")}>
             Home
           </button>
-          <button
-            className="nav-bar-button"
-            onClick={() => history.push(`/profile/${currentUser._id}`)}
-          >
-            Profile
-          </button>
-          <button
-            className="nav-bar-button"
-            onClick={() => history.push("/play")}
-          >
-            Game
-          </button>
+
           <button
             id="console-logout-button"
             className="nav-bar-button"
@@ -85,7 +74,10 @@ function ConsoleNavBar({ name }) {
         </div>
         {getLinks()}
         <div className="name-container">
-          <h1 className="user-console-name">
+          <h1
+            className="user-console-name"
+            onClick={() => history.push(`/profile/${currentUser._id}`)}
+          >
             {currentUser && currentUser.username}
           </h1>
         </div>
