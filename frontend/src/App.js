@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Switch, Route } from "react-router-dom";
 import { AuthRoute, ProtectedRoute } from "./components/Routes/Routes";
-import NavBar from "./components/NavBar/NavBar";
 import Video from "./components/VideoBackground/Video";
 import MainPage from "./components/MainPage/MainPage";
 import LoginForm from "./components/SessionForms/LoginForm";
@@ -28,24 +27,27 @@ function App() {
     });
   }, [dispatch]);
 
-  if (!loaded) {
-    return <LoadingScreen />;
-  }
-
   return (
     <>
-      <Video />
-      <Switch>
-        <AuthRoute exact path="/login" component={LoginForm} />
-        <AuthRoute exact path="/signup" component={SignupForm} />
-        <Route exact path="/about" component={AboutPage} />
-        <Route exact path="/roomform" component={RoomForm} />
-        <Route exact path="/roomlist" component={RoomList} />
-        <Route path="/room/:roomId" component={RoomShowPage} />
-        <ProtectedRoute exact path="/" component={MainPage} />
-        <ProtectedRoute exact path="/play" component={GamePage} />
-        <ProtectedRoute path="/profile/:userId" component={ProfilePage} />
-      </Switch>
+      <div className="video-background">
+        <Video />
+      </div>
+      {!loaded && <LoadingScreen />}
+      {loaded && (
+        <>
+          <Switch>
+            <AuthRoute exact path="/login" component={LoginForm} />
+            <AuthRoute exact path="/signup" component={SignupForm} />
+            <Route exact path="/about" component={AboutPage} />
+            <Route exact path="/roomform" component={RoomForm} />
+            <Route exact path="/roomlist" component={RoomList} />
+            <Route path="/room/:roomId" component={RoomShowPage} />
+            <ProtectedRoute exact path="/" component={MainPage} />
+            <ProtectedRoute exact path="/play" component={GamePage} />
+            <ProtectedRoute path="/profile/:userId" component={ProfilePage} />
+          </Switch>
+        </>
+      )}
     </>
   );
 }

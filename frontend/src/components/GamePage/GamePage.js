@@ -2,6 +2,7 @@ import "./GamePage.css";
 import React, { useRef } from "react";
 import { useState, useEffect } from "react";
 import Chat from "../ChatBox/ChatBox";
+import io from "socket.io-client";
 import ConsoleNavBar from "../ConsoleNavBar/ConsoleNavBar";
 
 function GamePage() {
@@ -15,7 +16,7 @@ function GamePage() {
 
   useEffect(() => {
     const img = new Image(50, 50);
-    img.src = "chak.png"; // EVENTUALLY USE AWS HERE TO PULL RANDOM IMAGE
+    img.src = "chak.png";
     console.log(img);
     img.onload = () => {
       setImage(img);

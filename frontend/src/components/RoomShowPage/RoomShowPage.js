@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const socket = io('http://localhost:3001');
 
-function RoomShowPage() {
+function RoomShowPage() { 
   
   const { roomId } = useParams();
   const user = useSelector((state) => state.session.user);
