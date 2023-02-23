@@ -21,13 +21,16 @@ function RoomShowPage() {
   ));
   const [socket2, setSocket] = useState(1);
   useEffect(() => {
-    dispatch(fetchRoom(roomId));
     socket.emit("join", roomId);
     socket.on("start-game", () => {
       history.push("/play")
       console.log("started game")
     })
   }, [roomId, socket, socket2, players])
+
+  useEffect(()=> {
+    dispatch(fetchRoom(roomId))
+  }, [roomId])
   
 
   if (user === undefined) {

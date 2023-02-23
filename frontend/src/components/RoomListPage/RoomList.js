@@ -22,7 +22,6 @@ function RoomList() {
   }, [dispatch, searchValue, rooms.length]);
 
   rooms.forEach((room) => {
-    debugger;
     room.players.forEach((player) => {
       if (player.playerId === currentUser._id) {
         history.push(`/room/${room._id}`);
