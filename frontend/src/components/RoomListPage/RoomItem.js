@@ -11,6 +11,7 @@ function RoomItem({ room }) {
   function handleDivClick(e) {
     dispatch(updateRoom(room))
   }
+  
   return (
       <Link to={`/room/${room._id}`}>
         <div className="room-item-container" onClick={handleDivClick}>

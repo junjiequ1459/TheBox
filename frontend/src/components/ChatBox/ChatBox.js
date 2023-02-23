@@ -13,10 +13,6 @@ function Chat({socket, username, room}) {
         room: room,
         username: username,
         message: currentMessage,
-        time:
-          new Date(Date.now()).getHours() +
-          ":" +
-          new Date(Date.now()).getMinutes(),
       };
 
       socket.emit("send_message", message);
