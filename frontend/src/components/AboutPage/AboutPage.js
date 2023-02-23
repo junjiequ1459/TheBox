@@ -4,7 +4,6 @@ import ConsoleNavBar from "../ConsoleNavBar/ConsoleNavBar";
 function AboutPage() {
   return (
     <>
-    
       <ConsoleNavBar name={"about"} />
       <div className="console-container">
         <div className="team-member-container">
@@ -14,17 +13,22 @@ function AboutPage() {
               alt="no img"
             ></img>
             <div>
-              <a href="https://github.com/junjiequ1459/TheBox" target="_blank">
+              <a
+                href="https://github.com/junjiequ1459/TheBox"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <i className="fa-brands fa-github"></i>
               </a>
               <a
                 href="https://www.linkedin.com/in/junjie-qu-239070169/"
                 target="_blank"
+                rel="noreferrer"
               >
-                <i class="fa-brands fa-linkedin"></i>
+                <i className="fa-brands fa-linkedin"></i>
               </a>
-              <a href="https://angel.co/" target="_blank">
-                <i class="fa-brands fa-angellist"></i>
+              <a href="https://angel.co/" target="_blank" rel="noreferrer">
+                <i className="fa-brands fa-angellist"></i>
               </a>
             </div>
             <h2>Team Lead</h2>
@@ -35,17 +39,22 @@ function AboutPage() {
               alt="no img"
             ></img>{" "}
             <div>
-              <a href="https://github.com/junjiequ1459/TheBox" target="_blank">
+              <a
+                href="https://github.com/junjiequ1459/TheBox"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <i className="fa-brands fa-github"></i>
               </a>
               <a
                 href="https://www.linkedin.com/in/junjie-qu-239070169/"
                 target="_blank"
+                rel="noreferrer"
               >
-                <i class="fa-brands fa-linkedin"></i>
+                <i className="fa-brands fa-linkedin"></i>
               </a>
-              <a href="https://angel.co/" target="_blank">
-                <i class="fa-brands fa-angellist"></i>
+              <a href="https://angel.co/" target="_blank" rel="noreferrer">
+                <i className="fa-brands fa-angellist"></i>
               </a>
             </div>
             <h2>Team Lead</h2>
@@ -56,17 +65,22 @@ function AboutPage() {
               alt="no img"
             ></img>{" "}
             <div>
-              <a href="https://github.com/junjiequ1459/TheBox" target="_blank">
+              <a
+                href="https://github.com/junjiequ1459/TheBox"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <i className="fa-brands fa-github"></i>
               </a>
               <a
                 href="https://www.linkedin.com/in/junjie-qu-239070169/"
                 target="_blank"
+                rel="noreferrer"
               >
-                <i class="fa-brands fa-linkedin"></i>
+                <i className="fa-brands fa-linkedin"></i>
               </a>
-              <a href="https://angel.co/" target="_blank">
-                <i class="fa-brands fa-angellist"></i>
+              <a href="https://angel.co/" target="_blank" rel="noreferrer">
+                <i className="fa-brands fa-angellist"></i>
               </a>
             </div>
             <h2>Team Lead</h2>
@@ -77,17 +91,22 @@ function AboutPage() {
               alt="no img"
             ></img>
             <div>
-              <a href="https://github.com/junjiequ1459/TheBox" target="_blank">
+              <a
+                href="https://github.com/junjiequ1459/TheBox"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <i className="fa-brands fa-github"></i>
               </a>
               <a
                 href="https://www.linkedin.com/in/junjie-qu-239070169/"
-                target="_blank"
+                target="_blank" 
+                rel="noreferrer"
               >
-                <i class="fa-brands fa-linkedin"></i>
+                <i className="fa-brands fa-linkedin"></i>
               </a>
-              <a href="https://angel.co/" target="_blank">
-                <i class="fa-brands fa-angellist"></i>
+              <a href="https://angel.co/" target="_blank" rel="noreferrer">
+                <i className="fa-brands fa-angellist"></i>
               </a>
             </div>
             <h2>Team Lead</h2>

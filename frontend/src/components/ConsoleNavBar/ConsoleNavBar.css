@@ -26,12 +26,13 @@
     margin-left: 0.3vw;
     padding-left: 20px;
     padding-right: 20px;
+    transition: background-color,padding 0.2s ease; 
+
 }
 
 .nav-bar-button:hover{
     background-color: #008df8;
-    transition: background-color 0.2s ease;
-
+    padding: 0px 60px;
 }
 
 
@@ -92,5 +93,7 @@
 
 #console-logout-button:hover{
     background-color: red;
-    transition: background-color 0.2s ease;
+    padding: 0px 60px;
+    transition: background-color,padding 0.2s ease; 
+    
 }
