@@ -16,7 +16,7 @@ function RoomShowPage() {
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch()
   const room = useSelector((state) => state.rooms[0])
-  const players = room.players.map((player) => <li> {player.username} </li>)
+  const players = room.players.map((player, i) => <li key={i}> {player.username} </li>)
   useEffect(() => {
     dispatch(fetchRoom(roomId))
   }, [roomId])
