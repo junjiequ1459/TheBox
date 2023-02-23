@@ -7,6 +7,7 @@ import io from "socket.io-client";
 import "./RoomShowPage.css";
 import { updateRoom, deleteRoom, fetchRooms } from "../../store/rooms";
 import { Link } from "react-router-dom";
+import GameModal from "../GamePage/GamePage.js";
 
 const socket = io("http://localhost:3001");
 
@@ -22,22 +23,20 @@ function RoomShowPage() {
     <li key={i}> {player.username} </li>
   ));
   const [socket2, setSocket] = useState(1);
+  const [hidden, setHidden] = useState(true);
+  const game = hidden ? null : <GameModal />;
 
   useEffect(() => {
     socket.emit("join", roomId);
     socket.on("start-game", () => {
-      history.push("/play")
-      console.log("started game")
-    })
-  }, [roomId, socket, socket2, players])
+      setHidden(false);
+      console.log("started game");
+    });
+  }, [roomId, socket, socket2, players]);
 
-  useEffect(()=> {
-    dispatch(fetchRoom(roomId))
-  }, [roomId])
-  
   useEffect(() => {
     dispatch(fetchRoom(roomId));
-  }, [roomId])
+  }, [roomId]);
 
   if (user === undefined) {
     return <>still loading...</>;
@@ -46,7 +45,7 @@ function RoomShowPage() {
   const handleStartGame = (e) => {
     e.preventDefault();
     socket.emit("start-game", roomId);
-    history.push("/play");
+    setHidden(false);
     setSocket(socket2 + 1);
   };
 
@@ -76,6 +75,7 @@ function RoomShowPage() {
 
   return (
     <>
+    <div>
       <div className="room-show">
         <h1> {room ? room.name : null}</h1>
         <h1> Hosted by: {room ? room.host.username : null}</h1>
@@ -86,6 +86,8 @@ function RoomShowPage() {
       ;<button onClick={handleStartGame}>START GAME</button>
       {leaveOrDelete}
       <Chat socket={socket} username={user.username} room={roomId} />
+      {game}
+    </div>
     </>
   );
 }
