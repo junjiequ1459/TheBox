@@ -62,15 +62,25 @@ function RoomShowPage() {
 
   const leaveOrDelete = room ? (
     room.host._id === user._id ? (
-      <Link to="/" onClick={handleDelete}>
-        {" "}
-        Delete Room{" "}
-      </Link>
+      <button
+        className="signup-button"
+        onClick={() => {
+          handleDelete();
+          history.push("/");
+        }}
+      >
+        Delete Room
+      </button>
     ) : (
-      <Link to="/" onClick={handleLeave}>
-        {" "}
-        Leave Room{" "}
-      </Link>
+      <button
+        className="signup-button"
+        onClick={() => {
+          handleLeave();
+          history.push("/");
+        }}
+      >
+        Leave Room
+      </button>
     )
   ) : null;
 
@@ -89,7 +99,10 @@ function RoomShowPage() {
                   {room ? room.size : null}){players ? players : null}
                 </ul>
               </div>
-              ;<button onClick={handleStartGame}>START GAME</button>
+              ;
+              <button className="signup-button" onClick={handleStartGame}>
+                START GAME
+              </button>
               {leaveOrDelete}
             </div>
             <div className="socket-container">

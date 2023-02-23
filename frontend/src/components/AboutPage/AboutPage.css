@@ -14,7 +14,11 @@
     border-radius: 50%;
 }
 
-.image-icon-container{
+.team-member-container img:hover{
+    transition: box-shadow 0.3s ease;
+    box-shadow: rgba(255, 235, 205, 1) 0px 2px 18px 0px;
+}
+.image-icon-container{  
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -52,10 +56,20 @@
 .fa-brands{
     color: white;
     font-size: 42px;
+    
 }
 
 
 .fa-brands:hover {
     transform: scale(1.5);
-    transition: transform 0.2s ease-out;
+    transition: transform 0.1s ease-out;
+
   }
+
+
+  .team-member-container h2:hover{
+    color:#8eff1e;
+    transition: color 0.3s ease;
+
+  }
+
