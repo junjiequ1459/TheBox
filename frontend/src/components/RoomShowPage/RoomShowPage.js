@@ -25,17 +25,7 @@ function RoomShowPage() {
       history.push("/play")
       console.log("started game")
     })
-
-    // listen for player-joined event to receive updated room data
-    socket.on("player-joined", (updatedRoom) => {
-      dispatch(updateRoom(updatedRoom)); // update room state with updated data
-    });
-
-    // clean up WebSocket connection when component unmounts
-    return () => {
-      socket.disconnect();
-    };
-  }, [roomId, socket, socket2])
+  }, [roomId, socket, socket2, players])
   
   
 
