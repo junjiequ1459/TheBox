@@ -70,18 +70,18 @@ router.patch("/:id", requireUser, validateRoomInput, async (req, res, next) => {
     const playerinfo = { playerId: req.user._id, username: req.user.username };
     // Check if the player is already in the room
     const playerIndex = roomToUpdate.players.findIndex(
-      (player) => player.playerId === req.user._id
+      (player) => player.playerId.toString() === req.user._id.toString()
     );
-    
     if (playerIndex === -1 && roomToUpdate.players.length < roomToUpdate.size) {
       // If the player is not already in the room and the room has space
       roomToUpdate.players.push(playerinfo);
-    } else if (playerIndex !== -1) {
-      // If the player is already in the room, remove them
-      roomToUpdate.players.splice(playerIndex, 1);
+      await roomToUpdate.save();
+    } else {
+      const index = roomToUpdate.players.indexOf(playerinfo);
+      roomToUpdate.players.splice(index, 1);
+      await roomToUpdate.save();
     }
-    
-    await roomToUpdate.save();
+
     // Populate the updated room object with host information and return it
     const updatedRoom = await Room.findById(roomId).populate(
       "host",
