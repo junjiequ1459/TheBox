@@ -10,7 +10,7 @@ const userSchema = new Schema(
     profileImageUrl: {
       type: String,
       required: true,
-      default: 'a'
+      default: "a",
     },
     email: {
       type: String,
@@ -19,6 +19,14 @@ const userSchema = new Schema(
     hashedPassword: {
       type: String,
       required: true,
+    },
+    wins: {
+      type: Number,
+      default: 0,
+    },
+    losses: {
+      type: Number,
+      default: 0,
     },
   },
   {

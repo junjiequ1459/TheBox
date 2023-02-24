@@ -1,28 +1,32 @@
-const express = require("express")
-const { default: mongoose } = require("mongoose")
-const router = express.Router()
-const Game = mongoose.model("Game")
-const Room = mongoose.model("Room")
+const express = require("express");
+const { default: mongoose } = require("mongoose");
+const router = express.Router();
+const Game = mongoose.model("Game");
+const User = mongoose.model("User");
 
 //show
-router.get('/:id', async(req, res , next) => {
-    try {
-        const game = await Game.findById(req.params.id).populate("winnerId", "_id username");
-        return res.json(game);
-    }
-    catch(err) {
-        const error = new Error('Game not found')
-        error.statusCode = 404;
-        error.errors = { message: "No game found with that id" };
-        return next(error);
-    }
-})
+router.get("/:id", async (req, res, next) => {
+  try {
+    const game = await Game.findById(req.params.id).populate(
+      "winnerId",
+      "_id username"
+    );
+    return res.json(game);
+  } catch (err) {
+    const error = new Error("Game not found");
+    error.statusCode = 404;
+    error.errors = { message: "No game found with that id" };
+    return next(error);
+  }
+});
 
 //index match history
 router.get("/:userId", async (req, res, next) => {
   try {
     const userId = req.params.userId;
-    const games = await Game.find({ players: { $in: [userId] } }).exec();
+    const games = await Game.find({ players: { $in: [userId] } })
+      .populate("winnerId", "_id username")
+      .exec();
     return res.json(games);
   } catch (err) {
     next(err);
@@ -31,35 +35,31 @@ router.get("/:userId", async (req, res, next) => {
 
 module.exports = router;
 
-
 // create
-router.post('/', async (req, res, next) => {
-    let room;
-    try {
-        room = await Room.findById(req.params.roomId);
-    } catch(err) {
+router.post("/", async (req, res, next) => {
+  try {
+    const newGame = new Game({
+      roomName: req.body.roomName,
+      winnerId: req.body.winnerId,
+      players: req.body.players,
+    });
 
-        const error = new Error('Room not found');
-        error.statusCode = 404;
-        error.errors = { message: "No room found with that id"};
-        return next(error);
-    }
+    let game = await newGame.save();
+    game = await game.populate("winnerId", "_id username");
 
-    try {
-        const newGame = new Game( {
-            roomId: req.body.roomId,
-            winnerId: req.body.winnerId,
-            players: room.players
-        })
+    const winner = await User.findById(req.body.winnerId);
+    winner.wins += 2;
+    await winner.save();
 
-        let game = await newGame.save();
-        game = await game.populate("roomId", "_id name").populate("winnerId", "_id username")
-        return res.json(game);
-    }
-    catch(err) {
-        next(err);
-    } 
-})
-
+    req.body.players.forEach(async (player) => {
+      const loser = await User.findbyId(player._id);
+      loser.losses += 1;
+      await loser.save();
+    });
+    return res.json(game);
+  } catch (err) {
+    next(err);
+  }
+});
 
 module.exports = router;

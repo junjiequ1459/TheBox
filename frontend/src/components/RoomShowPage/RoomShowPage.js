@@ -68,27 +68,27 @@ function RoomShowPage() {
     dispatch(updateRoom(room));
   };
 
-  const handleDelete = (e) => {
-    dispatch(deleteRoom(room));
-    dispatch(fetchRooms());
-  };
+  // const handleDelete = (e) => {
+  //   dispatch(deleteRoom(room));
+  //   dispatch(fetchRooms());
+  // };
 
   const hostStart = (room.host._id === user._id) ? <button className="signup-button" onClick={handleStartGame}>
   START GAME
 </button> : null
 
   const leaveOrDelete = room ? (
-    room.host._id === user._id ? (
-      <button
-        className="signup-button"
-        onClick={() => {
-          handleDelete();
-          history.push("/");
-        }}
-      >
-        Delete Room
-      </button>
-    ) : (
+    // room.host._id === user._id ?
+      // <button
+      //   className="signup-button"
+      //   onClick={() => {
+      //     handleDelete();
+      //     history.push("/");
+      //   }}
+      // >
+      //   Delete Room
+      // </button>
+      (
       <button
         className="signup-button"
         onClick={() => {
