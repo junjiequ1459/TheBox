@@ -10,14 +10,26 @@
 }
 
 
-.team-member-container img{
+
+.team-member-container #img-div{
     border-radius: 50%;
+    width: 300px;
+    height: 300px;
+    background-color: green;
+    overflow: hidden;
+}
+.team-member-container #kevin-img{
+    transform:scale(2);
 }
 
-.team-member-container img:hover{
+.team-member-container #joey-img{
+    transform:scale(2);
+}
+
+.team-member-container #img-div:hover{
     transition: box-shadow 0.3s ease;
     box-shadow: rgba(255, 235, 205, 1) 0px 2px 18px 0px;
-}
+} 
 .image-icon-container{  
     display: flex;
     flex-direction: column;
@@ -60,16 +72,50 @@
 }
 
 
-.fa-brands:hover {
+/* .fa-brands:hover {
     transform: scale(1.5);
     transition: transform 0.1s ease-out;
 
-  }
+  } */
 
 
   .team-member-container h2:hover{
     color:#8eff1e;
     transition: color 0.3s ease;
-
   }
 
+
+  .about-description::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  .about-description::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .about-description::-webkit-scrollbar-thumb {
+    background: #008df8; 
+    border-radius: 10px;
+  }
+  
+  .fa-brands:hover {
+    animation: shake 0.4s;
+  }
+  
+  @keyframes shake {
+    0% {
+      transform: rotate(0) scale(1);
+    }
+    25% {
+      transform: rotate(10deg) scale(1.1);
+    }
+    50% {
+      transform: rotate(-10deg) scale(0.9);
+    }
+    75% {
+      transform: rotate(10deg) scale(1.1);
+    }
+    100% {
+      transform: rotate(0) scale(1);
+    }
+  }

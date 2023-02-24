@@ -17,10 +17,19 @@
     overflow-y: auto;
     word-wrap: break-word;
 }
-.chat-div::-webkit-scrollbar {
-    width: 0;
-    display: none;
+.chat-body::-webkit-scrollbar {
+    width: 5px;
   }
+  
+  .chat-body::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .chat-body::-webkit-scrollbar-thumb {
+    background: #8eff1e; 
+    border-radius: 10px;
+  }
+  
 
 #game-page {
     display: flex;

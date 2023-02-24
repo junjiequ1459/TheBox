@@ -14,6 +14,7 @@ import RoomList from "./components/RoomListPage/RoomList";
 import RoomForm from "./components/RoomForm/RoomForm";
 import RoomShowPage from "./components/RoomShowPage/RoomShowPage";
 import LoadingScreen from "./LoadingScreen/LoadingScreen";
+import BackgroundMusic from "./assets/Arcade.mp3";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -27,8 +28,14 @@ function App() {
     });
   }, [dispatch]);
 
+  function toggleMute() {
+    var audio = document.getElementById("bg-music");
+    audio.muted = !audio.muted;
+  }
+
   return (
     <>
+      <audio id="bg-music" src={BackgroundMusic} autoplay controls></audio>{" "}
       <div className="video-background">
         <Video />
       </div>
