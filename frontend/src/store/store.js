@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
   errors,
   usersReducer,
   rooms,
-  games,
+  // games,
 });
 
 let enhancer;

@@ -42,10 +42,10 @@ export const saveGame = (game) => async (dispatch) => {
 const gamesReducer = (state = {}, action) => {
   const newState = { ...state };
   switch (action.type) {
-    case RECEIVE_GAME:
-      return { 0: action.game };
-    case RECEIVE_GAMES:
-      return { ...action.games };
+    // case RECEIVE_GAME:
+    //   return { 0: action.game };
+    // case RECEIVE_GAMES:
+    //   return { ...action.games };
     default:
       return state;
   }

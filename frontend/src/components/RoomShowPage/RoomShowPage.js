@@ -13,31 +13,32 @@ import ConsoleNavBar from "../ConsoleNavBar/ConsoleNavBar";
 const socket = io("http://localhost:3001");
 
 function RoomShowPage() {
+  const pics = ["chak", "manny", "rex", "wilson", "zahi"]
+  const [gamePic, setGamePic] = useState(pics[Math.floor(Math.random()*pics.length)])
   const dispatch = useDispatch();
   const history = useHistory();
   const { roomId } = useParams();
-
   const user = useSelector((state) => state.session.user);
   // const setWinner = (winner) => {
   //   setPrevWinner(winner)
   // }
   const room = useSelector((state) => state.rooms[0]);
   const ifPlayer = room ? room.players : [];
-  const answer = "chak"
   const players =
     ifPlayer.length === 0
       ? []
-      : ifPlayer.map((player, i) => <li key={i}> {player.username} </li>);
+      : ifPlayer.map((player, i) => <li key={i}> {player.username}</li>);
   const [socket2, setSocket] = useState(1);
   const [hidden, setHidden] = useState(true);
-  const game = hidden ? null : <GameModal answer={answer} socket={socket} roomId={roomId}/>;
+  const game = hidden ? null : <GameModal answer={gamePic} socket={socket} roomId={roomId}/>;
 
   socket.emit("join", roomId)
   useEffect(() => {
     const intervalId = setInterval(() => {
       dispatch(fetchRoom(roomId));
-    }, 500);
+    }, 1000);
     socket.on("start-game", () => {
+      setGamePic(pics[Math.floor(Math.random()*pics.length)]);
       setHidden(false);
       console.log("started game");
     });
@@ -104,7 +105,7 @@ function RoomShowPage() {
   return (
     <>
       <div>
-        <ConsoleNavBar name="gameroom" />
+        {/* <ConsoleNavBar name="gameroom" /> */}
         <div className="console-container">
           <div className="gameroom-container">
             <div>
