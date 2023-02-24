@@ -57,15 +57,19 @@ export const updateRoom = (room) => async (dispatch) => {
     body: JSON.stringify(room),
   });
   const updatedRoom = await res.json();
-  dispatch(receiveRoom(updatedRoom));
+  if(updatedRoom) {
+    dispatch(receiveRoom(updatedRoom));
+  } else {
+    dispatch(removeRoom(updatedRoom))
+  }
 };
 
-export const deleteRoom = (room) => async (dispatch) => {
-  const res = await jwtFetch(`/api/rooms/${room._id}`, {
-    method: "DELETE",
-  });
-  dispatch(removeRoom(room));
-};
+// export const deleteRoom = (room) => async (dispatch) => {
+//   const res = await jwtFetch(`/api/rooms/${room._id}`, {
+//     method: "DELETE",
+//   });
+//   dispatch(removeRoom(room));
+// };
 
 const roomsReducer = (state = {}, action) => {
   const newState = { ...state };
@@ -75,11 +79,11 @@ const roomsReducer = (state = {}, action) => {
     case RECEIVE_ROOMS:
       return { ...action.rooms };
     case REMOVE_ROOM:
-      delete newState[action.room];
+      delete newState[0];
       return newState;
     default:
       return state;
   }
-};
+}
 
 export default roomsReducer;

@@ -72,22 +72,39 @@ router.patch("/:id", requireUser, validateRoomInput, async (req, res, next) => {
     const playerIndex = roomToUpdate.players.findIndex(
       (player) => player.playerId.toString() === req.user._id.toString()
     );
+    console.log(playerIndex)
     if (playerIndex === -1 && roomToUpdate.players.length < roomToUpdate.size) {
       // If the player is not already in the room and the room has space
       roomToUpdate.players.push(playerinfo);
       await roomToUpdate.save();
+      const updatedRoom = await Room.findById(roomId).populate(
+        "host",
+        "_id username"
+      );
+      return res.json(updatedRoom);
     } else {
-      const index = roomToUpdate.players.indexOf(playerinfo);
-      roomToUpdate.players.splice(index, 1);
-      await roomToUpdate.save();
+      console.log(playerinfo);
+      console.log(roomToUpdate)
+      roomToUpdate.players.splice(playerIndex,1);
+      console.log(roomToUpdate)
+      if(roomToUpdate.host._id.toString() === playerinfo.playerId.toString() && roomToUpdate.players.length){
+        console.log(roomToUpdate)
+        roomToUpdate.host = roomToUpdate.players[0].playerId;
+        console.log(roomToUpdate)
+      }
+      if(!roomToUpdate.players.length){
+        await roomToUpdate.remove()
+      } else {
+        await roomToUpdate.save();
+        const updatedRoom = await Room.findById(roomId).populate(
+          "host",
+          "_id username"
+        );
+        return res.json(updatedRoom);
+      }
     }
 
     // Populate the updated room object with host information and return it
-    const updatedRoom = await Room.findById(roomId).populate(
-      "host",
-      "_id username"
-    );
-    return res.json(updatedRoom);
   } catch (err) {
     next(err);
   }
@@ -95,27 +112,27 @@ router.patch("/:id", requireUser, validateRoomInput, async (req, res, next) => {
 
 
 //destroy
-router.delete("/:id", requireUser, async (req, res, next) => {
-  try {
-    const roomId = req.params.id;
-    const roomToDelete = await Room.findById(roomId);
+// router.delete("/:id", requireUser, async (req, res, next) => {
+//   try {
+//     const roomId = req.params.id;
+//     const roomToDelete = await Room.findById(roomId);
 
-    if (!roomToDelete) {
-      return res.status(404).json({ message: "Room not found" });
-    }
+//     if (!roomToDelete) {
+//       return res.status(404).json({ message: "Room not found" });
+//     }
 
-    if(roomToDelete.host.toString() !== req.user._id.toString()){
+//     if(roomToDelete.host.toString() !== req.user._id.toString()){
       
-      return res.status(401).json({message: "Unnauthorized" })
-    }
+//       return res.status(401).json({message: "Unnauthorized" })
+//     }
     
-    await roomToDelete.remove()
+//     await roomToDelete.remove()
     
 
-    return res.json({ message: "Deleted room successfully" });
-  } catch (err) {
-    next(err);
-  }
-});
+//     return res.json({ message: "Deleted room successfully" });
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 module.exports = router;
