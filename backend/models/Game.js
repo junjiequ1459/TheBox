@@ -3,13 +3,13 @@ const Schema = mongoose.Schema;
 
 const gameSchema = new Schema(
   {
-    roomId:{
-      type: Schema.Types.ObjectId,
-      ref: "Room"
+    roomName: {
+      type: String,
+      require: true,
     },
     winnerId: {
       type: Schema.Types.ObjectId,
-      ref: "User"
+      ref: "User",
     },
     players: Array,
   },
