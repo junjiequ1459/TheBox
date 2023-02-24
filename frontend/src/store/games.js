@@ -19,6 +19,7 @@ export const fetchGames = (userId) => async (dispatch) => {
   dispatch(receiveGames(games));
 };
 
+
 export const fetchGame = (gameId) => async (dispatch) => {
   const response = await jwtFetch(`/api/games/${gameId}`);
   const game = await response.json();
