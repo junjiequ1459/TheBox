@@ -3,21 +3,48 @@
     border: 1px solid gray;
     padding: 10px;
     margin-left: 50px;
-    width: auto;
+    width: 425px;
     background-color: black;
-    max-height: 500px;
-    overflow: auto;
+    max-width: 425px;
+    display: flex;
+    color: #8eff1e;
+    font-size: 20px;
+    flex-direction: column;
 }
 
+.chat-body{
+    height: 500px;
+    overflow-y: auto;
+    word-wrap: break-word;
+}
 .chat-div::-webkit-scrollbar {
     width: 0;
     display: none;
   }
 
-#chat-div p {
-    color: #8eff1e;
-}
 #game-page {
     display: flex;
     justify-content: center;
 }
+
+.chat-submit-button{
+    background-color: black;
+    color: white;
+    border: none;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 20px;
+}
+
+.chat-submit-button:hover {
+    background-color: green;
+    transition: background-color 0.2s ease;
+
+  }
+
+#chat-username{
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+}
+

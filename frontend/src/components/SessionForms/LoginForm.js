@@ -56,7 +56,7 @@ function LoginForm() {
                 onChange={update("email")}
                 required
                 ref={emailInputRef}
-                autoComplete="new-email"
+                autoComplete="off"
               />
             </label>
           </div>
@@ -68,7 +68,7 @@ function LoginForm() {
                 type="password"
                 value={password}
                 onChange={update("password")}
-                autoComplete="new-password"
+                autoComplete="off"
                 required
               />
             </label>
@@ -77,7 +77,7 @@ function LoginForm() {
             className="signin-button"
             type="submit"
             value="Log In"
-            disabled={!email || !password}
+            // disabled={!email || !password}
           />
           <button className="signin-button" onClick={demoLogin}>
             {" "}

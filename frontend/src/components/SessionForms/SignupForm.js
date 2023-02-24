@@ -9,7 +9,6 @@ function SignupForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-  const [image, setImage] = useState(null);
   const errors = useSelector((state) => state.errors.session);
   const dispatch = useDispatch();
   const emailInputRef = useRef(null);
@@ -52,14 +51,12 @@ function SignupForm() {
     const user = {
       email,
       username,
-      image,
       password,
     };
 
     dispatch(signup(user));
   };
 
-  const updateFile = (e) => setImage(e.target.files[0]);
   return (
     <>
       <ConsoleNavBar name={"signup"} />
@@ -80,7 +77,7 @@ function SignupForm() {
                 onChange={update("email")}
                 required
                 ref={emailInputRef}
-                autoComplete="new-email"
+                autoComplete="off"
               />
             </label>
           </div>
@@ -93,7 +90,7 @@ function SignupForm() {
                 value={username}
                 onChange={update("username")}
                 required
-                autoComplete="new-username"
+                autoComplete="off"
               />
             </label>
           </div>
@@ -106,7 +103,7 @@ function SignupForm() {
                 value={password}
                 onChange={update("password")}
                 required
-                autoComplete="new-password"
+                autoComplete="off"
               />
             </label>
           </div>
@@ -122,7 +119,7 @@ function SignupForm() {
                 value={password2}
                 onChange={update("password2")}
                 required
-                autoComplete="new-password2"
+                autoComplete="off"
               />
             </label>
           </div>
@@ -130,9 +127,9 @@ function SignupForm() {
             className="signup-button"
             type="submit"
             value="Sign Up"
-            disabled={
-              !email || !username || !password || password !== password2
-            }
+            // disabled={
+            //   !email || !username || !password || password !== password2
+            // }
           />
         </form>
         <div className="errors">
