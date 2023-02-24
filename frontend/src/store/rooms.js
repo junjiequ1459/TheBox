@@ -75,7 +75,7 @@ const roomsReducer = (state = {}, action) => {
     case RECEIVE_ROOMS:
       return { ...action.rooms };
     case REMOVE_ROOM:
-      delete newState[action.room];
+      delete newState[0];
       return newState;
     default:
       return state;
