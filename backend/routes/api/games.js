@@ -48,11 +48,12 @@ router.post("/", async (req, res, next) => {
     game = await game.populate("winnerId", "_id username");
 
     const winner = await User.findById(req.body.winnerId);
-    winner.wins += 2;
+    winner.wins += 1;
+    winner.losses -= 1;
     await winner.save();
 
     req.body.players.forEach(async (player) => {
-      const loser = await User.findbyId(player._id);
+      const loser = await User.findById(player.playerId);
       loser.losses += 1;
       await loser.save();
     });

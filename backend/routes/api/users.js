@@ -101,6 +101,8 @@ router.get("/current", restoreUser, (req, res) => {
     username: req.user.username,
     profileImageUrl: req.user.profileImageUrl, // <- ADD THIS LINE
     email: req.user.email,
+    wins: req.user.wins,
+    losses: req.user.losses
   });
 });
 
