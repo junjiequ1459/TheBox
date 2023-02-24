@@ -8,7 +8,7 @@ const receiveGame = (game) => ({
   game,
 });
 
-const receiveGames = () => ({
+const receiveGames = (games) => ({
   type: RECEIVE_GAMES,
   games,
 });
