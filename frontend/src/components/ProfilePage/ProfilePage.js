@@ -6,6 +6,7 @@ import "./ProfilePage.css";
 import ConsoleNavBar from "../ConsoleNavBar/ConsoleNavBar";
 import io from "socket.io-client";
 import { updateUser } from "../../store/users";
+import { getCurrentUser } from "../../store/session";
 import jwtFetch from "../../store/jwt";
 
 const socket = io("http://localhost:3001");
@@ -27,8 +28,9 @@ function ProfilePage() {
     socket.emit("send_message", { message: `hello from ${userId}` });
   };
 
-  useEffect(() => {}, [currentImageUrl]);
+  // useEffect(() => dispatch(getCurrentUser()), []);
 
+  useEffect(() => {}, []);
   const handleImageUpload = async (e) => {
     e.preventDefault();
     if (!image) {
@@ -74,13 +76,13 @@ function ProfilePage() {
         <div className="wins-and-losses">
           <div className="win-losses-container">
             <h1>WINS</h1>
-            <h1>1</h1>
+            <h1>{user.wins}</h1>
             <h1>LOSSES</h1>
-            <h1>0</h1>
+            <h1>{user.losses}</h1>
           </div>
           <div className="win-percent">
             <h1>WIN PERCENTAGE</h1>
-            <h1>100%</h1>
+            <h1>{(user.wins/(user.losses + user.wins) * 100).toFixed(2)}%</h1>
           </div>
         </div>
         <div className="user-profile-container">

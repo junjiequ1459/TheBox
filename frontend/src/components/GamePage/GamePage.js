@@ -2,8 +2,8 @@ import "./GamePage.css";
 import React, { useRef } from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteRoom } from "../../store/rooms";
 import { useHistory } from "react-router-dom";
+import { saveGame } from "../../store/games";
 
 function GameModal({answer ,socket, roomId}) {
   const history = useHistory();
@@ -19,8 +19,7 @@ function GameModal({answer ,socket, roomId}) {
   }, []);
   useEffect(() => {
     if (userAnswer === answer) {
-      // socket.emit("receive-winner", user.username)
-      // setWinner(user.username)
+      dispatch(saveGame({roomName: room.name, winnerId: user._id, players: room.players}))
       socket.emit("end-game", roomId)
       history.push("/roomlist")
     };
@@ -57,7 +56,7 @@ function GameModal({answer ,socket, roomId}) {
 
       let scale = 80; //START SCALE
       const interval = setInterval(() => {
-        scale -= 0.02; //ZOOM SPEED
+        scale -= 0.04; //ZOOM SPEED
         if (
           image.width * scale <= canvas.width ||
           image.height * scale <= canvas.height
