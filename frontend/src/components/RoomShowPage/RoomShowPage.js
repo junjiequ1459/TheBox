@@ -31,8 +31,7 @@ function RoomShowPage() {
   const [socket2, setSocket] = useState(1);
   const [hidden, setHidden] = useState(true);
   const game = hidden ? null : <GameModal answer={gamePic} socket={socket} roomId={roomId}/>;
-
-  socket.emit("join", roomId)
+  socket.emit("join", roomId);
   useEffect(() => {
     const intervalId = setInterval(() => {
       dispatch(fetchRoom(roomId));
@@ -43,7 +42,7 @@ function RoomShowPage() {
       console.log("started game");
     });
     socket.on("end-game", () => {
-      history.push("/roomlist")
+      history.push("/roomlist");
     });
     // socket.on("receive-winner", (username) => {
     //   console.log('hit this')
@@ -74,32 +73,33 @@ function RoomShowPage() {
   //   dispatch(fetchRooms());
   // };
 
-  const hostStart = (room.host._id === user._id) ? <button className="signup-button" onClick={handleStartGame}>
-  START GAME
-</button> : null
+  const hostStart =
+    room.host._id === user._id ? (
+      <button className="signup-button" onClick={handleStartGame}>
+        START GAME
+      </button>
+    ) : null;
 
   const leaveOrDelete = room ? (
     // room.host._id === user._id ?
-      // <button
-      //   className="signup-button"
-      //   onClick={() => {
-      //     handleDelete();
-      //     history.push("/");
-      //   }}
-      // >
-      //   Delete Room
-      // </button>
-      (
-      <button
-        className="signup-button"
-        onClick={() => {
-          handleLeave();
-          history.push("/");
-        }}
-      >
-        Leave Room
-      </button>
-    )
+    // <button
+    //   className="signup-button"
+    //   onClick={() => {
+    //     handleDelete();
+    //     history.push("/");
+    //   }}
+    // >
+    //   Delete Room
+    // </button>
+    <button
+      className="signup-button"
+      onClick={() => {
+        handleLeave();
+        history.push("/");
+      }}
+    >
+      Leave Room
+    </button>
   ) : null;
 
   return (
@@ -117,8 +117,7 @@ function RoomShowPage() {
                   {room ? room.size : null}){players ? players : null}
                 </ul>
               </div>
-              ;
-              {hostStart}
+              ;{hostStart}
               {leaveOrDelete}
             </div>
             <div className="socket-container">

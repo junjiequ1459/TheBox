@@ -8,10 +8,12 @@ function AboutPage() {
       <div className="console-container">
         <div className="team-member-container">
           <div className="image-icon-container">
-            <img
-              src="https://the-box-project.s3.amazonaws.com/pfp/37ab184e003b034a4fa821b24849a0d4.png"
-              alt="no img"
-            ></img>
+            <div id="img-div">
+              <img
+                src="https://the-box-project.s3.amazonaws.com/pfp/37ab184e003b034a4fa821b24849a0d4.png"
+                alt="no img"
+              ></img>
+            </div>
             <div>
               <a
                 href="https://github.com/junjiequ1459/TheBox"
@@ -31,13 +33,17 @@ function AboutPage() {
                 <i className="fa-brands fa-angellist"></i>
               </a>
             </div>
-            <h2>Team Lead</h2>
+            <h2>Frontend/Team Lead</h2>
           </div>
           <div className="image-icon-container">
-            <img
-              src="https://the-box-project.s3.amazonaws.com/pfp/37ab184e003b034a4fa821b24849a0d4.png"
-              alt="no img"
-            ></img>{" "}
+            <div id="img-div">
+              {" "}
+              <img
+                id="kevin-img"
+                src="https://the-box-project.s3.amazonaws.com/pfp/kevin.jpeg"
+                alt="no img"
+              ></img>
+            </div>{" "}
             <div>
               <a
                 href="https://github.com/junjiequ1459/TheBox"
@@ -57,18 +63,21 @@ function AboutPage() {
                 <i className="fa-brands fa-angellist"></i>
               </a>
             </div>
-            <h2>Team Lead</h2>
+            <h2>Fullstack Flex</h2>
           </div>
           <div className="image-icon-container">
-            <img
-              src="https://the-box-project.s3.amazonaws.com/pfp/3db6a70a95a9616403861bfe9b1cf517.jpeg"
-              alt="no img"
-            ></img>{" "}
+            <div id="img-div">
+              {" "}
+              <img
+                src="https://the-box-project.s3.amazonaws.com/pfp/3db6a70a95a9616403861bfe9b1cf517.jpeg"
+                alt="no img"
+              ></img>
+            </div>{" "}
             <div>
               <a
                 href="https://github.com/junjiequ1459/TheBox"
                 target="_blank"
-                rel="noreferrer"
+                rel="noreferr er"
               >
                 <i className="fa-brands fa-github"></i>
               </a>
@@ -83,13 +92,17 @@ function AboutPage() {
                 <i className="fa-brands fa-angellist"></i>
               </a>
             </div>
-            <h2>FrontEnd Flex</h2>
+            <h2>Fullstack Flex</h2>
           </div>
           <div className="image-icon-container">
-            <img
-              src="https://the-box-project.s3.amazonaws.com/pfp/37ab184e003b034a4fa821b24849a0d4.png"
-              alt="no img"
-            ></img>
+            <div id="img-div">
+              {" "}
+              <img
+                id="joey-img"
+                src="https://the-box-project.s3.amazonaws.com/pfp/joey.jpg"
+                alt="no img"
+              ></img>
+            </div>
             <div>
               <a
                 href="https://github.com/junjiequ1459/TheBox"
@@ -109,7 +122,7 @@ function AboutPage() {
                 <i className="fa-brands fa-angellist"></i>
               </a>
             </div>
-            <h2>Team Lead</h2>
+            <h2>Backend Lead</h2>
           </div>
         </div>
         <div className="team-member-description">

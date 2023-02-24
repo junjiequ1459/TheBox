@@ -11,7 +11,7 @@ function RoomForm() {
   const user = useSelector((state) => state.session.user);
   const [name, setName] = useState("");
   const [size, setSize] = useState(4);
-  const [room, setRoom] = useState(null)
+  const [room, setRoom] = useState(null);
   const createInputRef = useRef(null);
 
   useEffect(() => {
@@ -24,11 +24,11 @@ function RoomForm() {
       name,
       size,
     };
-    dispatch(createRoom(roomObj))
-    history.push(`/roomlist`)
+    dispatch(createRoom(roomObj));
+    history.push(`/roomlist`);
   };
 
-  if (!user) return <Redirect to="/login" />
+  if (!user) return <Redirect to="/login" />;
   return (
     <div>
       <ConsoleNavBar name={"room-form"} />
@@ -48,15 +48,30 @@ function RoomForm() {
               Size:
               <label>
                 2
-                <input type="radio" name="size" onClick={() => setSize(2)} />
+                <input
+                  className="radio-form"
+                  type="radio"
+                  name="size"
+                  onClick={() => setSize(2)}
+                />
               </label>
               <label>
                 3
-                <input type="radio" name="size" onClick={() => setSize(3)} />
+                <input
+                  className="radio-form"
+                  type="radio"
+                  name="size"
+                  onClick={() => setSize(3)}
+                />
               </label>
               <label>
                 4
-                <input type="radio" name="size" onClick={() => setSize(4)} />
+                <input
+                  className="radio-form"
+                  type="radio"
+                  name="size"
+                  onClick={() => setSize(4)}
+                />
               </label>
               <button type="submit" className="signup-button">
                 {" "}
