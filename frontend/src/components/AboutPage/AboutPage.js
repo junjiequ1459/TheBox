@@ -162,8 +162,8 @@ function AboutPage() {
           </div>
           <div className="about-description">
              Welcome! Joey Tsui is my name, and I'm 24 years old. I have a degree
-             in computer information and am pursuing a career as a full stack coder. 
-             I love to code. I have been motivated to learn, develop, and have a positive 
+             in computer information and am pursuing a career as a full stack developer. 
+             I have a passion for coding and I have been motivated to learn, develop, and have a positive 
              influence on the world around me throughout my life.I appreciate you taking 
              the time to get to know me, and I look forward to working with you to 
              accomplish amazing things.
