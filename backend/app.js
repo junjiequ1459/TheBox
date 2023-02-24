@@ -111,6 +111,18 @@ io.on("connection", (socket) => {
     })
   })
 
+  socket.on('end-game', room => {
+    socket.to(room).emit('end-game',() => {
+      console.log('game ended')
+    })
+  })
+
+  socket.on('receive-winner', (room, username) => {
+    socket.to(room).emit('receive-winner', username, () => {
+      console.log('winner')
+    })
+  })
+
   socket.on("disconnect", (room) => {
     socket.leave(room);
     console.log(`user left room ${room}`);
@@ -119,6 +131,7 @@ io.on("connection", (socket) => {
   socket.on("send_message", (data) => {
     socket.to(data.room).emit("receive_message", data)
   });
+
   
 });
 
