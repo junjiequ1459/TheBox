@@ -73,8 +73,10 @@ function ProfilePage() {
       <div className="console-container">
         <div className="wins-and-losses">
           <div className="win-losses-container">
-            <h1>WINS</h1><h1>1</h1>
-            <h1>LOSSES</h1><h1>0</h1>
+            <h1>WINS</h1>
+            <h1>1</h1>
+            <h1>LOSSES</h1>
+            <h1>0</h1>
           </div>
           <div className="win-percent">
             <h1>WIN PERCENTAGE</h1>

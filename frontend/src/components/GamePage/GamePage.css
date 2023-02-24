@@ -1,5 +1,5 @@
-                                                                        .canvas {
-    border: #8eff1e solid 1px;
+.canvas {
+    border: white solid 1px;
     border-radius: 5%;
 }
 
@@ -9,7 +9,7 @@
     flex-direction: column;
     padding: 30px;
     background: black;
-    margin-top:15vh;
+    margin-top:13vh;
 }
 
 #answer-div{

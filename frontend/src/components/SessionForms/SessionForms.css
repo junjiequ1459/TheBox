@@ -3,6 +3,8 @@
     display: flex;
     height: 85vh;
     width: 85vw;
+    max-width: 85vw;
+    max-height: 85vh;
     min-width: 1200px;
     position: fixed;
     top: 50%;
@@ -73,3 +75,10 @@
     color:red;
     font-size: 20px;
   }
+
+  input:required:invalid {
+    border-color: red;
+  }
+  
+
+  

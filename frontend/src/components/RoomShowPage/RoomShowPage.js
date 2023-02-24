@@ -110,8 +110,7 @@ function RoomShowPage() {
             <div>
               <div className="room-show">
                 <h1> {room ? room.name : null}</h1>
-                <h1> Hosted by: {room ? room.host.username : null}</h1>
-                <h1> Previous Winner: </h1>
+                <h2> Hosted by: {room ? room.host.username : null}</h2>
                 <ul>
                   Players in room ({players ? players.length : null}/
                   {room ? room.size : null}){players ? players : null}

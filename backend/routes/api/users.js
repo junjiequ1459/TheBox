@@ -49,7 +49,7 @@ router.post(
     // Otherwise create a new user
     const profileImageUrl = req.file
       ? await singleFileUpload({ file: req.file, public: true })
-      : "https://the-box-project.s3.amazonaws.com/pfp/default-pfp-2.jpg";
+      : "https://the-box-project.s3.amazonaws.com/pfp/defaultIcon.jpg";
     const newUser = new User({
       username: req.body.username,
       profileImageUrl,
