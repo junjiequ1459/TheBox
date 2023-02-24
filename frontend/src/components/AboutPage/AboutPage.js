@@ -161,16 +161,12 @@ function AboutPage() {
             to accomplish great things.
           </div>
           <div className="about-description">
-            Welcome! My name is [Your Name], and I am [Your Age] years old. I am
-            [Your Occupation or Current Pursuit], and I am passionate about
-            [Your Interests or Goals]. Throughout my life, I have been driven by
-            a desire to learn, grow, and make a positive impact on the world
-            around me. [Add any personal details, achievements, or experiences
-            that you feel are relevant]. I am excited to [Connect with/Provide
-            Value to/Share my experiences with] the
-            [Community/Organization/Platform] and look forward to [Any Goals or
-            Objectives]. Thank you for taking the time to get to know me, and I
-            hope we can work together to achieve great things.
+             Welcome! Joey Tsui is my name, and I'm 24 years old. I have a degree
+             in computer information and am pursuing a career as a full stack coder. 
+             I love to code. I have been motivated to learn, develop, and have a positive 
+             influence on the world around me throughout my life.I appreciate you taking 
+             the time to get to know me, and I look forward to working with you to 
+             accomplish amazing things.
           </div>
         </div>
       </div>
