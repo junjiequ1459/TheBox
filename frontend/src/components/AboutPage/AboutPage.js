@@ -66,7 +66,7 @@ function AboutPage() {
               </a>
             </div>
             <h2>Frontend Lead
-            <br/> ICE SPICE COOK
+            <br/> REACT COOK
             </h2>
           </div>
           <div className="image-icon-container">
