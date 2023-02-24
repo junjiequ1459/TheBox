@@ -1,22 +1,34 @@
 import "./GamePage.css";
 import React, { useRef } from "react";
 import { useState, useEffect } from "react";
-import Chat from "../ChatBox/ChatBox";
-import io from "socket.io-client";
-import ConsoleNavBar from "../ConsoleNavBar/ConsoleNavBar";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteRoom } from "../../store/rooms";
+import { useHistory } from "react-router-dom";
 
-function GameModal() {
+function GameModal({answer ,socket, roomId}) {
+  const history = useHistory();
+  const dispatch = useDispatch();
   const canvasRef = useRef(null);
+  const room = useSelector((state) => state.rooms[0]);
+  const user = useSelector((state) => state.session.user);
   const [image, setImage] = useState(null);
   const answerInputRef = useRef(null);
-
+  const [userAnswer, setUserAnswer] = useState('')
   useEffect(() => {
     answerInputRef.current.focus();
   }, []);
+  useEffect(() => {
+    if (userAnswer === answer) {
+      // socket.emit("receive-winner", user.username)
+      // setWinner(user.username)
+      socket.emit("end-game", roomId)
+      history.push("/roomlist")
+    };
+  }, [userAnswer]);
 
   useEffect(() => {
     const img = new Image(50, 50);
-    img.src = "../../chak.png";
+    img.src = `../../${answer}.png`;
     img.onload = () => {
       setImage(img);
     };
@@ -65,7 +77,7 @@ function GameModal() {
       <div id="canvas-div">
         <canvas ref={canvasRef} className="canvas" />
         <form id="answer-div" onSubmit={handleSubmit}>
-          <input type="text" ref={answerInputRef}></input>
+          <input type="text" ref={answerInputRef} onChange={(e) => setUserAnswer(e.target.value)}></input>
           <button className="signup-button"> Submit Answer</button>
         </form>
       </div>
