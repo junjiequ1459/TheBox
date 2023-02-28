@@ -28,7 +28,7 @@ function RoomList() {
       }
     });
   });
-  if (!currentUser) return <Redirect to="/login"></Redirect>;
+  if (!currentUser) return <Redirect to="/login"/>
   return (
     <>
       <ConsoleNavBar name={"room-list"} />
