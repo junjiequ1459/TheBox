@@ -24,10 +24,36 @@ const io = require("socket.io")(server, {
   },
 });
 
+app.use(passport.initialize());
+
+if (!isProduction) {
+  app.use(cors());
+}
+
+app.use(
+  csurf({
+    cookie: {
+      secure: isProduction,
+      sameSite: isProduction && "Lax",
+      httpOnly: true,
+    },
+  })
+);
+
 const roomsRouter = require("./routes/api/rooms");
 const usersRouter = require("./routes/api/users");
 const csrfRouter = require("./routes/api/csrf");
 const gameRouter = require("./routes/api/games");
+
+app.use(logger("dev"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+
+app.use("/api/users", usersRouter);
+app.use("/api/rooms", roomsRouter);
+app.use("/api/csrf", csrfRouter);
+app.use("/api/games", gameRouter);
 
 if (isProduction) {
   const path = require("path");
@@ -43,31 +69,6 @@ if (isProduction) {
     res.sendFile(path.resolve(__dirname, "../frontend", "build", "index.html"));
   });
 }
-
-app.use(
-  csurf({
-    cookie: {
-      secure: isProduction,
-      sameSite: isProduction && "Lax",
-      httpOnly: true,
-    },
-  })
-);
-
-if (!isProduction) {
-  app.use(cors());
-}
-
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(passport.initialize());
-
-app.use("/api/users", usersRouter);
-app.use("/api/rooms", roomsRouter);
-app.use("/api/csrf", csrfRouter);
-app.use("/api/games", gameRouter);
 
 app.use((req, res, next) => {
   const err = new Error("Not Found");
