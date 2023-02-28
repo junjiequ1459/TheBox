@@ -44,10 +44,7 @@ function RoomShowPage() {
     socket.on("end-game", () => {
       history.push("/roomlist");
     });
-    // socket.on("receive-winner", (username) => {
-    //   console.log('hit this')
-    //   alert(`${username} has won the game!!!!!!!!`)
-    // });
+
     return () => {
       clearInterval(intervalId);
     };

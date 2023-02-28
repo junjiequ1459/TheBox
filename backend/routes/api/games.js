@@ -23,10 +23,14 @@ router.get("/:id", async (req, res, next) => {
 router.get("/:userId", async (req, res, next) => {
   try {
     const userId = req.params.userId;
-    const games = await Game.find({ "players.playerId": userId })
+    const games = await Game.find()
       .populate("winnerId", "_id username")
       .exec();
-    return res.json(games);
+    
+    const usersGames = games.filter(game => {
+      game.players.includes(userId);
+    })
+    return res.json(usersGames);
   } catch (err) {
     next(err);
   }
