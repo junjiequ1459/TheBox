@@ -25,6 +25,10 @@ const { isProduction } = require("./config/keys");
 // });
 
 app.use(passport.initialize());
+app.use(logger("dev"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 if (!isProduction) {
   app.use(cors());
@@ -44,11 +48,6 @@ const roomsRouter = require("./routes/api/rooms");
 const usersRouter = require("./routes/api/users");
 const csrfRouter = require("./routes/api/csrf");
 const gameRouter = require("./routes/api/games");
-
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 
 app.use("/api/users", usersRouter);
 app.use("/api/rooms", roomsRouter);
