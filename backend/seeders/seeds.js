@@ -58,6 +58,7 @@ const insertSeeds = () => {
     .then(() => User.insertMany(users))
     .then(() => {
       console.log("Done!");
+      mongoose.connection.close();
     })
     .catch((err) => {
       console.error(err.stack);
@@ -72,9 +73,17 @@ const insertRoomSeeds = () => {
     .then(() => Room.insertMany(rooms))
     .then(() => {
       console.log("Done!");
+      mongoose.connection.close();
     })
     .catch((err) => {
       console.error(err.stack);
       process.exit(1);
     });
 };
+
+process.on('SIGINT', () => {
+  mongoose.connection.close(() => {
+    console.log('Mongoose connection disconnected through app termination');
+    process.exit(0);
+  });
+});
