@@ -5,10 +5,8 @@ import { fetchRoom } from "../../store/rooms";
 import Chat from "../ChatBox/ChatBox";
 import io from "socket.io-client";
 import "./RoomShowPage.css";
-import { updateRoom, deleteRoom, fetchRooms } from "../../store/rooms";
-import { Link } from "react-router-dom";
+import { updateRoom} from "../../store/rooms";
 import GameModal from "../GamePage/GamePage.js";
-import ConsoleNavBar from "../ConsoleNavBar/ConsoleNavBar";
 
 const socket = io("http://localhost:3001");
 
@@ -19,9 +17,6 @@ function RoomShowPage() {
   const history = useHistory();
   const { roomId } = useParams();
   const user = useSelector((state) => state.session.user);
-  // const setWinner = (winner) => {
-  //   setPrevWinner(winner)
-  // }
   const room = useSelector((state) => state.rooms[0]);
   const ifPlayer = room ? room.players : [];
   const players =
@@ -65,10 +60,6 @@ function RoomShowPage() {
     dispatch(updateRoom(room));
   };
 
-  // const handleDelete = (e) => {
-  //   dispatch(deleteRoom(room));
-  //   dispatch(fetchRooms());
-  // };
 
   const hostStart =
     room.host._id === user._id ? (
@@ -78,16 +69,6 @@ function RoomShowPage() {
     ) : null;
 
   const leaveOrDelete = room ? (
-    // room.host._id === user._id ?
-    // <button
-    //   className="signup-button"
-    //   onClick={() => {
-    //     handleDelete();
-    //     history.push("/");
-    //   }}
-    // >
-    //   Delete Room
-    // </button>
     <button
       className="signup-button"
       onClick={() => {
@@ -102,7 +83,6 @@ function RoomShowPage() {
   return (
     <>
       <div>
-        {/* <ConsoleNavBar name="gameroom" /> */}
         <div className="console-container">
           <div className="gameroom-container">
             <div>
