@@ -3,6 +3,7 @@ const { mongoURI: db } = require("../config/keys.js");
 const User = require("../models/User");
 const Room = require("../models/Room");
 const bcrypt = require("bcryptjs");
+const Game = require("../models/Game.js");
 const users = [];
 const rooms = [];
 
@@ -44,6 +45,7 @@ mongoose
     console.log("Connected to MongoDB successfully");
     insertSeeds();
     insertRoomSeeds();
+    insertGameSeeds();
   })
   .catch((err) => {
     console.error(err.stack);
@@ -67,7 +69,7 @@ const insertSeeds = () => {
 };
 
 const insertRoomSeeds = () => {
-  console.log("Resetting db and seeding users...");
+  console.log("Resetting db and seeding rooms...");
   Room.collection
     .drop()
     .then(() => Room.insertMany(rooms))
@@ -80,6 +82,19 @@ const insertRoomSeeds = () => {
       process.exit(1);
     });
 };
+
+const insertGameSeeds = () => {
+  console.log("Resetting db and seeding games...")
+  Game.collection.drop()
+  .then(() => {
+    console.log("Done!")
+    mongoose.connection.close()
+  })
+    .catch((err) => {
+    console.error(err.stack);
+    process.exit(1);
+  });
+}
 
 process.on('SIGINT', () => {
   mongoose.connection.close(() => {
