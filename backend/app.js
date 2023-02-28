@@ -44,17 +44,6 @@ if (isProduction) {
   });
 }
 
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-
-app.use(passport.initialize());
-
-if (!isProduction) {
-  app.use(cors());
-}
-
 app.use(
   csurf({
     cookie: {
@@ -64,6 +53,16 @@ app.use(
     },
   })
 );
+
+if (!isProduction) {
+  app.use(cors());
+}
+
+app.use(logger("dev"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(passport.initialize());
 
 app.use("/api/users", usersRouter);
 app.use("/api/rooms", roomsRouter);
@@ -123,8 +122,8 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(3001, () => {
-  console.log("listening on *:3001");
+server.listen(3002, () => {
+  console.log("listening on *:3002");
 });
 
 module.exports = app;
