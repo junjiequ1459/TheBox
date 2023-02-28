@@ -35,6 +35,7 @@ function RoomList() {
       <div className="console-container">
         <div className="room-list-container">
           <div>
+            <div>
             <div className="roomlist-title">
               <h1>ROOMS</h1>
             </div>
@@ -48,6 +49,7 @@ function RoomList() {
               <ul className="rooms-list">{roomItems}</ul>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </>

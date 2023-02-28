@@ -25,5 +25,9 @@
   "homepage": "https://github.com/junjiequ1459/TheBox#readme",
   "engines": {
     "node": "16.18.1"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1325.0",
+    "csurf": "^1.11.0"
   }
 }
