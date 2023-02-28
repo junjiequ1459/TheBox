@@ -7,10 +7,9 @@ const User = mongoose.model("User");
 //show
 router.get("/:id", async (req, res, next) => {
   try {
-    const game = await Game.findById(req.params.id).populate(
-      "winnerId",
-      "_id username"
-    );
+    const game = await Game.findById(req.params.id)
+      .populate("winnerId", "_id username")
+      .populate("players", "_id username wins losses");
     return res.json(game);
   } catch (err) {
     const error = new Error("Game not found");
@@ -24,7 +23,7 @@ router.get("/:id", async (req, res, next) => {
 router.get("/:userId", async (req, res, next) => {
   try {
     const userId = req.params.userId;
-    const games = await Game.find({ players: { $in: [userId] } })
+    const games = await Game.find({ "players.playerId": userId })
       .populate("winnerId", "_id username")
       .exec();
     return res.json(games);
@@ -53,7 +52,7 @@ router.post("/", async (req, res, next) => {
     await winner.save();
 
     req.body.players.forEach(async (player) => {
-      const loser = await User.findById(player.playerId);
+      const loser = await User.findById(player._id);
       loser.losses += 1;
       await loser.save();
     });

@@ -8,10 +8,9 @@ const validateRoomInput = require("../../validations/rooms");
 //show
 router.get("/:id", async (req, res, next) => {
   try {
-    const room = await Room.findById(req.params.id).populate(
-      "host",
-      "_id username"
-    );
+    const room = await Room.findById(req.params.id)
+      .populate("host", "_id username")
+      .populate("players", "_id username wins losses");
 
     return res.json(room);
   } catch (err) {
@@ -27,6 +26,7 @@ router.get("/", async (req, res) => {
   try {
     const rooms = await Room.find()
       .populate("host", "_id username")
+      .populate("players", "_id username")
       .sort({ createdAt: -1 });
     return res.json(rooms);
   } catch (err) {
@@ -50,9 +50,12 @@ router.post("/", requireUser, validateRoomInput, async (req, res, next) => {
       throw err;
     }
 
-    newRoom.players.push({playerId: req.user._id, username: req.user.username});
+    newRoom.players.push(req.user._id)
+
     let room = await newRoom.save();
-    room = await room.populate("host", "_id username");
+    room = await room
+      .populate("host", "_id username")
+      .populate("players", "_id username wins losses");
     return res.json(room);
   } catch (err) {
     next(err);
@@ -67,39 +70,42 @@ router.patch("/:id", requireUser, validateRoomInput, async (req, res, next) => {
     if (!roomToUpdate) {
       return res.status(404).json({ message: "Room not found'" });
     }
-    const playerinfo = { playerId: req.user._id, username: req.user.username };
+
+
+    const playerinfo = req.user._id;
     // Check if the player is already in the room
     const playerIndex = roomToUpdate.players.findIndex(
-      (player) => player.playerId.toString() === req.user._id.toString()
+      (player) => player.toString() === playerinfo.toString()
     );
-    console.log(playerIndex)
+    console.log(playerIndex);
     if (playerIndex === -1 && roomToUpdate.players.length < roomToUpdate.size) {
       // If the player is not already in the room and the room has space
       roomToUpdate.players.push(playerinfo);
       await roomToUpdate.save();
-      const updatedRoom = await Room.findById(roomId).populate(
-        "host",
-        "_id username"
-      );
+      const updatedRoom = await Room.findById(roomId)
+        .populate("host", "_id username")
+        .populate("players", "_id username wins losses");
       return res.json(updatedRoom);
     } else {
       console.log(playerinfo);
-      console.log(roomToUpdate)
-      roomToUpdate.players.splice(playerIndex,1);
-      console.log(roomToUpdate)
-      if(roomToUpdate.host._id.toString() === playerinfo.playerId.toString() && roomToUpdate.players.length){
-        console.log(roomToUpdate)
-        roomToUpdate.host = roomToUpdate.players[0].playerId;
-        console.log(roomToUpdate)
+      console.log(roomToUpdate);
+      roomToUpdate.players.splice(playerIndex, 1);
+      console.log(roomToUpdate);
+      if (
+        roomToUpdate.host._id.toString() === playerinfo.toString() &&
+        roomToUpdate.players.length
+      ) {
+        console.log(roomToUpdate);
+        roomToUpdate.host = roomToUpdate.players[0];
+        console.log(roomToUpdate);
       }
-      if(!roomToUpdate.players.length){
-        await roomToUpdate.remove()
+      if (!roomToUpdate.players.length) {
+        await roomToUpdate.remove();
       } else {
         await roomToUpdate.save();
-        const updatedRoom = await Room.findById(roomId).populate(
-          "host",
-          "_id username"
-        );
+        const updatedRoom = await Room.findById(roomId)
+          .populate("host", "_id username")
+          .populate("players", "_id username wins losses");
         return res.json(updatedRoom);
       }
     }
@@ -109,7 +115,6 @@ router.patch("/:id", requireUser, validateRoomInput, async (req, res, next) => {
     next(err);
   }
 });
-
 
 //destroy
 // router.delete("/:id", requireUser, async (req, res, next) => {
@@ -122,12 +127,11 @@ router.patch("/:id", requireUser, validateRoomInput, async (req, res, next) => {
 //     }
 
 //     if(roomToDelete.host.toString() !== req.user._id.toString()){
-      
+
 //       return res.status(401).json({message: "Unnauthorized" })
 //     }
-    
+
 //     await roomToDelete.remove()
-    
 
 //     return res.json({ message: "Deleted room successfully" });
 //   } catch (err) {
