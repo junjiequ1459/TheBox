@@ -22,7 +22,7 @@ function RoomShowPage() {
   const players =
     ifPlayer.length === 0
       ? []
-      : ifPlayer.map((player, i) => <li key={i}> {player.username}</li>);
+      : ifPlayer.map((player, i) => <li key={i}> {player.username} ({player.wins} {player.wins < 2 ? "win" : "wins"})</li>);
   const [socket2, setSocket] = useState(1);
   const [hidden, setHidden] = useState(true);
   const game = hidden ? null : <GameModal answer={gamePic} socket={socket} roomId={roomId}/>;
@@ -85,7 +85,7 @@ function RoomShowPage() {
       <div>
         <div className="console-container">
           <div className="gameroom-container">
-            <div>
+            <div className="info-div">
               <div className="room-show">
                 <h1> {room ? room.name : null}</h1>
                 <h2> Hosted by: {room ? room.host.username : null}</h2>

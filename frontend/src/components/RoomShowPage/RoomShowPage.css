@@ -17,3 +17,7 @@
     justify-content: space-around;
     align-items: center;
 }
+
+.info-div {
+    padding-left: 30px;
+}
