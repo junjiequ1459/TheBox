@@ -11,7 +11,13 @@ const gameSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    players: Array,
+    players: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+      },
+    ],
   },
   {
     timestamps: true,

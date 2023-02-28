@@ -23,7 +23,7 @@ function RoomList() {
 
   rooms.forEach((room) => {
     room.players.forEach((player) => {
-      if (player.playerId === currentUser._id) {
+      if (player._id === currentUser._id) {
         history.push(`/room/${room._id}`);
       }
     });
