@@ -31,6 +31,16 @@ const usersRouter = require("./routes/api/users");
 const csrfRouter = require("./routes/api/csrf");
 const gameRouter = require("./routes/api/games");
 
+app.use(
+  csurf({
+    cookie: {
+      secure: isProduction,
+      sameSite: isProduction && "Lax",
+      httpOnly: true,
+    },
+  })
+);
+
 if (isProduction) {
   const path = require('path');
   app.get('/', (req, res) => {
@@ -61,15 +71,6 @@ if (!isProduction) {
   app.use(cors());
 }
 
-app.use(
-  csurf({
-    cookie: {
-      secure: isProduction,
-      sameSite: isProduction && "Lax",
-      httpOnly: true,
-    },
-  })
-);
 
 app.use("/api/users", usersRouter);
 app.use("/api/rooms", roomsRouter);
