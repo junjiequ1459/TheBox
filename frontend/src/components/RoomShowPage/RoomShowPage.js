@@ -30,6 +30,7 @@ function RoomShowPage() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       dispatch(fetchRoom(roomId));
+      console.log("interval")
     }, 1000);
     socket.on("start-game", () => {
       setGamePic(pics[Math.floor(Math.random()*pics.length)]);

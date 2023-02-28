@@ -17,12 +17,12 @@ const cors = require("cors");
 const csurf = require("csurf");
 const { isProduction } = require("./config/keys");
 
-const io = require("socket.io")(server, {
-  cors: {
-    origin: ["http://localhost:3000"],
-    transports: ["websocket", "polling"],
-  },
-});
+// const io = require("socket.io")(server, {
+//   cors: {
+//     origin: ["http://localhost:3000"],
+//     transports: ["websocket", "polling"],
+//   },
+// });
 
 app.use(passport.initialize());
 
@@ -70,24 +70,31 @@ if (isProduction) {
   });
 }
 
-app.use((req, res, next) => {
-  const err = new Error("Not Found");
+// app.use((req, res, next) => {
+//   const err = new Error("Not Found");
 
-  err.statusCode = 404;
-  next(err);
-});
+//   err.statusCode = 404;
+//   next(err);
+// });
 
-const serverErrorLogger = debug("backend:error");
+// const serverErrorLogger = debug("backend:error");
 
-app.use((err, req, res, next) => {
-  serverErrorLogger(err);
-  const statusCode = err.statusCode || 500;
-  res.status(statusCode);
-  res.json({
-    message: err.message,
-    statusCode,
-    errors: err.errors,
-  });
+// app.use((err, req, res, next) => {
+//   serverErrorLogger(err);
+//   const statusCode = err.statusCode || 500;
+//   res.status(statusCode);
+//   res.json({
+//     message: err.message,
+//     statusCode,
+//     errors: err.errors,
+//   });
+// });
+
+const io = require("socket.io")(server, {
+  cors: {
+    origin: ["http://localhost:3000"],
+    transports: ["websocket", "polling"],
+  },
 });
 
 io.on("connection", (socket) => {
@@ -125,6 +132,26 @@ io.on("connection", (socket) => {
 
 server.listen(3002, () => {
   console.log("listening on *:3002");
+});
+
+app.use((req, res, next) => {
+  const err = new Error("Not Found");
+
+  err.statusCode = 404;
+  next(err);
+});
+
+const serverErrorLogger = debug("backend:error");
+
+app.use((err, req, res, next) => {
+  serverErrorLogger(err);
+  const statusCode = err.statusCode || 500;
+  res.status(statusCode);
+  res.json({
+    message: err.message,
+    statusCode,
+    errors: err.errors,
+  });
 });
 
 module.exports = app;
