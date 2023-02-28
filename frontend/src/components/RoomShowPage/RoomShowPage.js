@@ -8,7 +8,7 @@ import "./RoomShowPage.css";
 import { updateRoom} from "../../store/rooms";
 import GameModal from "../GamePage/GamePage.js";
 
-const socket = io("http://localhost:3001");
+const socket = io("http://localhost:3002");
 
 function RoomShowPage() {
   const pics = ["chak", "manny", "rex", "wilson", "zahi"]

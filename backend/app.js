@@ -31,6 +31,25 @@ const usersRouter = require("./routes/api/users");
 const csrfRouter = require("./routes/api/csrf");
 const gameRouter = require("./routes/api/games");
 
+if (isProduction) {
+  const path = require('path');
+  app.get('/', (req, res) => {
+    res.cookie('CSRF-TOKEN', req.csrfToken());
+    res.sendFile(
+      path.resolve(__dirname, '../frontend', 'build', 'index.html')
+    );
+  });
+
+  app.use(express.static(path.resolve("../frontend/build")));
+
+  app.get(/^(?!\/?api).*/, (req, res) => {
+    res.cookie('CSRF-TOKEN', req.csrfToken());
+    res.sendFile(
+      path.resolve(__dirname, '../frontend', 'build', 'index.html')
+    );
+  });
+}
+
 app.use(
   csurf({
     cookie: {
@@ -41,18 +60,16 @@ app.use(
   })
 );
 
+if (!isProduction) {
+  app.use(cors());
+}
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use(passport.initialize());
-
-if (!isProduction) {
-  app.use(cors());
-}
-
-
 app.use("/api/users", usersRouter);
 app.use("/api/rooms", roomsRouter);
 app.use("/api/csrf", csrfRouter);
@@ -78,24 +95,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-if (isProduction) {
-  const path = require('path');
-  app.get('/', (req, res) => {
-    res.cookie('CSRF-TOKEN', req.csrfToken());
-    res.sendFile(
-      path.resolve(__dirname, '../frontend', 'build', 'index.html')
-    );
-  });
 
-  app.use(express.static(path.resolve("../frontend/build")));
-
-  app.get(/^(?!\/?api).*/, (req, res) => {
-    res.cookie('CSRF-TOKEN', req.csrfToken());
-    res.sendFile(
-      path.resolve(__dirname, '../frontend', 'build', 'index.html')
-    );
-  });
-}
 
 io.on("connection", (socket) => {
 
@@ -134,8 +134,8 @@ io.on("connection", (socket) => {
   
 });
 
-server.listen(3001, () => {
-  console.log("listening on *:3001");
+server.listen(3002, () => {
+  console.log("listening on *:3002");
 });
 
 module.exports = app;
