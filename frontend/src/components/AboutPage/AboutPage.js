@@ -33,9 +33,7 @@ function AboutPage() {
                 <i className="fa-brands fa-angellist"></i>
               </a>
             </div>
-            <h2>Backend Lead
-            <br/> EXPRESS COOK
-            </h2>
+            <h2>Backend Lead</h2>
           </div>
           <div className="image-icon-container">
             <div id="img-div">
@@ -65,9 +63,7 @@ function AboutPage() {
                 <i className="fa-brands fa-angellist"></i>
               </a>
             </div>
-            <h2>Frontend Lead
-            <br/> REACT COOK
-            </h2>
+            <h2>Frontend Lead</h2>
           </div>
           <div className="image-icon-container">
             <div id="img-div">
@@ -96,9 +92,7 @@ function AboutPage() {
                 <i className="fa-brands fa-angellist"></i>
               </a>
             </div>
-            <h2>Team Lead/Frontend
-              <br/> CSS AWS COOK
-            </h2>
+            <h2>Team Lead/Frontend</h2>
           </div>
           <div className="image-icon-container">
             <div id="img-div">
@@ -128,9 +122,7 @@ function AboutPage() {
                 <i className="fa-brands fa-angellist"></i>
               </a>
             </div>
-            <h2>FullStack Lead
-            <br/> SOCKET COOK
-            </h2>
+            <h2>FullStack Lead</h2>
           </div>
         </div>
         <div className="team-member-description">
@@ -142,31 +134,30 @@ function AboutPage() {
             science graduate.
           </div>
           <div className="about-description">
-            Welcome! My name is Kevin Liu, and I am 25 years old. I am
-            Aspiring Software Engineer, and I am passionate about life.
-            Throughout my life, I have been driven by a desire to learn, grow,
-            and make a positive impact on the world around me. [Add any personal
-            details, achievements, or experiences that you feel are relevant]. I
-            am excited to [Connect with/Provide Value to/Share my experiences
-            with] the [Community/Organization/Platform] and look forward to [Any
-            Goals or Objectives]. Thank you for taking the time to get to know
-            me, and I hope we can work together to achieve great things.
+            Welcome! My name is Kevin Liu, and I am 25 years old. I am Aspiring
+            Software Engineer, and I am passionate about life. Throughout my
+            life, I have been driven by a desire to learn, grow, and make a
+            positive impact on the world around me. I am excited to Share my
+            experiences with the Communityand look forward to Thank you for
+            taking the time to get to know me, and I hope we can work together
+            to achieve great things.
           </div>
           <div className="about-description">
-            Hello! JunJieQu(Rex) is my name, and I am 23 years old. I am a
-            future SWE. I've been motivated to study, develop, and have a
+            Hello! JunJieQu(Rex) is my name, and I am 23 years old. I am an
+            aspiring SWE. I've been motivated to study, develop, and have a
             positive impact on the world all of my life. I am eager to discuss
             my experiences while attending App Academy. I appreciate you taking
             the time to get to know me, and I look forward to working with you
             to accomplish great things.
           </div>
           <div className="about-description">
-             Welcome! Joey Tsui is my name, and I'm 24 years old. I have a degree
-             in computer information and am pursuing a career as a full stack developer. 
-             I have a passion for coding and I have been motivated to learn, develop, and have a positive 
-             influence on the world around me throughout my life.I appreciate you taking 
-             the time to get to know me, and I look forward to working with you to 
-             accomplish amazing things.
+            Welcome! Joey Tsui is my name, and I'm 24 years old. I have a degree
+            in computer information and am pursuing a career as a full stack
+            developer. I have a passion for coding and I have been motivated to
+            learn, develop, and have a positive influence on the world around me
+            throughout my life.I appreciate you taking the time to get to know
+            me, and I look forward to working with you to accomplish amazing
+            things.
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 .rooms-list {
     color: #8eff1e;
+    display: flex;
 }
 
 .room-item {
@@ -15,8 +16,8 @@
 }
 
 .room-list-style{
-    height: 600px;
-    width: 800px;
+    height: 60vh;
+    width: 70vw;
     border: 1px solid #008df8;
     display: flex;
     align-items: flex-start;
@@ -27,7 +28,7 @@
 .room-item-container{
     border: 1px solid #8eff1e;
     height: 10vh;
-    width: 37vw;
+    width: 65vw;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -35,7 +36,7 @@
 }
 
 .room-item-container:hover{
-    background-color: green;
+    background-color: rgb(15, 26, 15);
     transition: background-color 0.2s ease;
 
 }

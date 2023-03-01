@@ -1,6 +1,6 @@
 .team-member-container{
     /* background-color: green; */
-    height: 55vh;
+    height: 42vh;
     width: 85vw;
     display: flex;
     justify-content: space-evenly;
@@ -9,14 +9,12 @@
     gap:2vw;
 }
 
-
-
 .team-member-container #img-div{
     border-radius: 50%;
-    width: 300px;
-    height: 300px;
-    background-color: green;
+    width: 12vw;
+    height: 24vh;
     overflow: hidden;
+
 }
 .team-member-container #kevin-img{
     transform:scale(2);
@@ -56,18 +54,18 @@
 .about-description{
     /* background-color: gray; */
     color:white;
-    width: 400px;
-    height: 250px;
+    width: 50vw;
+    height: 25vh;
     border: 1px solid #008df8;
     border-radius: 10px;
-    padding: 30px;
+    padding: 10px;
     overflow: auto;
 
 }
 
 .fa-brands{
     color: white;
-    font-size: 42px;
+    font-size: 2vw;
     
 }
 

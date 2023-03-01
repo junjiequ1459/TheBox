@@ -14,7 +14,7 @@ import RoomList from "./components/RoomListPage/RoomList";
 import RoomForm from "./components/RoomForm/RoomForm";
 import RoomShowPage from "./components/RoomShowPage/RoomShowPage";
 import LoadingScreen from "./LoadingScreen/LoadingScreen";
-import BackgroundMusic from "./assets/Arcade.mp3";
+import MusicPlayer from "./components/MusicPlayer/MusicPlayer";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -28,11 +28,6 @@ function App() {
     });
   }, [dispatch]);
 
-  function toggleMute() {
-    var audio = document.getElementById("bg-music");
-    audio.muted = !audio.muted;
-  }
-
   return (
     <>
       <audio id="bg-music" src={BackgroundMusic} autoPlay controls></audio>{" "}
@@ -42,6 +37,7 @@ function App() {
       {!loaded && <LoadingScreen />}
       {loaded && (
         <>
+        <MusicPlayer />
           <Switch>
             <AuthRoute exact path="/login" component={LoginForm} />
             <AuthRoute exact path="/signup" component={SignupForm} />
