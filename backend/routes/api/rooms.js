@@ -11,7 +11,7 @@ router.get("/:id", async (req, res, next) => {
     const room = await Room.findById(req.params.id)
       .populate("host", "_id username")
       .populate("players", "_id username wins losses");
-      
+
     return res.json(room);
   } catch (err) {
     const error = new Error("Room not found");

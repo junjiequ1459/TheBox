@@ -19,23 +19,6 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-//index match history
-router.get("/:userId", async (req, res, next) => {
-  try {
-    const userId = req.params.userId;
-    const games = await Game.find()
-      .populate("winnerId", "_id username")
-      .exec();
-    
-    const usersGames = games.filter(game => {
-      game.players.includes(userId);
-    })
-    return res.json(usersGames);
-  } catch (err) {
-    next(err);
-  }
-});
-
 module.exports = router;
 
 // create

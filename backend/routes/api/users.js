@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
 const User = mongoose.model("User");
+const Game = mongoose.model("Game");
 const passport = require("passport");
 const { loginUser, restoreUser } = require("../../config/passport");
 const { isProduction } = require("../../config/keys");
@@ -13,12 +14,25 @@ const { singleFileUpload, singleMulterUpload } = require("../../awsS3");
 //index leaderboards
 router.get("/", async (req, res, next) => {
   try {
-    const users = await User.find();
+    const users = await User.find().sort({ wins: -1 });
     return res.json(users);
   } catch (err) {
     return res.json([]);
   }
 });
+
+// profile
+// router.get("/:userId", async (req, res,next) => {
+//   try {
+//     const user = await User.findById(req.params.userId)
+//     return res.json(user);
+//   } catch (err) {
+//     const error = new Error("User not found");
+//     error.statusCode = 404;
+//     error.errors = { message: "No user found with that id" };
+//     return next(error);
+//   }
+// })
 
 router.post(
   "/register",
@@ -102,7 +116,7 @@ router.get("/current", restoreUser, (req, res) => {
     profileImageUrl: req.user.profileImageUrl, // <- ADD THIS LINE
     email: req.user.email,
     wins: req.user.wins,
-    losses: req.user.losses
+    losses: req.user.losses,
   });
 });
 
@@ -127,5 +141,26 @@ router.put(
     }
   }
 );
+
+//index match history
+router.get("/:userId/games", async (req, res, next) => {
+  try {
+    const userId = req.params.userId;
+    const games = await Game.find()
+      .populate("winnerId", "_id username")
+      .sort({ createdAt: -1 })
+      .exec();
+
+    const usersGames = [];
+    games.forEach((game) => {
+      game.players.forEach((player) => {
+        if (player.toString() === userId.toString()) usersGames.push(game);
+      });
+    });
+    return res.json(usersGames);
+  } catch (err) {
+    next(err);
+  }
+});
 
 module.exports = router;

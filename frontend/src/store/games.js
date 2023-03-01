@@ -14,7 +14,7 @@ const receiveGames = (games) => ({
 });
 
 export const fetchGames = (userId) => async (dispatch) => {
-  const response = await jwtFetch(`/api/games/${userId}`);
+  const response = await jwtFetch(`/api/users/${userId}/games`);
   const games = await response.json();
   dispatch(receiveGames(games));
 };
