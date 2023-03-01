@@ -22,7 +22,6 @@ align-items: center;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  overflow-y: auto;
 }
 
 .ranking-heading{
@@ -37,9 +36,10 @@ align-items: center;
 .ranking-username{
   display: inline-block;
   /* background-color: blue; */
-  min-width: 10vw;
+  min-width: 12vw;
+  max-width: 12vw;
   margin-left: 11vw;
-  margin-right: 8vw;
+  margin-right: 7vw;
 }
 .ranking-wins{
   /* background-color: darkblue; */
@@ -50,4 +50,9 @@ align-items: center;
   position: absolute;
   top:5vh;
   left: 5vw;
+}
+
+.list-overflow{
+  overflow-y: auto;
+  height: 35vh;
 }

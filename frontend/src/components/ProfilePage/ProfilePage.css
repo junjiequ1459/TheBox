@@ -46,3 +46,28 @@ h1 {
     display: flex;
     justify-content: space-around;
 }
+
+.matchlist-container{
+    position: absolute;
+    bottom: -35vh;
+    /* background-color: darkblue; */
+    display: flex;
+    height: 40vh;
+    width: 50vw;
+    color: #8eff1e;
+    overflow-y: auto;
+}
+
+#player-list-title{
+    display: inline;
+    color:#008df8;
+}
+
+.win-loss-match{
+    font-weight: bold;
+    font-size: 24px;
+}
+#roomname-title-match{
+    margin-bottom: 0px;
+    color:blanchedalmond;
+}

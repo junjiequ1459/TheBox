@@ -34,7 +34,9 @@ function Leaderboard() {
                 <p>Player</p>
                 <p>Wins</p>
               </div>
-              <ol>{userItems}</ol>
+              <div className="list-overflow">
+                <ol>{userItems}</ol>
+              </div>
             </div>
           </div>
         </div>

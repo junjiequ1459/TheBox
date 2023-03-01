@@ -39,3 +39,15 @@ audio::-webkit-media-controls-panel {
   background-color: white;
 }
 
+.-webkit-scrollbar {
+  width: 5px;
+}
+
+.-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.-webkit-scrollbar-thumb {
+  background: #008df8; 
+  border-radius: 10px;
+}
