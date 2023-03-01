@@ -13,10 +13,10 @@ const receiveUsers = (users) => ({
   users
 })
 
-const receiveUser = (user) => ({
-  type: RECEIVE_USER,
-  user
-})
+// const receiveUser = (user) => ({
+//   type: RECEIVE_USER,
+//   user
+// })
 
 export const fetchUsers = () => async dispatch => {
   const response = await jwtFetch('/api/users')
@@ -24,11 +24,11 @@ export const fetchUsers = () => async dispatch => {
   dispatch(receiveUsers(users))
 }//need to edit reducer
 
-export const fetchUser = (userId) => async dispatch => {
-  const response = await jwtFetch(`/api/users/${userId}`)
-  const user = await response.json();
-  dispatch(receiveUser(user))
-}//need to edit reducer
+// export const fetchUser = (userId) => async dispatch => {
+//   const response = await jwtFetch(`/api/users/${userId}`)
+//   const user = await response.json();
+//   dispatch(receiveUser(user))
+// }//need to edit reducer
 
 const initialState = {
   users: [],
