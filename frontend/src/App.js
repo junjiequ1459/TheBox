@@ -35,7 +35,7 @@ function App() {
 
   return (
     <>
-      <audio id="bg-music" src={BackgroundMusic} autoplay controls></audio>{" "}
+      <audio id="bg-music" src={BackgroundMusic} autoPlay controls></audio>{" "}
       <div className="video-background">
         <Video />
       </div>
@@ -49,9 +49,9 @@ function App() {
             <ProtectedRoute exact path="/roomform" component={RoomForm} />
             <ProtectedRoute exact path="/roomlist" component={RoomList} />
             <ProtectedRoute path="/room/:roomId" component={RoomShowPage} />
-            <ProtectedRoute exact path="/" component={MainPage} />
             <ProtectedRoute exact path="/play" component={GamePage} />
             <ProtectedRoute path="/profile/:userId" component={ProfilePage} />
+            <ProtectedRoute path="/" component={MainPage} />
           </Switch>
         </>
       )}

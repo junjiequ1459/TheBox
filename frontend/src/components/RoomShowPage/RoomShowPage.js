@@ -7,6 +7,7 @@ import io from "socket.io-client";
 import "./RoomShowPage.css";
 import { updateRoom} from "../../store/rooms";
 import GameModal from "../GamePage/GamePage.js";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 const socket = io("http://localhost:3002");
 
@@ -74,7 +75,7 @@ function RoomShowPage() {
       className="signup-button"
       onClick={() => {
         handleLeave();
-        history.push("/");
+        history.push("/")
       }}
     >
       Leave Room

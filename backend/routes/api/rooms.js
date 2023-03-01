@@ -12,6 +12,12 @@ router.get("/:id", async (req, res, next) => {
       .populate("host", "_id username")
       .populate("players", "_id username wins losses");
 
+    //   const roomsObj = {}
+    //   rooms.forEach( room => {
+    //     roomsObj[room._id] = room
+    //   })
+      
+    // return res.json(roomsObj);
     return res.json(room);
   } catch (err) {
     const error = new Error("Room not found");

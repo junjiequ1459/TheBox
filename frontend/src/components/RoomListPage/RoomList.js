@@ -21,13 +21,17 @@ function RoomList() {
     dispatch(fetchRooms(searchValue));
   }, [dispatch, searchValue, rooms.length]);
 
+  let usersRoom;
+  
   rooms.forEach((room) => {
     room.players.forEach((player) => {
       if (player._id === currentUser._id) {
-        history.push(`/room/${room._id}`);
+        usersRoom = room;
       }
     });
   });
+
+  if(usersRoom) return <Redirect to={`/room/${usersRoom._id}`}/>
   if (!currentUser) return <Redirect to="/login"/>
   return (
     <>
