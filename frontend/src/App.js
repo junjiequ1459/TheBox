@@ -30,7 +30,6 @@ function App() {
 
   return (
     <>
-      <audio id="bg-music" src={BackgroundMusic} autoPlay controls></audio>{" "}
       <div className="video-background">
         <Video />
       </div>
