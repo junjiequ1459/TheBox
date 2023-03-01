@@ -28,13 +28,12 @@ router.get("/", async (req, res) => {
       .populate("host", "_id username")
       .populate("players", "_id username")
       .sort({ createdAt: -1 });
-    //   const roomsObj = {}
-    //   rooms.forEach( room => {
-    //     roomsObj[room._id] = room
-    //   })
-      
-    // return res.json(roomsObj);
-    return res.json(rooms);
+    const roomsObj = {};
+    rooms.forEach((room) => {
+      roomsObj[room._id] = room;
+    });
+    return res.json(roomsObj);
+    // return res.json(rooms);
   } catch (err) {
     return res.json([]);
   }
@@ -48,6 +47,7 @@ router.post("/", requireUser, validateRoomInput, async (req, res, next) => {
       size: req.body.size,
       host: req.user._id,
     });
+    newRoom.players.push(req.user._id);
 
     const existingRoom = await Room.findOne({ host: newRoom.host });
     if (existingRoom) {
@@ -55,11 +55,9 @@ router.post("/", requireUser, validateRoomInput, async (req, res, next) => {
       err.statusCode = 400;
       throw err;
     }
+    await newRoom.save();
 
-    newRoom.players.push(req.user._id)
-
-    let room = await newRoom.save();
-    room = await room
+    const room = await Room.findOne({ host: newRoom.host })
       .populate("host", "_id username")
       .populate("players", "_id username wins losses");
     return res.json(room);
@@ -76,7 +74,6 @@ router.patch("/:id", requireUser, validateRoomInput, async (req, res, next) => {
     if (!roomToUpdate) {
       return res.status(404).json({ message: "Room not found'" });
     }
-
 
     const playerinfo = req.user._id;
     // Check if the player is already in the room
@@ -101,6 +98,7 @@ router.patch("/:id", requireUser, validateRoomInput, async (req, res, next) => {
       }
       if (!roomToUpdate.players.length) {
         await roomToUpdate.remove();
+        return res.json(null);
       } else {
         await roomToUpdate.save();
         const updatedRoom = await Room.findById(roomId)
