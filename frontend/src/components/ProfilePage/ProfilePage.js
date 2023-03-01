@@ -86,18 +86,20 @@ function ProfilePage() {
       <div className="console-container">
         <div className="wins-and-losses">
           <div className="win-losses-container">
-            <h1>WINS</h1>
+            <h1 style={{ color: "#8eff1e" }}>WINS</h1>
             <h1>{user.wins}</h1>
-            <h1>LOSSES</h1>
+            <h1 style={{ color: "red" }}>LOSSES</h1>
             <h1>{user.losses}</h1>
           </div>
           <div className="win-percent">
-            <h1>WIN PERCENTAGE</h1>
+            <h1 style={{ color: "#008df8" }}>WIN PERCENTAGE</h1>
             <h1>
               {((user.wins / (user.losses + user.wins)) * 100).toFixed(2)}%
             </h1>
           </div>
-          <ul>{matchList}</ul>
+          <div className="matchlist-container">
+            <ul>{matchList}</ul>
+          </div>
         </div>
         <div className="user-profile-container">
           <img
