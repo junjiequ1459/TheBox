@@ -148,13 +148,14 @@ router.get("/:userId/games", async (req, res, next) => {
     const userId = req.params.userId;
     const games = await Game.find()
       .populate("winnerId", "_id username")
+      .populate("players", "_id username")
       .sort({ createdAt: -1 })
       .exec();
 
     const usersGames = [];
     games.forEach((game) => {
       game.players.forEach((player) => {
-        if (player.toString() === userId.toString()) usersGames.push(game);
+        if (player._id.toString() === userId.toString()) usersGames.push(game);
       });
     });
     return res.json(usersGames);

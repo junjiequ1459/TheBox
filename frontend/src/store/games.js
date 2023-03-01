@@ -19,7 +19,6 @@ export const fetchGames = (userId) => async (dispatch) => {
   dispatch(receiveGames(games));
 };
 
-
 export const fetchGame = (gameId) => async (dispatch) => {
   const response = await jwtFetch(`/api/games/${gameId}`);
   const game = await response.json();
@@ -44,8 +43,8 @@ const gamesReducer = (state = {}, action) => {
   switch (action.type) {
     // case RECEIVE_GAME:
     //   return { 0: action.game };
-    // case RECEIVE_GAMES:
-    //   return { ...action.games };
+    case RECEIVE_GAMES:
+      return { ...newState, ...action.games };
     default:
       return state;
   }
