@@ -2,14 +2,14 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import session from "./session";
 import errors from "./errors";
-import usersReducer from "./users";
+import users from "./users";
 import rooms from "./rooms";
-import games from "./games";
+// import games from "./games";
 
 const rootReducer = combineReducers({
   session,
   errors,
-  usersReducer,
+  users,
   rooms,
   // games,
 });
