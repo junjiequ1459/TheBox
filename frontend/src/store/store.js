@@ -4,14 +4,14 @@ import session from "./session";
 import errors from "./errors";
 import users from "./users";
 import rooms from "./rooms";
-// import games from "./games";
+import games from "./games";
 
 const rootReducer = combineReducers({
   session,
   errors,
   users,
   rooms,
-  // games,
+  games
 });
 
 let enhancer;

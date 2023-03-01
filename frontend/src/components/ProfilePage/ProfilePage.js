@@ -6,8 +6,10 @@ import "./ProfilePage.css";
 import ConsoleNavBar from "../ConsoleNavBar/ConsoleNavBar";
 import io from "socket.io-client";
 import { updateUser } from "../../store/users";
-import { getCurrentUser } from "../../store/session";
+// import { getCurrentUser } from "../../store/session";
 import jwtFetch from "../../store/jwt";
+import { fetchGames } from "../../store/games";
+import MatchItem from "./MatchItem";
 
 const socket = io("http://localhost:3002");
 
@@ -15,6 +17,12 @@ function ProfilePage() {
   const { userId } = useParams();
   const [image, setImage] = useState(null);
   const user = useSelector((state) => state.session.user);
+  const games = useSelector((state) =>
+    state.games ? Object.values(state.games) : []
+  );
+  const matchList = games.map((game, i) => (
+    <MatchItem key={i} userId={userId} game={game} />
+  ));
   const fileInput = useRef(null);
 
   const [currentImageUrl, setcurrentImageUrl] = useState(user.profileImageUrl);
@@ -30,7 +38,10 @@ function ProfilePage() {
 
   // useEffect(() => dispatch(getCurrentUser()), []);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    dispatch(fetchGames(userId));
+  }, []);
+
   const handleImageUpload = async (e) => {
     e.preventDefault();
     if (!image) {
@@ -82,8 +93,11 @@ function ProfilePage() {
           </div>
           <div className="win-percent">
             <h1>WIN PERCENTAGE</h1>
-            <h1>{(user.wins/(user.losses + user.wins) * 100).toFixed(2)}%</h1>
+            <h1>
+              {((user.wins / (user.losses + user.wins)) * 100).toFixed(2)}%
+            </h1>
           </div>
+          <ul>{matchList}</ul>
         </div>
         <div className="user-profile-container">
           <img
