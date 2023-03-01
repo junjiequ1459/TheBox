@@ -91,7 +91,7 @@ if (isProduction) {
 
 const io = require("socket.io")(server, {
   cors: {
-    origin: ["http://localhost:3000"],
+    origin: ["http://localhost:3000", "https://the-box.onrender.com"],
     transports: ["websocket", "polling"],
   },
 });
