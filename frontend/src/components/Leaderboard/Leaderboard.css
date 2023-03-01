@@ -1,0 +1,53 @@
+.leaderboards-container{
+width: 85vw;
+height: 85vh;
+display: flex;
+/* background-color: green; */
+justify-content:center;
+align-items: center;
+}
+
+.leaderboards-container ol{
+  list-style: decimal;
+  color:#8eff1e;
+  font-size: 28px;
+  margin-left: 10.5vw;
+  
+}
+
+.ranking-container{
+  /* background-color: darkblue; */
+  width: 55vw;
+  height: 45vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.ranking-heading{
+  display: flex;
+  justify-content: space-evenly;
+  /* background-color: green; */
+  width: 55vw;
+  color: blanchedalmond;
+  font-size: 32px;
+}
+
+.ranking-username{
+  display: inline-block;
+  /* background-color: blue; */
+  min-width: 10vw;
+  margin-left: 11vw;
+  margin-right: 8vw;
+}
+.ranking-wins{
+  /* background-color: darkblue; */
+  display: inline;
+}
+
+.leaderboard-title{
+  position: absolute;
+  top:5vh;
+  left: 5vw;
+}
