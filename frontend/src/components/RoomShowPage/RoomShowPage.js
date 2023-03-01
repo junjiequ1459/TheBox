@@ -7,8 +7,9 @@ import io from "socket.io-client";
 import "./RoomShowPage.css";
 import { updateRoom} from "../../store/rooms";
 import GameModal from "../GamePage/GamePage.js";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
-const socket = io("http://localhost:3001");
+const socket = io("http://localhost:3002");
 
 function RoomShowPage() {
   const pics = ["chak", "manny", "rex", "wilson", "zahi"]
@@ -30,6 +31,7 @@ function RoomShowPage() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       dispatch(fetchRoom(roomId));
+      console.log("interval")
     }, 1000);
     socket.on("start-game", () => {
       setGamePic(pics[Math.floor(Math.random()*pics.length)]);
@@ -73,7 +75,7 @@ function RoomShowPage() {
       className="signup-button"
       onClick={() => {
         handleLeave();
-        history.push("/");
+        history.push("/")
       }}
     >
       Leave Room

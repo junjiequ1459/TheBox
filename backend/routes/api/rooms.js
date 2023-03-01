@@ -11,7 +11,7 @@ router.get("/:id", async (req, res, next) => {
     const room = await Room.findById(req.params.id)
       .populate("host", "_id username")
       .populate("players", "_id username wins losses");
-
+      
     return res.json(room);
   } catch (err) {
     const error = new Error("Room not found");
@@ -28,6 +28,12 @@ router.get("/", async (req, res) => {
       .populate("host", "_id username")
       .populate("players", "_id username")
       .sort({ createdAt: -1 });
+    //   const roomsObj = {}
+    //   rooms.forEach( room => {
+    //     roomsObj[room._id] = room
+    //   })
+      
+    // return res.json(roomsObj);
     return res.json(rooms);
   } catch (err) {
     return res.json([]);

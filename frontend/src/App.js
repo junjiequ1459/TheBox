@@ -30,6 +30,7 @@ function App() {
 
   return (
     <>
+      <audio id="bg-music" src={BackgroundMusic} autoPlay controls></audio>{" "}
       <div className="video-background">
         <Video />
       </div>
@@ -41,12 +42,12 @@ function App() {
             <AuthRoute exact path="/login" component={LoginForm} />
             <AuthRoute exact path="/signup" component={SignupForm} />
             <Route exact path="/about" component={AboutPage} />
-            <Route exact path="/roomform" component={RoomForm} />
-            <Route exact path="/roomlist" component={RoomList} />
-            <Route path="/room/:roomId" component={RoomShowPage} />
-            <ProtectedRoute exact path="/" component={MainPage} />
+            <ProtectedRoute exact path="/roomform" component={RoomForm} />
+            <ProtectedRoute exact path="/roomlist" component={RoomList} />
+            <ProtectedRoute path="/room/:roomId" component={RoomShowPage} />
             <ProtectedRoute exact path="/play" component={GamePage} />
             <ProtectedRoute path="/profile/:userId" component={ProfilePage} />
+            <ProtectedRoute path="/" component={MainPage} />
           </Switch>
         </>
       )}

@@ -17,17 +17,42 @@ const cors = require("cors");
 const csurf = require("csurf");
 const { isProduction } = require("./config/keys");
 
-const io = require("socket.io")(server, {
-  cors: {
-    origin: ["http://localhost:3000"],
-    transports: ["websocket", "polling"],
-  },
-});
+// const io = require("socket.io")(server, {
+//   cors: {
+//     origin: ["http://localhost:3000"],
+//     transports: ["websocket", "polling"],
+//   },
+// });
+
+app.use(passport.initialize());
+app.use(logger("dev"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+
+if (!isProduction) {
+  app.use(cors());
+}
+
+app.use(
+  csurf({
+    cookie: {
+      secure: isProduction,
+      sameSite: isProduction && "Lax",
+      httpOnly: true,
+    },
+  })
+);
 
 const roomsRouter = require("./routes/api/rooms");
 const usersRouter = require("./routes/api/users");
 const csrfRouter = require("./routes/api/csrf");
 const gameRouter = require("./routes/api/games");
+
+app.use("/api/users", usersRouter);
+app.use("/api/rooms", roomsRouter);
+app.use("/api/csrf", csrfRouter);
+app.use("/api/games", gameRouter);
 
 if (isProduction) {
   const path = require("path");
@@ -44,50 +69,31 @@ if (isProduction) {
   });
 }
 
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+// app.use((req, res, next) => {
+//   const err = new Error("Not Found");
 
-app.use(passport.initialize());
+//   err.statusCode = 404;
+//   next(err);
+// });
 
-if (!isProduction) {
-  app.use(cors());
-}
+// const serverErrorLogger = debug("backend:error");
 
-app.use(
-  csurf({
-    cookie: {
-      secure: isProduction,
-      sameSite: isProduction && "Lax",
-      httpOnly: true,
-    },
-  })
-);
+// app.use((err, req, res, next) => {
+//   serverErrorLogger(err);
+//   const statusCode = err.statusCode || 500;
+//   res.status(statusCode);
+//   res.json({
+//     message: err.message,
+//     statusCode,
+//     errors: err.errors,
+//   });
+// });
 
-app.use("/api/users", usersRouter);
-app.use("/api/rooms", roomsRouter);
-app.use("/api/csrf", csrfRouter);
-app.use("/api/games", gameRouter);
-
-app.use((req, res, next) => {
-  const err = new Error("Not Found");
-
-  err.statusCode = 404;
-  next(err);
-});
-
-const serverErrorLogger = debug("backend:error");
-
-app.use((err, req, res, next) => {
-  serverErrorLogger(err);
-  const statusCode = err.statusCode || 500;
-  res.status(statusCode);
-  res.json({
-    message: err.message,
-    statusCode,
-    errors: err.errors,
-  });
+const io = require("socket.io")(server, {
+  cors: {
+    origin: ["http://localhost:3000"],
+    transports: ["websocket", "polling"],
+  },
 });
 
 io.on("connection", (socket) => {
@@ -123,8 +129,28 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(3001, () => {
-  console.log("listening on *:3001");
+server.listen(3002, () => {
+  console.log("listening on *:3002");
+});
+
+app.use((req, res, next) => {
+  const err = new Error("Not Found");
+
+  err.statusCode = 404;
+  next(err);
+});
+
+const serverErrorLogger = debug("backend:error");
+
+app.use((err, req, res, next) => {
+  serverErrorLogger(err);
+  const statusCode = err.statusCode || 500;
+  res.status(statusCode);
+  res.json({
+    message: err.message,
+    statusCode,
+    errors: err.errors,
+  });
 });
 
 module.exports = app;
