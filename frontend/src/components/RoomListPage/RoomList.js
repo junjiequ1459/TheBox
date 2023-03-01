@@ -11,19 +11,18 @@ import {
 
 function RoomList() {
   const dispatch = useDispatch();
-  const history = useHistory();
   const currentUser = useSelector((state) => state.session.user);
   const [searchValue, setSearchValue] = useState("");
-  const rooms = useSelector((state) => Object.values(state.rooms));
-  const roomItems = rooms.map((room, i) => <RoomItem key={i} room={room} />);
-
+  const rooms = useSelector((state) => (state.rooms ? state.rooms : {}));
+  const roomItems = Object.values(rooms).map((room, i) => (
+    <RoomItem key={i} room={room} />
+  ));
   useEffect(() => {
     dispatch(fetchRooms(searchValue));
   }, [dispatch, searchValue, rooms.length]);
 
-  let usersRoom;
-  
-  rooms.forEach((room) => {
+  let usersRoom = null;
+  Object.values(rooms).forEach((room) => {
     room.players.forEach((player) => {
       if (player._id === currentUser._id) {
         usersRoom = room;
@@ -31,8 +30,10 @@ function RoomList() {
     });
   });
 
-  if(usersRoom) return <Redirect to={`/room/${usersRoom._id}`}/>
-  if (!currentUser) return <Redirect to="/login"/>
+  // Object.keys(rooms).forEach((roomId)=> )
+
+  if (usersRoom) return <Redirect to={`/room/${usersRoom._id}`} />;
+  if (!currentUser) return <Redirect to="/login" />;
   return (
     <>
       <ConsoleNavBar name={"room-list"} />
@@ -40,20 +41,20 @@ function RoomList() {
         <div className="room-list-container">
           <div>
             <div>
-            <div className="roomlist-title">
-              <h1>ROOMS</h1>
-            </div>
-            <input
-              type="search"
-              value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
-              placeholder={"Search by lobby name"}
-            />
-            <div className="room-list-style">
-              <ul className="rooms-list">{roomItems}</ul>
+              <div className="roomlist-title">
+                <h1>ROOMS</h1>
+              </div>
+              <input
+                type="search"
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+                placeholder={"Search by lobby name"}
+              />
+              <div className="room-list-style">
+                <ul className="rooms-list">{roomItems}</ul>
+              </div>
             </div>
           </div>
-        </div>
         </div>
       </div>
     </>
