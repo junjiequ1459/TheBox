@@ -1,6 +1,9 @@
 .rooms-list {
     color: #8eff1e;
     display: flex;
+    flex-wrap: wrap;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .room-item {
