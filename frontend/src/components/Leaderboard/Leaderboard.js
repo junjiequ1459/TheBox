@@ -13,7 +13,8 @@ function Leaderboard() {
   const userItems = users.map((user, i) => (
     <li key={i}>
       {" "}
-      {user.username} : {user.wins}{" "}
+      <div className="ranking-username">{user.username}</div>
+      <div className="ranking-wins">{user.wins}</div>{" "}
     </li>
   ));
   useEffect(() => {
@@ -23,7 +24,21 @@ function Leaderboard() {
   return (
     <>
       <ConsoleNavBar name={"leaderboard"} />
-      <ul>{userItems}</ul>
+      <div className="console-container">
+        <h1 className="leaderboard-title">LeaderBoards</h1>
+        <div className="leaderboards-container">
+          <div className="ranking-container">
+            <div>
+              <div className="ranking-heading">
+                <p>Rank</p>
+                <p>Player</p>
+                <p>Wins</p>
+              </div>
+              <ol>{userItems}</ol>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
