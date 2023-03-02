@@ -113,8 +113,8 @@ function ProfilePage() {
 
       <div className="console-container">
         <div className="wins-and-losses">
+        <h1>{user.username}</h1>
           <div className="profile-username">
-            <h1>{user.username}</h1>
           </div>
           <div className="win-losses-container">
             <h1 style={{ color: "#8eff1e" }}>WINS</h1>

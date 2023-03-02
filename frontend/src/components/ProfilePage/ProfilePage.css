@@ -24,7 +24,7 @@ h1 {
 
 .wins-and-losses{
     /* background-color: purple;        */
-    margin-top: 20vh;
+    margin-top: 10vh;
     width: 40vw;
     height: 30vh;
     display: flex;
@@ -50,7 +50,7 @@ h1 {
 
 .matchlist-container{
     position: absolute;
-    bottom: -35vh;
+    bottom: -45vh;
     /* background-color: darkblue; */
     display: flex;
     height: 40vh;
@@ -70,6 +70,7 @@ h1 {
     font-size: 24px;
     max-width: 5vw;
     min-width: 5vw;
+    
 }
 #roomname-title-match{
     margin-bottom: 0px;
