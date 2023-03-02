@@ -17,7 +17,7 @@ We will need to
 
 - Implement game(s)
 
-#Functionality and MVP
+# Functionality and MVP
 
 1. Hosting - (2/20) 1 day
 2. User Auth - (2/20) 1 day
@@ -38,35 +38,59 @@ We will need to
 7. Production ReadMe - (2/24) 1 day
    Production ReadMe
 
-#Group Members and Work Breakdown
+# Group Members and Work Breakdown
 
-Work Breakdown
-Roles
+## Work Breakdown
+
+### Roles
+
 Team Lead and CSS styler - Rex
+
 Frontend - Kevin
+
 Backend - Joey
+
 Flex and Git Manager - Zahi
-Monday
+
+### Monday
+
 Build React app - Kevin, Rex
+
 Build express backend app - Joey, Zahi
+
 Finish User Auth and style including Profiles - ALL
+
 Investigate Websockets - ALL
-Tuesday
+
+### Tuesday
+
 Create CRUD for rooms/lobbies - ALL
+
 Backend - Joey, Zahi
-Frontend - Kevin, Rex(Styler)
-Brainstorm games - Rex
-Wednesday
-Start and play game functionality - ALL
-Backend - Joey, Zahi
-Frontend - Kevin, Rex
-Setup Sockets - ALL
-Thursday
-CRUD for messages - ALL
-Backend - Joey, Zahi
+
 Frontend - Kevin, Rex(Styler)
 
-#Technologies and Technical Challenges
+Brainstorm games - Rex
+
+### Wednesday
+
+Start and play game functionality - ALL
+
+Backend - Joey, Zahi
+
+Frontend - Kevin, Rex
+
+Setup Sockets - ALL
+
+### Thursday
+
+CRUD for messages - ALL
+
+Backend - Joey, Zahi
+
+Frontend - Kevin, Rex(Styler)
+
+# Technologies and Technical Challenges
 
 MongoDB/Express - We are using MongoDB for our backend database to hold informations such as user's information, states, games and etc.
 
