@@ -9,10 +9,13 @@ The Box delivers the fun of party games to your electronic devices. We provide a
 
 We will need to
 
-*Create user auth, player stats
-*Provide full CRUD for user lobbies
-*Chat functionality
-*Implement game(s)
+- Create user auth, player stats
+
+- Provide full CRUD for user lobbies
+
+- Chat functionality
+
+- Implement game(s)
 
 #Functionality and MVP
 
