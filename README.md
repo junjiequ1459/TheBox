@@ -19,23 +19,23 @@ We will need to
 
 # Functionality and MVP
 
-1. Hosting - (2/20) 1 day
-2. User Auth - (2/20) 1 day
+### 1. Hosting - (2/20) 1 day
+### 2. User Auth - (2/20) 1 day
    We will have demo logins to navigate the website
    Without logging in the user cannot play the game
-3. Rooms/Lobby - (2/21) 1 day
+### 3. Rooms/Lobby - (2/21) 1 day
    Users will be able to create a lobby or rooms to wait for enough people to start the game
    Logged in users can join existing lobbies
-4. Game - (2/22) 2 days
+### 4. Game - (2/22) 2 days
    The main feature, the game can be played with multiple people
    Only users logged in can play the game
-5. Sockets - (2/22) 2 days
+### 5. Sockets - (2/22) 2 days
    Sockets will allow all players to simultaneously play the game and update for everyone
    Users within the same lobby will be subscribed and listening to any updates
-6. Profile - (2/23) 1 day
+### 6. Profile - (2/23) 1 day
    Users will have their own profile page
    The profile page will have a users information and a match history plus win percentage
-7. Production ReadMe - (2/24) 1 day
+### 7. Production ReadMe - (2/24) 1 day
    Production ReadMe
 
 # Group Members and Work Breakdown
