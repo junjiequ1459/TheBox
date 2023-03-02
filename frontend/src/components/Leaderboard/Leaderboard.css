@@ -56,3 +56,17 @@ align-items: center;
   overflow-y: auto;
   height: 35vh;
 }
+
+
+.list-overflow::-webkit-scrollbar {
+  width: 5px;
+}
+
+.list-overflow::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.list-overflow::-webkit-scrollbar-thumb {
+  background: #8eff1e; 
+  border-radius: 10px;
+}
