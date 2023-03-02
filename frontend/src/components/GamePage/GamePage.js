@@ -6,10 +6,11 @@ import { useHistory } from "react-router-dom";
 import { saveGame } from "../../store/games";
 
 function GameModal({answer ,socket, roomId}) {
+
   const history = useHistory();
   const dispatch = useDispatch();
   const canvasRef = useRef(null);
-  const room = useSelector((state) => state.rooms[0]);
+  const room = useSelector((state) => state.rooms[roomId]);
   const user = useSelector((state) => state.session.user);
   const [image, setImage] = useState(null);
   const answerInputRef = useRef(null);
