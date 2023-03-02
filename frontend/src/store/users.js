@@ -13,10 +13,23 @@ const receiveUsers = (users) => ({
   users,
 });
 
+
 const receiveUser = (user) => ({
   type: RECEIVE_USER,
   user,
 });
+
+// export const updateUser = (user) => async (dispatch) => {
+//   const response = await jwtFetch(`/api/${user._id}`, {
+//     method: "PUT",
+//     headers: {
+//       "Content-Type": "application/json"
+//     },
+//     body: JSON.stringify(user)
+//   })
+//   const updatedUser = await response.json();
+//   dispatch(receiveUser(updatedUser))
+// }
 
 export const fetchUsers = () => async (dispatch) => {
   const response = await jwtFetch("/api/users");
@@ -34,15 +47,14 @@ const usersReducer = (state = {}, action) => {
   const newState = { ...state };
   switch (action.type) {
     case "UPDATE_USER":
-      const updatedUser = action.user;
-      const updatedUsers = state.users.map((user) => {
-        if (user.id === updatedUser.id) {
-          return updatedUser;
-        } else {
-          return user;
-        }
-      });
-      return { ...state, users: updatedUsers };
+      // const updatedUsers = state.users.map((user) => {
+      //   if (user.id === updatedUser.id) {
+      //     return updatedUser;
+      //   } else {
+      //     return user;
+      //   }
+      // });
+      return { ...state, users: action.user };
     case RECEIVE_USER:
       return (newState[action.user] = action.user);
     case RECEIVE_USERS:

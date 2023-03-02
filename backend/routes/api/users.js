@@ -21,8 +21,6 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-
-
 router.post(
   "/register",
   singleMulterUpload("image"),
@@ -110,9 +108,9 @@ router.get("/current", restoreUser, (req, res) => {
 });
 
 // profile
-router.get("/:userId", async (req, res,next) => {
+router.get("/:userId", async (req, res, next) => {
   try {
-    const user = await User.findById(req.params.userId)
+    const user = await User.findById(req.params.userId);
     return res.json(user);
   } catch (err) {
     const error = new Error("User not found");
@@ -120,10 +118,10 @@ router.get("/:userId", async (req, res,next) => {
     error.errors = { message: "No user found with that id" };
     return next(error);
   }
-})
+});
 
 router.put(
-  "/:userId/profile-image",
+  "/:userId",
   singleMulterUpload("image"),
   async (req, res, next) => {
     try {
@@ -137,7 +135,7 @@ router.put(
       user.profileImageUrl = profileImageUrl;
       await user.save();
 
-      res.json({ user });
+      res.json({user});
     } catch (err) {
       next(err);
     }

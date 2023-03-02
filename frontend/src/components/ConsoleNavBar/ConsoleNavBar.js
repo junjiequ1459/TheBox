@@ -12,6 +12,7 @@ function ConsoleNavBar({ name }) {
   const logoutUser = (e) => {
     e.preventDefault();
     dispatch(logout());
+    history.push("/login");
   };
 
   function getLinks() {

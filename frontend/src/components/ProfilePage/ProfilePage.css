@@ -8,14 +8,14 @@ h1 {
     display: flex;
     flex-direction: column; 
     align-items: flex-end;
-    justify-content: top;
+    justify-content: center;
     margin-top: 10vh;
     /* background-color: green; */
 }
 
 .profile-image{
-    height: 400px;
-    width: 400px;
+    height: 40vh;
+    width: 21vw;
 }
 
 #file-name{
@@ -99,4 +99,9 @@ h1 {
   .matchlist-container::-webkit-scrollbar-thumb {
     background: #8eff1e; 
     border-radius: 10px;
+  }
+
+  .profile-username{
+    text-indent: 10%;
+    font-size: 50px;
   }

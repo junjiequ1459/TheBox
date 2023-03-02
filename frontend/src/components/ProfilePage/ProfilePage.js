@@ -4,15 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRef } from "react";
 import "./ProfilePage.css";
 import ConsoleNavBar from "../ConsoleNavBar/ConsoleNavBar";
-import io from "socket.io-client";
 import { updateUser } from "../../store/users";
-// import { getCurrentUser } from "../../store/session";
 import jwtFetch from "../../store/jwt";
 import { fetchGames } from "../../store/games";
 import MatchItem from "./MatchItem";
 import { fetchUser } from "../../store/users";
-
-const socket = io("http://localhost:3002");
 
 function ProfilePage() {
   const { userId } = useParams();
@@ -27,24 +23,16 @@ function ProfilePage() {
   ));
   const fileInput = useRef(null);
 
-  const [currentImageUrl, setcurrentImageUrl] = useState(user.profileImageUrl);
+  const [currentImageUrl, setcurrentImageUrl] = useState(null);
 
   const dispatch = useDispatch();
 
-  socket.emit("join", `${userId}`);
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    socket.emit("send_message", { message: `hello from ${userId}` });
-  };
-
-  // useEffect(() => dispatch(getCurrentUser()), []);
-
   useEffect(() => {
-    dispatch(fetchUser(userId)).then(async()=>{
-    await dispatch(fetchGames(userId));
-  })
-  }, [userId]);
+    dispatch(fetchUser(userId)).then(async () => {
+      setcurrentImageUrl(user.profileImageUrl);
+      dispatch(fetchGames(userId));
+    });
+  }, [currentImageUrl, userId]);
 
   const handleImageUpload = async (e) => {
     e.preventDefault();
@@ -55,7 +43,7 @@ function ProfilePage() {
     const formData = new FormData();
     formData.append("image", image);
     try {
-      const response = await jwtFetch(`/api/users/${userId}/profile-image`, {
+      const response = await jwtFetch(`/api/users/${userId}`, {
         method: "PUT",
         body: formData,
       });
@@ -78,7 +66,7 @@ function ProfilePage() {
       document.getElementById("file-name").textContent = fileName;
       setImage(e.target.files[0]);
     } else {
-      document.getElementById("file-name").textContent = "";
+      // document.getElementById("file-name").textContent = "";
       setImage(null);
     }
   }
@@ -113,9 +101,7 @@ function ProfilePage() {
 
       <div className="console-container">
         <div className="wins-and-losses">
-        <h1>{user.username}</h1>
-          <div className="profile-username">
-          </div>
+          <h1 className="profile-username">{user.username}</h1>
           <div className="win-losses-container">
             <h1 style={{ color: "#8eff1e" }}>WINS</h1>
             <h1>{user.wins}</h1>
