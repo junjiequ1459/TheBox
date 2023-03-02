@@ -44,7 +44,7 @@ const gamesReducer = (state = {}, action) => {
     // case RECEIVE_GAME:
     //   return { 0: action.game };
     case RECEIVE_GAMES:
-      return { ...newState, ...action.games };
+      return { ...action.games };
     default:
       return state;
   }

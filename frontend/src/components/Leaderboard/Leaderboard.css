@@ -41,6 +41,12 @@ align-items: center;
   margin-left: 11vw;
   margin-right: 7vw;
 }
+
+.ranking-username:hover{
+  text-decoration: underline;
+  
+}
+
 .ranking-wins{
   /* background-color: darkblue; */
   display: inline;

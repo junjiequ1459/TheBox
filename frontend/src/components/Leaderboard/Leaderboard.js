@@ -13,7 +13,10 @@ function Leaderboard() {
   const userItems = users.map((user, i) => (
     <li key={i}>
       {" "}
-      <div className="ranking-username">{user.username}</div>
+      <div className="ranking-username"><Link to={`/profile/${user._id}`}>
+      {user.username}
+      </Link>
+      </div>
       <div className="ranking-wins">{user.wins}</div>{" "}
     </li>
   ));

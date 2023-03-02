@@ -21,18 +21,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-// profile
-// router.get("/:userId", async (req, res,next) => {
-//   try {
-//     const user = await User.findById(req.params.userId)
-//     return res.json(user);
-//   } catch (err) {
-//     const error = new Error("User not found");
-//     error.statusCode = 404;
-//     error.errors = { message: "No user found with that id" };
-//     return next(error);
-//   }
-// })
+
 
 router.post(
   "/register",
@@ -119,6 +108,19 @@ router.get("/current", restoreUser, (req, res) => {
     losses: req.user.losses,
   });
 });
+
+// profile
+router.get("/:userId", async (req, res,next) => {
+  try {
+    const user = await User.findById(req.params.userId)
+    return res.json(user);
+  } catch (err) {
+    const error = new Error("User not found");
+    error.statusCode = 404;
+    error.errors = { message: "No user found with that id" };
+    return next(error);
+  }
+})
 
 router.put(
   "/:userId/profile-image",

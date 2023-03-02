@@ -10,13 +10,15 @@ import { updateUser } from "../../store/users";
 import jwtFetch from "../../store/jwt";
 import { fetchGames } from "../../store/games";
 import MatchItem from "./MatchItem";
+import { fetchUser } from "../../store/users";
 
 const socket = io("http://localhost:3002");
 
 function ProfilePage() {
   const { userId } = useParams();
   const [image, setImage] = useState(null);
-  const user = useSelector((state) => state.session.user);
+  const user = useSelector((state) => state.users);
+  const currentUser = useSelector((state) => state.session.user);
   const games = useSelector((state) =>
     state.games ? Object.values(state.games) : []
   );
@@ -39,8 +41,10 @@ function ProfilePage() {
   // useEffect(() => dispatch(getCurrentUser()), []);
 
   useEffect(() => {
-    dispatch(fetchGames(userId));
-  }, []);
+    dispatch(fetchUser(userId)).then(async()=>{
+    await dispatch(fetchGames(userId));
+  })
+  }, [userId]);
 
   const handleImageUpload = async (e) => {
     e.preventDefault();
@@ -79,12 +83,39 @@ function ProfilePage() {
     }
   }
 
+  const imageForm =
+    currentUser._id === user._id ? (
+      <form onSubmit={handleImageUpload}>
+        <label>
+          <button
+            className="signup-button"
+            onClick={() => fileInput.current.click()}
+          >
+            Choose File
+          </button>
+          <input
+            type="file"
+            accept=".jpg, .jpeg, .png"
+            ref={fileInput}
+            style={{ display: "none" }}
+            onChange={updateFile}
+          />
+        </label>
+        <button className="signup-button" type="submit">
+          Upload
+        </button>
+      </form>
+    ) : null;
+
   return (
     <>
       <ConsoleNavBar name={"profilePage"} />
 
       <div className="console-container">
         <div className="wins-and-losses">
+          <div className="profile-username">
+            <h1>{user.username}</h1>
+          </div>
           <div className="win-losses-container">
             <h1 style={{ color: "#8eff1e" }}>WINS</h1>
             <h1>{user.wins}</h1>
@@ -107,26 +138,7 @@ function ProfilePage() {
             src={currentImageUrl}
             alt="noimg"
           ></img>
-          <form onSubmit={handleImageUpload}>
-            <label>
-              <button
-                className="signup-button"
-                onClick={() => fileInput.current.click()}
-              >
-                Choose File
-              </button>
-              <input
-                type="file"
-                accept=".jpg, .jpeg, .png"
-                ref={fileInput}
-                style={{ display: "none" }}
-                onChange={updateFile}
-              />
-            </label>
-            <button className="signup-button" type="submit">
-              Upload
-            </button>
-          </form>
+          {imageForm}
           <span id="file-name"></span>
         </div>
       </div>
