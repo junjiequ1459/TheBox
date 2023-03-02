@@ -3,7 +3,7 @@
 
 TheBox is a fullstack MERN party game app that allows you to chat and play with friends.
 
-#Background and Overview
+# Background and Overview
 
 The Box delivers the fun of party games to your electronic devices. We provide a selection of entertaining games that are ideal for any social occasion and are created for friends and family to enjoy together. The Box is the app for you if you want to spice up a family gathering, mark a significant event, or just hang out with pals.
 
@@ -34,7 +34,7 @@ We will need to
    Users within the same lobby will be subscribed and listening to any updates
 6. Profile - (2/23) 1 day
    Users will have their own profile page
-   The profile page will have a users information and maybe some additional information
+   The profile page will have a users information and a match history plus win percentage
 7. Production ReadMe - (2/24) 1 day
    Production ReadMe
 
@@ -48,9 +48,9 @@ Team Lead and CSS styler - Rex
 
 Frontend - Kevin
 
-Backend - Joey
+Fullstack Flex - Joey
 
-Flex and Git Manager - Zahi
+Backend and Git Manager - Zahi
 
 ### Monday
 
@@ -58,9 +58,9 @@ Build React app - Kevin, Rex
 
 Build express backend app - Joey, Zahi
 
-Finish User Auth and style including Profiles - ALL
+Finish User Auth and style including Profiles - All
 
-Investigate Websockets - ALL
+Investigate Websockets - Joey
 
 ### Tuesday
 
@@ -80,11 +80,11 @@ Backend - Joey, Zahi
 
 Frontend - Kevin, Rex
 
-Setup Sockets - ALL
+Setup Sockets - Joey
 
 ### Thursday
 
-CRUD for messages - ALL
+Polish app
 
 Backend - Joey, Zahi
 
