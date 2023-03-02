@@ -1,21 +1,20 @@
 # TheBox
 
-TheBox
 
 TheBox is a fullstack MERN party game app that allows you to chat and play with friends.
 
-Background and Overview
+#Background and Overview
 
 The Box delivers the fun of party games to your electronic devices. We provide a selection of entertaining games that are ideal for any social occasion and are created for friends and family to enjoy together. The Box is the app for you if you want to spice up a family gathering, mark a significant event, or just hang out with pals.
 
 We will need to
 
-Create user auth, player stats
-Provide full CRUD for user lobbies
-Chat functionality
-Implement game(s)
+*Create user auth, player stats
+*Provide full CRUD for user lobbies
+*Chat functionality
+*Implement game(s)
 
-Functionality and MVP
+#Functionality and MVP
 
 1. Hosting - (2/20) 1 day
 2. User Auth - (2/20) 1 day
@@ -36,7 +35,7 @@ Functionality and MVP
 7. Production ReadMe - (2/24) 1 day
    Production ReadMe
 
-Group Members and Work Breakdown
+#Group Members and Work Breakdown
 
 Work Breakdown
 Roles
@@ -64,7 +63,7 @@ CRUD for messages - ALL
 Backend - Joey, Zahi
 Frontend - Kevin, Rex(Styler)
 
-Technologies and Technical Challenges
+#Technologies and Technical Challenges
 
 MongoDB/Express - We are using MongoDB for our backend database to hold informations such as user's information, states, games and etc.
 
