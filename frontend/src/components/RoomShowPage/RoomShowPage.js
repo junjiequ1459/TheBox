@@ -71,12 +71,11 @@ function RoomShowPage() {
   };
 
   const hostStart =
-    room.host._id === user._id ? (
+    room?.host._id === user._id ? (
       <button className="signup-button" onClick={handleStartGame}>
         START GAME
       </button>
     ) : null;
-
   const leaveOrDelete = room ? (
     <button
       className="signup-button"
