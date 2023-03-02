@@ -4,6 +4,7 @@ function MatchItem({ userId, game }) {
   const userItems = users.map((user, i) => <li key={i}> {user.username} </li>);
   return (
     <li>
+      <div className="roomname-wins-container">
       <h2 id="roomname-title-match">RoomName: {game.roomName}</h2>
       <ul>
         <p id="player-list-title">Players</p>: {userItems}
@@ -14,6 +15,7 @@ function MatchItem({ userId, game }) {
         ) : (
           <p style={{ color: "red" }}>LOSS</p>
         )}
+      </div>
       </div>
     </li>
   );

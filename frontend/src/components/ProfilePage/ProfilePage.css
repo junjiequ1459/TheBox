@@ -47,15 +47,17 @@ h1 {
     justify-content: space-around;
 }
 
+
 .matchlist-container{
     position: absolute;
     bottom: -35vh;
     /* background-color: darkblue; */
     display: flex;
     height: 40vh;
-    width: 50vw;
+    width: 55vw;
     color: #8eff1e;
     overflow-y: auto;
+    border:solid 1px #8eff1e;
 }
 
 #player-list-title{
@@ -66,8 +68,34 @@ h1 {
 .win-loss-match{
     font-weight: bold;
     font-size: 24px;
+    max-width: 5vw;
+    min-width: 5vw;
 }
 #roomname-title-match{
     margin-bottom: 0px;
     color:blanchedalmond;
+    max-width: 10vw;
+    min-width: 10vw;
 }
+
+  .roomname-wins-container{
+    width: 50vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+
+
+  .matchlist-container::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  .matchlist-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .matchlist-container::-webkit-scrollbar-thumb {
+    background: #8eff1e; 
+    border-radius: 10px;
+  }
