@@ -12,6 +12,8 @@ function GameModal({answer ,socket, roomId}) {
   const canvasRef = useRef(null);
   const room = useSelector((state) => state.rooms[roomId]);
   const user = useSelector((state) => state.session.user);
+  const [time, setTime] = useState(25);
+  let interval;
   const [image, setImage] = useState(null);
   const answerInputRef = useRef(null);
   const [userAnswer, setUserAnswer] = useState('')
@@ -24,7 +26,12 @@ function GameModal({answer ,socket, roomId}) {
       socket.emit("end-game", roomId)
       history.push("/roomlist")
     };
-  }, [userAnswer]);
+    if (time === 0) {
+      dispatch(saveGame({roomName: room.name, winnerId: "", players: room.players}))
+      socket.emit("end-game", roomId)
+      history.push("/roomlist")
+    }
+  }, [userAnswer, time]);
 
   useEffect(() => {
     const img = new Image(50, 50);
@@ -35,6 +42,10 @@ function GameModal({answer ,socket, roomId}) {
     img.onerror = () => {
       console.error("Error loading image");
     };
+    interval = setInterval(() => {
+      setTime(time => time - 1);
+    }, 1000);
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
@@ -53,6 +64,8 @@ function GameModal({answer ,socket, roomId}) {
         const x = (canvas.width - width) / 2;
         const y = (canvas.height - height) / 2;
         ctx.drawImage(image, x, y, width, height);
+        ctx.font = "48px serif";
+        ctx.fillText(time, x, y, width, height);
       };
 
       let scale = 80; //START SCALE
@@ -69,16 +82,11 @@ function GameModal({answer ,socket, roomId}) {
     }
   }, [image]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
   return (
       <div id="canvas-div">
         <canvas ref={canvasRef} className="canvas" />
-        <form id="answer-div" onSubmit={handleSubmit}>
+        <form id="answer-div">
           <input type="text" ref={answerInputRef} onChange={(e) => setUserAnswer(e.target.value)}></input>
-          <button className="signup-button"> Submit Answer</button>
         </form>
       </div>
   );
