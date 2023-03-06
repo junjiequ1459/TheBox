@@ -34,16 +34,19 @@ router.post("/", async (req, res, next) => {
     
     const winner = await User.findById(req.body.winnerId);
     if(winner){
+      
       winner.wins += 1;
       winner.losses -= 1;
       await winner.save();
+      
+      req.body.players.forEach(async (player) => {
+        const loser = await User.findById(player._id);
+        loser.losses += 1;
+        await loser.save();
+      });
+      
     }
 
-    req.body.players.forEach(async (player) => {
-      const loser = await User.findById(player._id);
-      loser.losses += 1;
-      await loser.save();
-    });
     return res.json(game);
   } catch (err) {
     next(err);
