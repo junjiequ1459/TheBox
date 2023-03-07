@@ -85,6 +85,7 @@
     align-items: center;
     /* background-color: green; */
     margin-right: 1vw;
+    z-index: -1;
 }
 
 .fa-solid{
