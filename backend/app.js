@@ -89,7 +89,7 @@ if (isProduction) {
 //   });
 // });
 
-const port = 3002 || process.env.PORT ;
+const port = process.env.PORT || 3002;
 
 const io = require("socket.io")(server, {
   cors: {
