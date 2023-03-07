@@ -27,13 +27,10 @@ router.post("/", async (req, res, next) => {
       players: req.body.players,
     });
     
-    console.log(newGame)
 
     const winner = await User.findById(req.body.winnerId);
-    console.log(winner);
     if (winner) {
       newGame = await newGame.populate("winnerId", "_id username")
-      console.log(newGame)
       winner.wins += 1;
       winner.losses -= 1;
       await winner.save();
@@ -45,7 +42,6 @@ router.post("/", async (req, res, next) => {
       });
     }
     const game = await newGame.save();
-    console.log(game)
     
     return res.json(game);
   } catch (err) {
