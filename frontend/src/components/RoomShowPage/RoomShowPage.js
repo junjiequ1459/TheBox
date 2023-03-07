@@ -49,7 +49,6 @@ function RoomShowPage() {
     }
     const randomAnswer = pics[Math.floor(Math.random() * pics.length)];
     setAnswer(randomAnswer);
-    debugger
   }, [category]);
   
   const game = hidden ? null : (
@@ -60,9 +59,9 @@ function RoomShowPage() {
     const intervalId = setInterval(() => {
       dispatch(fetchRoom(roomId));
     }, 1000);
-    socket.on("start-game", () => {
+    socket.on("start-game", (answer) => {
+      setAnswer(answer);
       setHidden(false);
-      console.log("started game");
     });
     socket.on("end-game", () => {
       history.push("/roomlist");
@@ -79,7 +78,7 @@ function RoomShowPage() {
 
   const handleStartGame = (e) => {
     e.preventDefault();
-    socket.emit("start-game", roomId);
+    socket.emit("start-game", roomId, answer);
     setHidden(false);
     setSocket(socket2 + 1);
   };

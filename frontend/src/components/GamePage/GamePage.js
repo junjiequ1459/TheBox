@@ -16,11 +16,13 @@ function GameModal({answer, socket, roomId}) {
   const [image, setImage] = useState(null);
   const answerInputRef = useRef(null);
   const [userAnswer, setUserAnswer] = useState('')
+  const [gameAnswer, setGameAnswer] = useState(null)
   useEffect(() => {
     answerInputRef.current.focus();
   }, []);
+  
   useEffect(() => {
-    if (userAnswer === answer) {
+    if (userAnswer === gameAnswer) {
       dispatch(saveGame({roomName: room.name, winnerId: user._id, players: room.players}))
       socket.emit("end-game", roomId)
       history.push("/roomlist")
@@ -37,6 +39,7 @@ function GameModal({answer, socket, roomId}) {
     img.src = `../../${answer}.png`;
     img.onload = () => {
       setImage(img);
+      setGameAnswer(answer)
     };
     img.onerror = () => {
       console.error("Error loading image");
