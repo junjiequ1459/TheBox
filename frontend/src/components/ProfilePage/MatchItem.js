@@ -1,11 +1,11 @@
 import "./ProfilePage.css";
 function MatchItem({ userId, game }) {
-  const users = game.players ? game.players : [];
+  const users = game?.players ? game?.players : [];
   const userItems = users.map((user, i) => (
     <li
       key={i}
       style={
-        user._id === game.winner?._id ? { color: "green" } : { color: "red" }
+        user._id === game?.winner?._id ? { color: "green" } : { color: "red" }
       }
     >
       {" "}
@@ -15,13 +15,13 @@ function MatchItem({ userId, game }) {
   return (
     <li>
       <div className="roomname-wins-container">
-        <h2 id="roomname-title-match">RoomName: {game.roomName}</h2>
+        <h2 id="roomname-title-match">RoomName: {game?.roomName}</h2>
         <ul>
           <p id="player-list-title">Players</p>: {userItems}
         </ul>
         <div className="win-loss-match">
-          {game.winner ? (
-            game.winner._id === userId ? (
+          {game?.winner ? (
+            game?.winner._id === userId ? (
               <p>WIN</p>
             ) : (
               <p style={{ color: "red" }}>LOSS</p>
