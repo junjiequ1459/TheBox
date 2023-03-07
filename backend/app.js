@@ -89,6 +89,8 @@ if (isProduction) {
 //   });
 // });
 
+const port = 3002 || process.env.PORT ;
+
 const io = require("socket.io")(server, {
   cors: {
     origin: ["http://localhost:3000", "https://the-box.onrender.com"],
@@ -130,7 +132,7 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(3002, () => {
+server.listen(port, () => {
   console.log("listening on *:3002");
 });
 
