@@ -2,14 +2,21 @@
     border: white solid 1px;
     border-radius: 5%;
 }
-
+#game-timer {
+    margin: auto;
+    font-size: 60px;
+    padding-bottom: 10px;
+}
 #canvas-div{
     display: flex;
     justify-content: center;
     flex-direction: column;
     padding: 30px;
     background: black;
-    margin-top:13vh;
+}
+
+#game-input {
+    border-bottom: solid 1px #8eff1e;
 }
 
 #answer-div{

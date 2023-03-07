@@ -5,32 +5,40 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { saveGame } from "../../store/games";
 
-function GameModal({answer, socket, roomId}) {
+function GameModal({ answer, socket, roomId }) {
   const history = useHistory();
   const dispatch = useDispatch();
   const canvasRef = useRef(null);
   const room = useSelector((state) => state.rooms[roomId]);
   const user = useSelector((state) => state.session.user);
-  const [time, setTime] = useState(25);
+  const [time, setTime] = useState(20);
   let interval;
   const [image, setImage] = useState(null);
   const answerInputRef = useRef(null);
-  const [userAnswer, setUserAnswer] = useState('')
-  const [gameAnswer, setGameAnswer] = useState(null)
+  const [userAnswer, setUserAnswer] = useState("");
+  const [gameAnswer, setGameAnswer] = useState(null);
   useEffect(() => {
     answerInputRef.current.focus();
   }, []);
-  
+
   useEffect(() => {
     if (userAnswer === gameAnswer) {
-      dispatch(saveGame({roomName: room.name, winner: user._id, players: room.players}))
-      socket.emit("end-game", roomId)
-      history.push("/roomlist")
-    };
+      dispatch(
+        saveGame({
+          roomName: room.name,
+          winner: user._id,
+          players: room.players,
+        })
+      );
+      socket.emit("end-game", roomId);
+      history.push("/roomlist");
+    }
     if (time === 0) {
-      dispatch(saveGame({roomName: room.name, winner: null, players: room.players}))
-      socket.emit("end-game", roomId)
-      history.push("/roomlist")
+      dispatch(
+        saveGame({ roomName: room.name, winner: null, players: room.players })
+      );
+      socket.emit("end-game", roomId);
+      history.push("/roomlist");
     }
   }, [userAnswer, time]);
 
@@ -39,13 +47,13 @@ function GameModal({answer, socket, roomId}) {
     img.src = `../../${answer}.png`;
     img.onload = () => {
       setImage(img);
-      setGameAnswer(answer)
+      setGameAnswer(answer);
     };
     img.onerror = () => {
       console.error("Error loading image");
     };
     interval = setInterval(() => {
-      setTime(time => time - 1);
+      setTime((time) => time - 1);
     }, 1000);
     return () => clearInterval(interval);
   }, []);
@@ -66,8 +74,6 @@ function GameModal({answer, socket, roomId}) {
         const x = (canvas.width - width) / 2;
         const y = (canvas.height - height) / 2;
         ctx.drawImage(image, x, y, width, height);
-        ctx.font = "48px serif";
-        ctx.fillText(time, x, y, width, height);
       };
 
       let scale = 80; //START SCALE
@@ -86,15 +92,27 @@ function GameModal({answer, socket, roomId}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  }
+  };
 
   return (
-      <div id="canvas-div">
-        <canvas ref={canvasRef} className="canvas" />
-        <form id="answer-div" onSubmit={handleSubmit}>
-          <input type="text" ref={answerInputRef} onChange={(e) => setUserAnswer(e.target.value)}></input>
-        </form>
-      </div>
+    <div id="canvas-div">
+      {time > 10 ? (
+        <h1 id="game-timer">{time}</h1>
+      ) : (
+        <h1 id="game-timer" style={{ color: "red" }}>
+          {time}
+        </h1>
+      )}
+      <canvas ref={canvasRef} className="canvas" />
+      <form id="answer-div" onSubmit={handleSubmit}>
+        <input
+          id="game-input"
+          type="text"
+          ref={answerInputRef}
+          onChange={(e) => setUserAnswer(e.target.value)}
+        ></input>
+      </form>
+    </div>
   );
 }
 
