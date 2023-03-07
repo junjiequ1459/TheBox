@@ -7,20 +7,16 @@ import io from "socket.io-client";
 import "./RoomShowPage.css";
 import { updateRoom } from "../../store/rooms";
 import GameModal from "../GamePage/GamePage.js";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 const socket = io("http://localhost:3002");
 
 function RoomShowPage() {
-  const pics = ["chak", "manny", "rex", "wilson", "zahi"];
-  const [gamePic, setGamePic] = useState(
-    pics[Math.floor(Math.random() * pics.length)]
-  );
   const dispatch = useDispatch();
   const history = useHistory();
   const { roomId } = useParams();
   const user = useSelector((state) => state.session.user);
   const room = useSelector((state) => state.rooms[roomId]);
+  const winner = room.name
   const ifPlayer = room ? room.players : [];
   const players =
     ifPlayer.length === 0
@@ -33,8 +29,31 @@ function RoomShowPage() {
         ));
   const [socket2, setSocket] = useState(1);
   const [hidden, setHidden] = useState(true);
+  const [category, setCategory] = useState("");
+  const [answer, setAnswer] = useState("");
+  useEffect(() => {
+    let pics;
+    switch (category) {
+      case "Animals":
+         pics = ["","","","",""];
+         break;
+      case "People":
+         pics = ["chak", "manny", "rex", "wilson", "zahi"];
+         break;
+      case "Places":
+         pics = ["","","","",""];
+         break;
+      default:
+        pics = ["","","","",""];
+        break;
+    }
+    const randomAnswer = pics[Math.floor(Math.random() * pics.length)];
+    setAnswer(randomAnswer);
+    debugger
+  }, [category]);
+  
   const game = hidden ? null : (
-    <GameModal answer={gamePic} socket={socket} roomId={roomId} />
+    <GameModal answer = { answer } socket={socket} roomId={roomId} category={category}/>
   );
   socket.emit("join", roomId);
   useEffect(() => {
@@ -42,7 +61,6 @@ function RoomShowPage() {
       dispatch(fetchRoom(roomId));
     }, 1000);
     socket.on("start-game", () => {
-      setGamePic(pics[Math.floor(Math.random() * pics.length)]);
       setHidden(false);
       console.log("started game");
     });
@@ -72,9 +90,17 @@ function RoomShowPage() {
 
   const hostStart =
     room?.host._id === user._id ? (
-      <button className="signup-button" onClick={handleStartGame}>
-        START GAME
-      </button>
+      <div>
+        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+          <option value="">-- Select a category --</option>
+          <option value="Animals">Animals</option>
+          <option value="People">People</option>
+          <option value="Places">Places</option>
+        </select>
+        {category != "" ? <button className="signup-button" onClick={handleStartGame}>
+          START GAME
+        </button> : null}
+      </div>
     ) : null;
   const leaveOrDelete = room ? (
     <button
@@ -102,11 +128,11 @@ function RoomShowPage() {
                   {room ? room.size : null}){players ? players : null}
                 </ul>
               </div>
-              ;{hostStart}
+              {hostStart}
               {leaveOrDelete}
             </div>
             <div className="socket-container">
-              <Chat socket={socket} username={user.username} room={roomId} />
+              <Chat socket={socket} username={user.username} room={roomId} winner={winner}/>
               {game}
             </div>
           </div>

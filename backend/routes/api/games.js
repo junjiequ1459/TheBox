@@ -5,17 +5,13 @@ const Game = mongoose.model("Game");
 const User = mongoose.model("User");
 
 //show
-router.get("/:id", async (req, res, next) => {
+router.get("/:roomName", async (req, res, next) => {
   try {
-    const game = await Game.findById(req.params.id).populate(
-      "players",
-      "_id username wins losses"
-    );
+    const game = await Game.findOne({ roomName: req.params.roomName })
+      .sort({ timestamp: -1 })
+      .limit(1);
     return res.json(game);
   } catch (err) {
-    const error = new Error("Game not found");
-    error.statusCode = 404;
-    error.errors = { message: "No game found with that id" };
     return next(error);
   }
 });

@@ -2,7 +2,7 @@ import "./ChatBox.css";
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 
-function Chat({ socket, username, room }) {
+function Chat({ socket, username, room, winner}) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [allMessages, setMessageArray] = useState([]);
   const messageUlRef = useRef(null);
@@ -21,6 +21,25 @@ function Chat({ socket, username, room }) {
       scrollToBottom();
     }
   };
+
+  const sendWinner = () => {
+    if (currentMessage !== "") {
+      const message = {
+        room: room,
+        username: "SERVER",
+        message: winner,
+      };
+
+      socket.emit("send_message", message);
+      setMessageArray((array) => [...array, message]);
+      setCurrentMessage("");
+      scrollToBottom();
+    }
+  };
+
+  useEffect(() => {
+    sendWinner();
+  }, [winner]);
 
   useEffect(() => {
     socket.on("receive_message", (data) => {

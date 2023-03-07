@@ -5,8 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { saveGame } from "../../store/games";
 
-function GameModal({answer ,socket, roomId}) {
-
+function GameModal({answer, socket, roomId}) {
   const history = useHistory();
   const dispatch = useDispatch();
   const canvasRef = useRef(null);
