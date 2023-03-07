@@ -23,12 +23,12 @@ function GameModal({answer, socket, roomId}) {
   
   useEffect(() => {
     if (userAnswer === gameAnswer) {
-      dispatch(saveGame({roomName: room.name, winnerId: user._id, players: room.players}))
+      dispatch(saveGame({roomName: room.name, winner: user._id, players: room.players}))
       socket.emit("end-game", roomId)
       history.push("/roomlist")
     };
     if (time === 0) {
-      dispatch(saveGame({roomName: room.name, winnerId: null, players: room.players}))
+      dispatch(saveGame({roomName: room.name, winner: null, players: room.players}))
       socket.emit("end-game", roomId)
       history.push("/roomlist")
     }

@@ -8,8 +8,9 @@ const User = mongoose.model("User");
 router.get("/:roomName", async (req, res, next) => {
   try {
     const game = await Game.findOne({ roomName: req.params.roomName })
-      .sort({ timestamp: -1 })
-      .limit(1);
+      .sort({ createdAt: -1 })
+      .limit(1)
+      .populate("winner" , "_id username");
     return res.json(game);
   } catch (err) {
     return next(error);
@@ -23,14 +24,14 @@ router.post("/", async (req, res, next) => {
   try {
     let newGame = new Game({
       roomName: req.body.roomName,
-      winnerId: req.body.winnerId,
+      winner: req.body.winner,
       players: req.body.players,
     });
     
 
-    const winner = await User.findById(req.body.winnerId);
+    const winner = await User.findById(req.body.winner);
     if (winner) {
-      newGame = await newGame.populate("winnerId", "_id username")
+      newGame = await newGame.populate("winner", "_id username")
       winner.wins += 1;
       winner.losses -= 1;
       await winner.save();

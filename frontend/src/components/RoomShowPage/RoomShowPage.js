@@ -17,6 +17,7 @@ function RoomShowPage() {
   const { roomId } = useParams();
   const user = useSelector((state) => state.session.user);
   const room = useSelector((state) => state.rooms[roomId]);
+  const winner = useSelector((state) => state.games ? state.games.winner?.username : null)
   const ifPlayer = room ? room.players : [];
   const players =
     ifPlayer.length === 0
@@ -77,6 +78,10 @@ function RoomShowPage() {
     };
   }, []);
 
+  useEffect(()=> {
+    dispatch(fetchGame(room.name))
+  },[winner])
+
   if (user === undefined) {
     return <>still loading...</>;
   }
@@ -132,7 +137,7 @@ function RoomShowPage() {
               <div className="room-show">
                 <h1> {room ? room.name : null}</h1>
                 <h2> Hosted by: {room ? room.host.username : null}</h2>
-                <h2> Previous Winner: {  }</h2>
+                { winner ? <h2> Previous Winner: { winner }</h2> : null}
                 <ul>
                   Players in room ({players ? players.length : null}/
                   {room ? room.size : null}){players ? players : null}

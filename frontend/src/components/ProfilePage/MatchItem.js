@@ -5,7 +5,7 @@ function MatchItem({ userId, game }) {
     <li
       key={i}
       style={
-        user._id === game.winnerId?._id ? { color: "green" } : { color: "red" }
+        user._id === game.winner?._id ? { color: "green" } : { color: "red" }
       }
     >
       {" "}
@@ -20,8 +20,8 @@ function MatchItem({ userId, game }) {
           <p id="player-list-title">Players</p>: {userItems}
         </ul>
         <div className="win-loss-match">
-          {game.winnerId ? (
-            game.winnerId._id === userId ? (
+          {game.winner ? (
+            game.winner._id === userId ? (
               <p>WIN</p>
             ) : (
               <p style={{ color: "red" }}>LOSS</p>

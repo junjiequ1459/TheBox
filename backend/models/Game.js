@@ -7,7 +7,7 @@ const gameSchema = new Schema(
       type: String,
       require: true,
     },
-    winnerId: {
+    winner: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },

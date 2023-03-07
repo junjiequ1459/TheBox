@@ -147,7 +147,7 @@ router.get("/:userId/games", async (req, res, next) => {
   try {
     const userId = req.params.userId;
     const games = await Game.find()
-      .populate("winnerId", "_id username")
+      .populate("winner", "_id username")
       .populate("players", "_id username")
       .sort({ createdAt: -1 })
       .exec();
