@@ -7,6 +7,7 @@ import io from "socket.io-client";
 import "./RoomShowPage.css";
 import { updateRoom } from "../../store/rooms";
 import GameModal from "../GamePage/GamePage.js";
+import { fetchGame } from "../../store/games";
 
 const socket = io("http://localhost:3002");
 
@@ -16,7 +17,6 @@ function RoomShowPage() {
   const { roomId } = useParams();
   const user = useSelector((state) => state.session.user);
   const room = useSelector((state) => state.rooms[roomId]);
-  // const winner = room.name
   const ifPlayer = room ? room.players : [];
   const players =
     ifPlayer.length === 0
@@ -132,6 +132,7 @@ function RoomShowPage() {
               <div className="room-show">
                 <h1> {room ? room.name : null}</h1>
                 <h2> Hosted by: {room ? room.host.username : null}</h2>
+                <h2> Previous Winner: {  }</h2>
                 <ul>
                   Players in room ({players ? players.length : null}/
                   {room ? room.size : null}){players ? players : null}

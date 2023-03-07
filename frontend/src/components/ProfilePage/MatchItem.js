@@ -1,6 +1,6 @@
 import "./ProfilePage.css";
 function MatchItem({ userId, game }) {
-  const users = game.players;
+  const users = game.players ? game.players : [];
   const userItems = users.map((user, i) => (
     <li
       key={i}
