@@ -79,7 +79,7 @@ function RoomShowPage() {
   }, []);
 
   useEffect(()=> {
-    dispatch(fetchGame(room.name))
+    dispatch(fetchGame(room?.name))
   },[winner])
 
   if (user === undefined) {

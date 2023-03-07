@@ -3,7 +3,7 @@ const http = require("http");
 const socketIO = require("socket.io");
 const app = express();
 const port = process.env.PORT || 3002;
-const server = app.listen(port, () => console.log(`Server is running on port ${port}`));
+const server = app.listen(port, () => console.log(`Server listening on port ${port}`));
 
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
