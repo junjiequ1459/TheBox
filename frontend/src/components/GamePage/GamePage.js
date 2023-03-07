@@ -84,10 +84,14 @@ function GameModal({answer, socket, roomId}) {
     }
   }, [image]);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  }
+
   return (
       <div id="canvas-div">
         <canvas ref={canvasRef} className="canvas" />
-        <form id="answer-div">
+        <form id="answer-div" onSubmit={handleSubmit}>
           <input type="text" ref={answerInputRef} onChange={(e) => setUserAnswer(e.target.value)}></input>
         </form>
       </div>
