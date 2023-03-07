@@ -11,8 +11,10 @@ function RoomItem({ room }) {
     dispatch(updateRoom(room));
   }
 
+  const fullroom = room.players.length < room.size ? `/room/${room._id}` : `/roomlist`
+
   return (
-    <Link to={`/room/${room._id}`}>
+    <Link to={fullroom}>
       <div className="room-item-container" onClick={handleDivClick}>
         <ul className="room-item">
           <div>
