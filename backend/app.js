@@ -2,7 +2,8 @@ const express = require("express");
 const http = require("http");
 const socketIO = require("socket.io");
 const app = express();
-const server = http.createServer(app);
+const port = process.env.PORT || 3002;
+const server = app.listen(port, () => console.log(`Server is running on port ${port}`));
 
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
@@ -17,12 +18,6 @@ const cors = require("cors");
 const csurf = require("csurf");
 const { isProduction } = require("./config/keys");
 
-// const io = require("socket.io")(server, {
-//   cors: {
-//     origin: ["http://localhost:3000"],
-//     transports: ["websocket", "polling"],
-//   },
-// });
 
 app.use(passport.initialize());
 app.use(logger("dev"));
@@ -69,27 +64,6 @@ if (isProduction) {
   });
 }
 
-// app.use((req, res, next) => {
-//   const err = new Error("Not Found");
-
-//   err.statusCode = 404;
-//   next(err);
-// });
-
-// const serverErrorLogger = debug("backend:error");
-
-// app.use((err, req, res, next) => {
-//   serverErrorLogger(err);
-//   const statusCode = err.statusCode || 500;
-//   res.status(statusCode);
-//   res.json({
-//     message: err.message,
-//     statusCode,
-//     errors: err.errors,
-//   });
-// });
-
-const port = process.env.PORT || 3002;
 
 const io = require("socket.io")(server, {
   cors: {
@@ -132,9 +106,9 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(port, () => {
-  console.log("listening on *:3002");
-});
+// server.listen(port, () => {
+//   console.log(`listening on ${port}`);
+// });
 
 app.use((req, res, next) => {
   const err = new Error("Not Found");
