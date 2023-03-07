@@ -30,19 +30,23 @@ router.post("/", async (req, res, next) => {
       players: req.body.players,
     });
 
-    let game = await newGame.save();
-    game = await game.populate("winnerId", "_id username");
-
+    const game = await newGame.save();
+    
     const winner = await User.findById(req.body.winnerId);
-    winner.wins += 1;
-    winner.losses -= 1;
-    await winner.save();
+    if(winner){
+      
+      winner.wins += 1;
+      winner.losses -= 1;
+      await winner.save();
+      
+      req.body.players.forEach(async (player) => {
+        const loser = await User.findById(player._id);
+        loser.losses += 1;
+        await loser.save();
+      });
+      
+    }
 
-    req.body.players.forEach(async (player) => {
-      const loser = await User.findById(player._id);
-      loser.losses += 1;
-      await loser.save();
-    });
     return res.json(game);
   } catch (err) {
     next(err);
