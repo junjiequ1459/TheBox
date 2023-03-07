@@ -1,4 +1,4 @@
-import { useHistory, useParams } from "react-router";
+import { useHistory, useParams, Redirect } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchRoom } from "../../store/rooms";
@@ -16,7 +16,7 @@ function RoomShowPage() {
   const { roomId } = useParams();
   const user = useSelector((state) => state.session.user);
   const room = useSelector((state) => state.rooms[roomId]);
-  const winner = room.name
+  // const winner = room.name
   const ifPlayer = room ? room.players : [];
   const players =
     ifPlayer.length === 0
@@ -38,22 +38,28 @@ function RoomShowPage() {
          pics = ["capybara","penguin","hedgehog","sloth","loris"];
          break;
       case "People":
-         pics = ["chak", "manny", "rex", "wilson", "zahi"];
-         break;
+        pics = ["chak", "manny", "rex", "wilson", "zahi"];
+        break;
       case "Places":
          pics = ["paris","rome","newyorkcity","sydney","egypt"];
          break;
       default:
-        pics = ["","","","",""];
+        pics = ["", "", "", "", ""];
         break;
     }
     const randomAnswer = pics[Math.floor(Math.random() * pics.length)];
     setAnswer(randomAnswer);
   }, [category]);
-  
+
   const game = hidden ? null : (
-    <GameModal answer = { answer } socket={socket} roomId={roomId} category={category}/>
+    <GameModal
+      answer={answer}
+      socket={socket}
+      roomId={roomId}
+      category={category}
+    />
   );
+
   socket.emit("join", roomId);
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -66,7 +72,6 @@ function RoomShowPage() {
     socket.on("end-game", () => {
       history.push("/roomlist");
     });
-
     return () => {
       clearInterval(intervalId);
     };
@@ -75,6 +80,9 @@ function RoomShowPage() {
   if (user === undefined) {
     return <>still loading...</>;
   }
+
+  if (!room?.players.find((p) => p._id.toString() === user._id.toString()))
+    return <Redirect to="/roomlist" />;
 
   const handleStartGame = (e) => {
     e.preventDefault();
@@ -96,9 +104,11 @@ function RoomShowPage() {
           <option value="People">People</option>
           <option value="Places">Places</option>
         </select>
-        {category != "" ? <button className="signup-button" onClick={handleStartGame}>
-          START GAME
-        </button> : null}
+        {category != "" ? (
+          <button className="signup-button" onClick={handleStartGame}>
+            START GAME
+          </button>
+        ) : null}
       </div>
     ) : null;
   const leaveOrDelete = room ? (
@@ -131,7 +141,7 @@ function RoomShowPage() {
               {leaveOrDelete}
             </div>
             <div className="socket-container">
-              <Chat socket={socket} username={user.username} room={roomId} winner={winner}/>
+              <Chat socket={socket} username={user.username} room={roomId} />
               {game}
             </div>
           </div>

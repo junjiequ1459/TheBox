@@ -80,10 +80,11 @@ router.patch("/:id", requireUser, validateRoomInput, async (req, res, next) => {
     const playerIndex = roomToUpdate.players.findIndex(
       (player) => player.toString() === playerinfo.toString()
     );
-    if (playerIndex === -1 && roomToUpdate.players.length < roomToUpdate.size) {
-      // If the player is not already in the room and the room has space
-      roomToUpdate.players.push(playerinfo);
-      await roomToUpdate.save();
+    if (playerIndex === -1) {
+      if(roomToUpdate.players.length < roomToUpdate.size) {
+        roomToUpdate.players.push(playerinfo);
+        await roomToUpdate.save();
+      }
       const updatedRoom = await Room.findById(roomId)
         .populate("host", "_id username")
         .populate("players", "_id username wins losses");

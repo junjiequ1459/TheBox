@@ -18,8 +18,9 @@ function RoomList() {
     <RoomItem key={i} room={room} />
   ));
   useEffect(() => {
+    console.log('fetching rooms')
     dispatch(fetchRooms(searchValue));
-  }, [dispatch, searchValue, rooms.length]);
+  }, [searchValue, rooms.length]);
 
   let usersRoom = null;
   Object.values(rooms).forEach((room) => {
