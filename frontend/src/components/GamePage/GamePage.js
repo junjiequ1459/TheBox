@@ -27,7 +27,7 @@ function GameModal({answer ,socket, roomId}) {
       history.push("/roomlist")
     };
     if (time === 0) {
-      dispatch(saveGame({roomName: room.name, winnerId: "", players: room.players}))
+      dispatch(saveGame({roomName: room.name, winnerId: null, players: room.players}))
       socket.emit("end-game", roomId)
       history.push("/roomlist")
     }
