@@ -35,13 +35,13 @@ function RoomShowPage() {
     let pics;
     switch (category) {
       case "Animals":
-         pics = ["","","","",""];
+         pics = ["capybara","penguin","hedgehog","sloth","loris"];
          break;
       case "People":
          pics = ["chak", "manny", "rex", "wilson", "zahi"];
          break;
       case "Places":
-         pics = ["","","","",""];
+         pics = ["paris","rome","newyorkcity","sydney","egypt"];
          break;
       default:
         pics = ["","","","",""];
