@@ -18,23 +18,21 @@ function ProfilePage() {
   const games = useSelector((state) =>
     state.games ? Object.values(state.games) : []
   );
+  const matchList = games.map((game, i) => (
+  <MatchItem key={i} userId={userId} game={game} />
+  ))
   const fileInput = useRef(null);
-  
   const [currentImageUrl, setcurrentImageUrl] = useState(null);
-  
   const dispatch = useDispatch();
   
   useEffect(() => {
     dispatch(fetchUser(userId)).then(async () => {
       setcurrentImageUrl(user.profileImageUrl);
+      dispatch(fetchGames(userId));
     });
-    dispatch(fetchGames(userId));
   }, [currentImageUrl, userId]);
   
-  const matchList = dispatch(fetchGames(userId)) ? games.map((game, i) => (
-  <MatchItem key={i} userId={userId} game={game} />
-  )) : null ;
-  
+
   const handleImageUpload = async (e) => {
     e.preventDefault();
     if (!image) {
