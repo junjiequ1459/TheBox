@@ -30,6 +30,12 @@ function ConsoleNavBar({ name }) {
           </button>
           <button
             className="nav-bar-button"
+            onClick={() => history.push("/howto")}
+          >
+            HowTo
+          </button>
+          <button
+            className="nav-bar-button"
             onClick={() => history.push("/leaderboard")}
           >
             Leaderboard
@@ -52,6 +58,12 @@ function ConsoleNavBar({ name }) {
               onClick={() => history.push("/about")}
             >
               About
+            </button>
+            <button
+              className="nav-bar-button"
+              onClick={() => history.push("/howto")}
+            >
+              HowTo
             </button>
             <button
               className="nav-bar-button"

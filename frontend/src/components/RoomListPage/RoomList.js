@@ -32,8 +32,6 @@ function RoomList() {
     });
   });
 
-  // Object.keys(rooms).forEach((roomId)=> )
-
   if (usersRoom) return <Redirect to={`/room/${usersRoom._id}`} />;
   if (!currentUser) return <Redirect to="/login" />;
   

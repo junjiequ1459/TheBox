@@ -1,0 +1,20 @@
+#howto-header{
+    font-size: 50px;
+}
+
+#howto-ul {
+    font-size: larger;
+}
+
+#howto-ul li{
+    margin-bottom: 5%;
+}
+
+#howto-description {
+    height: 50vh;
+    width: 50vw;
+}
+
+.howto-container {
+    margin: auto
+}
