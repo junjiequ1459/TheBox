@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { fetchRoom } from "../../store/rooms";
 import Chat from "../ChatBox/ChatBox";
 import io from "socket.io-client";
+import { bank } from "../GamePage/QuestionBank";
 import "./RoomShowPage.css";
 import { updateRoom } from "../../store/rooms";
 import GameModal from "../GamePage/GamePage.js";
@@ -32,33 +33,42 @@ function RoomShowPage() {
   const [hidden, setHidden] = useState(true);
   const [category, setCategory] = useState("");
   const [answer, setAnswer] = useState("");
+  const [question, setQuestion] = useState(null);
 
   useEffect(() => {
     let pics;
     switch (category) {
       case "Animals":
          pics = ["capybara","penguin","hedgehog","sloth","loris"];
+         var randomAnswer = pics[Math.floor(Math.random() * pics.length)];
+         setAnswer(randomAnswer);
          break;
       case "People":
         pics = ["chak", "manny", "rex", "wilson", "zahi"];
+          var randomAnswer = pics[Math.floor(Math.random() * pics.length)];
+          setAnswer(randomAnswer);
         break;
       case "Places":
          pics = ["paris","rome","newyorkcity","sydney","egypt"];
+         var randomAnswer = pics[Math.floor(Math.random() * pics.length)];
+         setAnswer(randomAnswer);
          break;
+      case "Quiz":
+         var randomAnswer = bank[Math.floor(Math.random() * bank.length)]
+         setAnswer(randomAnswer.answer);
+         setQuestion(randomAnswer.question);
       default:
         pics = ["", "", "", "", ""];
         break;
     }
-    const randomAnswer = pics[Math.floor(Math.random() * pics.length)];
-    setAnswer(randomAnswer);
   }, [category]);
 
   const game = hidden ? null : (
     <GameModal
       answer={answer}
+      question={question}
       socket={socket}
       roomId={roomId}
-      category={category}
     />
   );
 
@@ -67,7 +77,8 @@ function RoomShowPage() {
     const intervalId = setInterval(() => {
       dispatch(fetchRoom(roomId));
     }, 1000);
-    socket.on("start-game", (answer) => {
+    socket.on("start-game", (answer, question) => {
+      setQuestion(question);
       setAnswer(answer);
       setHidden(false);
     });
@@ -93,7 +104,7 @@ function RoomShowPage() {
 
   const handleStartGame = (e) => {
     e.preventDefault();
-    socket.emit("start-game", roomId, answer);
+    socket.emit("start-game", roomId, answer, question);
     setHidden(false);
     setSocket(socket2 + 1);
   };
@@ -110,6 +121,7 @@ function RoomShowPage() {
           <option value="Animals">Animals</option>
           <option value="People">People</option>
           <option value="Places">Places</option>
+          <option value="Quiz">Quiz</option>
         </select>
         {category != "" ? (
           <button className="signup-button" onClick={handleStartGame}>
@@ -118,7 +130,7 @@ function RoomShowPage() {
         ) : null}
       </div>
     ) : null;
-    
+
   const leaveOrDelete = room ? (
     <button
       className="signup-button"

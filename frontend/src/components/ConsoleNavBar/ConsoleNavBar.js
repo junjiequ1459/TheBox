@@ -19,20 +19,20 @@ function ConsoleNavBar({ name }) {
     if (loggedIn) {
       return (
         <div className="console-nav-link-container">
+          <button className="nav-bar-button" onClick={() => history.push("/")}>
+            Home
+          </button>
           <button
             className="nav-bar-button"
             onClick={() => history.push("/about")}
           >
             About
           </button>
-          <button className="nav-bar-button" onClick={() => history.push("/")}>
-            Home
-          </button>
           <button
             className="nav-bar-button"
             onClick={() => history.push("/leaderboard")}
           >
-            LeaderBoard
+            Leaderboard
           </button>
           <button
             id="console-logout-button"
@@ -57,7 +57,7 @@ function ConsoleNavBar({ name }) {
               className="nav-bar-button"
               onClick={() => history.push("/leaderboard")}
             >
-              LeaderBoard
+              Leaderboard
             </button>
             <button
               className="nav-bar-button"
