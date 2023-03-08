@@ -16,6 +16,7 @@ function GameModal({ question, answer, socket, roomId }) {
   const [time, setTime] = useState(20);
   const [userAnswer, setUserAnswer] = useState("");
   const [gameAnswer, setGameAnswer] = useState(null);
+  const [gameQuestion, setGameQuestion] = useState(null);
   let interval;
 
   useEffect(() => {
@@ -56,8 +57,10 @@ function GameModal({ question, answer, socket, roomId }) {
         console.error("Error loading image");
       };
     }
+    if (question) {
+      setGameQuestion(question)
+    }
     setGameAnswer(answer);
-    debugger
     interval = setInterval(() => {
       setTime((time) => time - 1);
     }, 1000);
@@ -66,22 +69,13 @@ function GameModal({ question, answer, socket, roomId }) {
 
   useEffect(() => {
     //DRAWS THE CANVAS
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    canvas.width = 500;
-    canvas.height = 500;
-
-    if (question) {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const x = (canvas.width) / 2;
-      const y = (canvas.height) / 2;
-      ctx.font = "50px serif";
-      ctx.fillStyle = 'blanchedalmond';
-      ctx.fillText(question, 50, 50);
-    }
-
     //DRAWS IMAGE
+
     if (image) {
+      const canvas = canvasRef.current;
+      const ctx = canvas.getContext("2d");
+      canvas.width = 500;
+      canvas.height = 500;
       const draw = (scale) => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         const width = image.width * scale;
@@ -103,7 +97,20 @@ function GameModal({ question, answer, socket, roomId }) {
         draw(scale);
       }, 10); //ZOOM SPEED
     }
-  }, [image, question]);
+  }, [image]);
+
+  useEffect(() => {
+    if (gameQuestion) {
+      const canvas = canvasRef.current;
+      const ctx = canvas.getContext("2d");
+      canvas.width = 500;
+      canvas.height = 500;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.font = "50px serif";
+      ctx.fillStyle = 'blanchedalmond';
+      ctx.fillText(gameQuestion, 50, 50);
+    }
+  }, [time, gameQuestion])
 
   const handleSubmit = (e) => {
     e.preventDefault();

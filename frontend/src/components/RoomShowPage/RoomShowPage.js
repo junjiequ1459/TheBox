@@ -10,7 +10,7 @@ import { updateRoom } from "../../store/rooms";
 import GameModal from "../GamePage/GamePage.js";
 import { fetchGame } from "../../store/games";
 
-const socket = io();
+const socket = io("http://localhost:3002");
 
 function RoomShowPage() {
   const dispatch = useDispatch();
@@ -123,7 +123,7 @@ function RoomShowPage() {
           <option value="Places">Places</option>
           <option value="Quiz">Quiz</option>
         </select>
-        {category != "" ? (
+        {(category != ""  && room.players.length > 1) ? (
           <button className="signup-button" onClick={handleStartGame}>
             START GAME
           </button>
