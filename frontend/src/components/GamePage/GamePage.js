@@ -106,9 +106,26 @@ function GameModal({ question, answer, socket, roomId }) {
       canvas.width = 500;
       canvas.height = 500;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.font = "50px serif";
+      ctx.font = "40px Orbitron";
       ctx.fillStyle = 'blanchedalmond';
-      ctx.fillText(gameQuestion, 50, 50);
+      var words = gameQuestion.split(' ');
+      var line = '';
+      var x = 50;
+      var y = 50;
+      for(var n = 0; n < words.length; n++) {
+        var testLine = line + words[n] + ' ';
+        var metrics = ctx.measureText(testLine);
+        var testWidth = metrics.width;
+        if (testWidth > canvas.width && n > 0) {
+          ctx.fillText(line, x, y);
+          line = words[n] + ' ';
+          y += 50;
+        }
+        else {
+          line = testLine;
+        }
+      }
+      ctx.fillText(line, 0, y);
     }
   }, [time, gameQuestion])
 

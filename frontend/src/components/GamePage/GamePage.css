@@ -1,6 +1,7 @@
 .canvas {
     border: white solid 1px;
     border-radius: 5%;
+    padding: 20px;
 }
 #game-timer {
     margin: auto;
