@@ -9,7 +9,7 @@ import { updateRoom } from "../../store/rooms";
 import GameModal from "../GamePage/GamePage.js";
 import { fetchGame } from "../../store/games";
 
-const socket = io();
+const socket = io.connect("http://localhost:10000");
 
 function RoomShowPage() {
   const dispatch = useDispatch();
@@ -71,7 +71,8 @@ function RoomShowPage() {
       setHidden(false);
     });
     socket.on("end-game", () => {
-      history.push("/roomlist");
+      // history.push("/roomlist");
+      window.location.reload();
     });
     return () => {
       clearInterval(intervalId);

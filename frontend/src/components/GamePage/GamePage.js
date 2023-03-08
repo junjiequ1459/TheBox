@@ -31,14 +31,16 @@ function GameModal({ answer, socket, roomId }) {
         })
       );
       socket.emit("end-game", roomId);
-      history.push("/roomlist");
+      // history.push("/roomlist");
+      window.location.reload();
     }
     if (time === 0) {
       dispatch(
         saveGame({ roomName: room.name, winner: null, players: room.players })
       );
       socket.emit("end-game", roomId);
-      history.push("/roomlist");
+      // history.push("/roomlist");
+      window.location.reload();
     }
   }, [userAnswer, time]);
 
