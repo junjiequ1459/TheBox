@@ -5,8 +5,7 @@ import { useState, useEffect } from "react";
 import { fetchRooms } from "../../store/rooms";
 import RoomItem from "./RoomItem";
 import {
-  Redirect,
-  useHistory,
+  Redirect
 } from "react-router-dom/cjs/react-router-dom.min";
 
 function RoomList() {
@@ -14,9 +13,11 @@ function RoomList() {
   const currentUser = useSelector((state) => state.session.user);
   const [searchValue, setSearchValue] = useState("");
   const rooms = useSelector((state) => (state.rooms ? state.rooms : {}));
+
   const roomItems = Object.values(rooms).map((room, i) => (
     <RoomItem key={i} room={room} />
   ));
+
   useEffect(() => {
     console.log('fetching rooms')
     dispatch(fetchRooms(searchValue));
@@ -35,6 +36,7 @@ function RoomList() {
 
   if (usersRoom) return <Redirect to={`/room/${usersRoom._id}`} />;
   if (!currentUser) return <Redirect to="/login" />;
+  
   return (
     <>
       <ConsoleNavBar name={"room-list"} />

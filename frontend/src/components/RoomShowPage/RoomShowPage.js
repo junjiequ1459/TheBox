@@ -32,6 +32,7 @@ function RoomShowPage() {
   const [hidden, setHidden] = useState(true);
   const [category, setCategory] = useState("");
   const [answer, setAnswer] = useState("");
+
   useEffect(() => {
     let pics;
     switch (category) {
@@ -117,6 +118,7 @@ function RoomShowPage() {
         ) : null}
       </div>
     ) : null;
+    
   const leaveOrDelete = room ? (
     <button
       className="signup-button"

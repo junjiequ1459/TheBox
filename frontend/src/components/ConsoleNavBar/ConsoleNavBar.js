@@ -1,13 +1,13 @@
 import "./ConsoleNavBar.css";
-import { NavLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../store/session";
 
 function ConsoleNavBar({ name }) {
-  const loggedIn = useSelector((state) => !!state.session.user);
-  const currentUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const history = useHistory();
+  const loggedIn = useSelector((state) => !!state.session.user);
+  const currentUser = useSelector((state) => state.session.user);
 
   const logoutUser = (e) => {
     e.preventDefault();

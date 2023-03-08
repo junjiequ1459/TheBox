@@ -2,21 +2,22 @@ import "./GamePage.css";
 import React, { useRef } from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { saveGame } from "../../store/games";
 
 function GameModal({ answer, socket, roomId }) {
-  const history = useHistory();
+  // const history = useHistory();
   const dispatch = useDispatch();
   const canvasRef = useRef(null);
   const room = useSelector((state) => state.rooms[roomId]);
   const user = useSelector((state) => state.session.user);
-  const [time, setTime] = useState(20);
-  let interval;
-  const [image, setImage] = useState(null);
   const answerInputRef = useRef(null);
+  const [image, setImage] = useState(null);
+  const [time, setTime] = useState(20);
   const [userAnswer, setUserAnswer] = useState("");
   const [gameAnswer, setGameAnswer] = useState(null);
+  let interval;
+
   useEffect(() => {
     answerInputRef.current.focus();
   }, []);

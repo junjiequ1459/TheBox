@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./MusicPlayer.css";
 import BackgroundMusic from "../../assets/Arcade.mp3";
 

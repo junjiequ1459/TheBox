@@ -11,19 +11,22 @@ import MatchItem from "./MatchItem";
 import { fetchUser } from "../../store/users";
 
 function ProfilePage() {
+  const dispatch = useDispatch();
   const { userId } = useParams();
-  const [image, setImage] = useState(null);
   const user = useSelector((state) => state.users);
   const currentUser = useSelector((state) => state.session.user);
+  const fileInput = useRef(null);
+  const [currentImageUrl, setcurrentImageUrl] = useState(null);
+  const [image, setImage] = useState(null);
+
   const games = useSelector((state) =>
     state.games ? Object.values(state.games) : []
   );
+
   const matchList = games.map((game, i) => (
-  <MatchItem key={i} userId={userId} game={game} />
+    <MatchItem key={i} userId={userId} game={game} />
   ))
-  const fileInput = useRef(null);
-  const [currentImageUrl, setcurrentImageUrl] = useState(null);
-  const dispatch = useDispatch();
+  
   
   useEffect(() => {
     dispatch(fetchUser(userId)).then(async () => {
@@ -97,7 +100,6 @@ function ProfilePage() {
   return (
     <>
       <ConsoleNavBar name={"profilePage"} />
-
       <div className="console-container">
         <div className="wins-and-losses">
           <h1 className="profile-username">{user.username}</h1>
