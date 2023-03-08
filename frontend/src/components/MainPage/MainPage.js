@@ -1,16 +1,9 @@
-import { useSelector, useDispatch } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "./MainPage.css";
 import ConsoleNavBar from "../ConsoleNavBar/ConsoleNavBar";
 
 function MainPage() {
-  const user = useSelector((state) => state.session.user);
   const history = useHistory();
-
-  // if (!user) {
-  //   history.push("/login");
-  //   return null;
-  // }
 
   const handleJoinRoom = () => {
     history.push("/roomlist");

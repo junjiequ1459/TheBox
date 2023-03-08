@@ -11,7 +11,7 @@ function RoomForm() {
   const user = useSelector((state) => state.session.user);
   const [name, setName] = useState("");
   const [size, setSize] = useState(4);
-  const [room, setRoom] = useState(null);
+  // const [room, setRoom] = useState(null);
   const createInputRef = useRef(null);
 
   useEffect(() => {
@@ -70,6 +70,7 @@ function RoomForm() {
                   className="radio-form"
                   type="radio"
                   name="size"
+                  checked
                   onClick={() => setSize(4)}
                 />
               </label>

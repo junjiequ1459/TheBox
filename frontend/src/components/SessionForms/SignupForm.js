@@ -5,12 +5,12 @@ import ConsoleNavBar from "../ConsoleNavBar/ConsoleNavBar";
 import "./SessionForms.css";
 
 function SignupForm() {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   const errors = useSelector((state) => state.errors.session);
-  const dispatch = useDispatch();
   const emailInputRef = useRef(null);
 
   useEffect(() => {

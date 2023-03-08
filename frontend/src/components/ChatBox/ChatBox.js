@@ -22,25 +22,6 @@ function Chat({ socket, username, room}) {
     }
   };
 
-  // const sendWinner = () => {
-  //   if (currentMessage !== "") {
-  //     const message = {
-  //       room: room,
-  //       username: "SERVER",
-  //       message: winner,
-  //     };
-
-  //     socket.emit("send_message", message);
-  //     setMessageArray((array) => [...array, message]);
-  //     setCurrentMessage("");
-  //     scrollToBottom();
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   sendWinner();
-  // }, [winner]);
-
   useEffect(() => {
     socket.on("receive_message", (data) => {
       setMessageArray((array) => [...array, data]);

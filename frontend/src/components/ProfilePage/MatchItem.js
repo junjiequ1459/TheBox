@@ -1,6 +1,8 @@
 import "./ProfilePage.css";
+
 function MatchItem({ userId, game }) {
   const users = game?.players ? game?.players : [];
+
   const userItems = users.map((user, i) => (
     <li
       key={i}
@@ -12,6 +14,7 @@ function MatchItem({ userId, game }) {
       {user.username}{" "}
     </li>
   ));
+  
   return (
     <li>
       <div className="roomname-wins-container">

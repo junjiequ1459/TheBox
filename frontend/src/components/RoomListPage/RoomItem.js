@@ -1,7 +1,6 @@
 import "./RoomList.css";
-import { useRef, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { updateRoom } from "../../store/rooms";
 
 function RoomItem({ room }) {

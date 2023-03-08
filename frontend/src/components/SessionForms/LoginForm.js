@@ -5,10 +5,10 @@ import ConsoleNavBar from "../ConsoleNavBar/ConsoleNavBar";
 import "./SessionForms.css";
 
 function LoginForm() {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const errors = useSelector((state) => state.errors.session);
-  const dispatch = useDispatch();
   const emailInputRef = useRef(null);
 
   useEffect(() => {

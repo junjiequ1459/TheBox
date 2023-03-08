@@ -1,15 +1,17 @@
 import "./Leaderboard.css";
 import ConsoleNavBar from "../ConsoleNavBar/ConsoleNavBar";
-import { useRef, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers } from "../../store/users";
 
 function Leaderboard() {
   const dispatch = useDispatch();
+  
   const users = useSelector((state) =>
     state.users ? Object.values(state.users) : []
   );
+
   const userItems = users.map((user, i) => (
     <li key={i}>
       {" "}
@@ -20,6 +22,7 @@ function Leaderboard() {
       <div className="ranking-wins">{user.wins}</div>{" "}
     </li>
   ));
+
   useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
