@@ -10,7 +10,7 @@ import { updateRoom } from "../../store/rooms";
 import GameModal from "../GamePage/GamePage.js";
 import { fetchGame } from "../../store/games";
 
-const socket = io("http://localhost:3002");
+const socket = io();
 
 function RoomShowPage() {
   const dispatch = useDispatch();
