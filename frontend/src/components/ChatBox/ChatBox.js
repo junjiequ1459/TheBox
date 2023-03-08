@@ -42,11 +42,12 @@ function Chat({ socket, username, room}) {
       </div>
       <div className="chat-body" ref={messageUlRef}>
         {/* <ScrollToBottom className="message-container"> */}
-        {allMessages.map((eachMessage) => {
+        {allMessages.map((eachMessage, i) => {
           return (
             <div
               className="message"
               id={username === eachMessage.username ? "you" : "other"}
+              key={i}
             >
               <div className="message-meta">
                 <p id="time">{eachMessage.time}</p>

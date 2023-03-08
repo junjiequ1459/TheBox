@@ -7,7 +7,7 @@ import { fetchUsers } from "../../store/users";
 
 function Leaderboard() {
   const dispatch = useDispatch();
-  
+
   const users = useSelector((state) =>
     state.users ? Object.values(state.users) : []
   );
@@ -31,7 +31,7 @@ function Leaderboard() {
     <>
       <ConsoleNavBar name={"leaderboard"} />
       <div className="console-container">
-        <h1 className="leaderboard-title">LeaderBoards</h1>
+        <h1 className="leaderboard-title">Leaderboard</h1>
         <div className="leaderboards-container">
           <div className="ranking-container">
             <div>

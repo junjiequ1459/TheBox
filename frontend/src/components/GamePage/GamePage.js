@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import { useHistory } from "react-router-dom";
 import { saveGame } from "../../store/games";
 
-function GameModal({ answer, socket, roomId }) {
+function GameModal({ question, answer, socket, roomId }) {
   // const history = useHistory();
   const dispatch = useDispatch();
   const canvasRef = useRef(null);
@@ -16,6 +16,7 @@ function GameModal({ answer, socket, roomId }) {
   const [time, setTime] = useState(20);
   const [userAnswer, setUserAnswer] = useState("");
   const [gameAnswer, setGameAnswer] = useState(null);
+  const [gameQuestion, setGameQuestion] = useState(null);
   let interval;
 
   useEffect(() => {
@@ -23,7 +24,7 @@ function GameModal({ answer, socket, roomId }) {
   }, []);
 
   useEffect(() => {
-    if (userAnswer === gameAnswer) {
+    if (userAnswer.split(" ").join("").toLowerCase() === gameAnswer) {
       dispatch(
         saveGame({
           roomName: room.name,
@@ -45,16 +46,21 @@ function GameModal({ answer, socket, roomId }) {
     }
   }, [userAnswer, time]);
 
-  useEffect(() => {
-    const img = new Image(50, 50);
-    img.src = `../../${answer}.png`;
-    img.onload = () => {
-      setImage(img);
-      setGameAnswer(answer);
-    };
-    img.onerror = () => {
-      console.error("Error loading image");
-    };
+  useEffect(() => { //Loads image
+    if (!question) {
+      const img = new Image(50, 50);
+      img.src = `../../${answer}.png`;
+      img.onload = () => {
+        setImage(img);
+      };
+      img.onerror = () => {
+        console.error("Error loading image");
+      };
+    }
+    if (question) {
+      setGameQuestion(question)
+    }
+    setGameAnswer(answer);
     interval = setInterval(() => {
       setTime((time) => time - 1);
     }, 1000);
@@ -63,13 +69,13 @@ function GameModal({ answer, socket, roomId }) {
 
   useEffect(() => {
     //DRAWS THE CANVAS
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    canvas.width = 500;
-    canvas.height = 500;
-
     //DRAWS IMAGE
+
     if (image) {
+      const canvas = canvasRef.current;
+      const ctx = canvas.getContext("2d");
+      canvas.width = 500;
+      canvas.height = 500;
       const draw = (scale) => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         const width = image.width * scale;
@@ -93,6 +99,19 @@ function GameModal({ answer, socket, roomId }) {
     }
   }, [image]);
 
+  useEffect(() => {
+    if (gameQuestion) {
+      const canvas = canvasRef.current;
+      const ctx = canvas.getContext("2d");
+      canvas.width = 500;
+      canvas.height = 500;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.font = "50px serif";
+      ctx.fillStyle = 'blanchedalmond';
+      ctx.fillText(gameQuestion, 50, 50);
+    }
+  }, [time, gameQuestion])
+
   const handleSubmit = (e) => {
     e.preventDefault();
   };
@@ -107,7 +126,7 @@ function GameModal({ answer, socket, roomId }) {
         </h1>
       )}
       <canvas ref={canvasRef} className="canvas" />
-      <form id="answer-div" onSubmit={handleSubmit}>
+      <form id="answer-div" autoComplete="off" onSubmit={handleSubmit}>
         <input
           id="game-input"
           type="text"
