@@ -70,13 +70,6 @@
 }
 
 
-/* .fa-brands:hover {
-    transform: scale(1.5);
-    transition: transform 0.1s ease-out;
-
-  } */
-
-
   .team-member-container h2:hover{
     color:#8eff1e;
     transition: color 0.3s ease;

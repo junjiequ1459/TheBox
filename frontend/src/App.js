@@ -16,6 +16,7 @@ import RoomShowPage from "./components/RoomShowPage/RoomShowPage";
 import LoadingScreen from "./LoadingScreen/LoadingScreen";
 import MusicPlayer from "./components/MusicPlayer/MusicPlayer";
 import Leaderboard from "./components/Leaderboard/Leaderboard";
+import HowToPage from "./components/HowToPage/HowToPage";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -42,6 +43,7 @@ function App() {
             <AuthRoute exact path="/login" component={LoginForm} />
             <AuthRoute exact path="/signup" component={SignupForm} />
             <Route exact path="/about" component={AboutPage} />
+            <Route exact path="/howto" component={HowToPage} />
             <ProtectedRoute exact path="/roomform" component={RoomForm} />
             <ProtectedRoute exact path="/roomlist" component={RoomList} />
             <ProtectedRoute path="/room/:roomId" component={RoomShowPage} />
