@@ -77,8 +77,8 @@ io.on("connection", (socket) => {
     socket.join(room);
   });
 
-  socket.on("start-game", (room, answer, question) => {
-    io.emit("start-game", answer, question)
+  socket.on("start-game", (room, payload) => {
+    io.emit("start-game", payload)
     socket.to(room).emit("start-game", () => {
       console.log("game started");
     });
@@ -113,7 +113,6 @@ io.on("connection", (socket) => {
 
 app.use((req, res, next) => {
   const err = new Error("Not Found");
-
   err.statusCode = 404;
   next(err);
 });
