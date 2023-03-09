@@ -83,14 +83,16 @@ function RoomShowPage() {
     />
   );
 
-  socket.emit("join", roomId);
   useEffect(() => {
+    socket.emit("join", roomId);
     const intervalId = setInterval(() => {
       dispatch(fetchRoom(roomId));
     }, 1000);
     socket.on("start-game", (answer, question) => {
+      debugger
       setQuestion(question);
       setAnswer(answer);
+      // setCategory(category);
       setHidden(false);
     });
     socket.on("end-game", () => {
@@ -121,6 +123,7 @@ function RoomShowPage() {
   };
 
   const handleLeave = (e) => {
+    socket.emit("leave", roomId)
     dispatch(updateRoom(room));
   };
 

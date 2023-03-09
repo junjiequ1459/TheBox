@@ -73,7 +73,7 @@ const io = require("socket.io")(server, {
 });
 
 io.on("connection", (socket) => {
-  socket.on("join", (room, username) => {
+  socket.on("join", room => {
     socket.join(room);
   });
 
@@ -96,12 +96,13 @@ io.on("connection", (socket) => {
     });
   });
 
-  socket.on("disconnect", (room) => {
+  socket.on("leave", (room) => {
     socket.leave(room);
     console.log(`user left room ${room}`);
   });
 
   socket.on("send_message", (data) => {
+    console.log(data)
     socket.to(data.room).emit("receive_message", data);
   });
 });
