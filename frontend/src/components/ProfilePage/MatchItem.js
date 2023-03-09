@@ -7,7 +7,7 @@ function MatchItem({ userId, game }) {
     <li
       key={i}
       style={
-        user._id === game?.winner?._id ? { color: "green" } : { color: "red" }
+        user._id === game?.winner?._id ? { color: "#8eff1e" } : { color: "red" }
       }
     >
       {" "}
