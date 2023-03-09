@@ -17,6 +17,7 @@ function GameModal({ category, question, answer, socket, roomId }) {
   const [userAnswer, setUserAnswer] = useState("");
   const [gameAnswer, setGameAnswer] = useState(null);
   const [gameQuestion, setGameQuestion] = useState(null);
+  const [roomCategory, setRoomCategory] = useState(null);
   let interval;
 
   useEffect(() => {
@@ -53,7 +54,7 @@ function GameModal({ category, question, answer, socket, roomId }) {
   }, [userAnswer, time]);
 
   useEffect(() => {
-    //Loads image
+    setRoomCategory(category)
     if (!question) {
       const img = new Image(50, 50);
       img.src = `../../${answer}.png`;
@@ -141,7 +142,7 @@ function GameModal({ category, question, answer, socket, roomId }) {
 
   return (
     <div id="canvas-div">
-      <h1 id="category-header">{category}</h1>
+      <h1 id="category-header">{roomCategory}</h1>
       {time > 10 ? (
         <h1 id="game-timer">{time}</h1>
       ) : (

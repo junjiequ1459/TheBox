@@ -37,12 +37,13 @@ function RoomShowPage() {
   const [socket2, setSocket] = useState(1);
   const [hidden, setHidden] = useState(true);
   const [category, setCategory] = useState("");
+  const [gameCategory, setGameCategory] = useState("");
   const [answer, setAnswer] = useState("");
   const [question, setQuestion] = useState(null);
 
   useEffect(() => {
     let pics;
-    let randomAnswer;
+    let randomAnswer = null;
     switch (category) {
       case "Animals":
         pics = ["capybara", "penguin", "hedgehog", "sloth", "loris"];
@@ -63,9 +64,11 @@ function RoomShowPage() {
         setQuestion(null);
         break;
       case "Quiz":
-        randomAnswer = bank[Math.floor(Math.random() * bank.length)];
-        setAnswer(randomAnswer.answer);
-        setQuestion(randomAnswer.question);
+        if (!question) {
+          randomAnswer = bank[Math.floor(Math.random() * bank.length)];
+          setAnswer(randomAnswer.answer);
+          setQuestion(randomAnswer.question);
+        } 
         break;
       default:
         pics = ["", "", "", "", ""];
@@ -75,7 +78,7 @@ function RoomShowPage() {
 
   const game = hidden ? null : (
     <GameModal
-      category={category}
+      category={gameCategory}
       answer={answer}
       question={question}
       socket={socket}
@@ -88,10 +91,12 @@ function RoomShowPage() {
     const intervalId = setInterval(() => {
       dispatch(fetchRoom(roomId));
     }, 1000);
-    socket.on("start-game", (answer, question) => {
-      debugger
-      setQuestion(question);
-      setAnswer(answer);
+    socket.on("start-game", (payload) => {
+      if (payload) {
+        setQuestion(payload.question);
+        setAnswer(payload.answer);
+        setGameCategory(payload.category);
+      }
       // setCategory(category);
       setHidden(false);
     });
@@ -117,7 +122,12 @@ function RoomShowPage() {
 
   const handleStartGame = (e) => {
     e.preventDefault();
-    socket.emit("start-game", roomId, answer, question);
+    const payload = {
+      answer,
+      question,
+      category
+    }
+    socket.emit("start-game", roomId, payload);
     setHidden(false);
     setSocket(socket2 + 1);
   };
@@ -130,7 +140,10 @@ function RoomShowPage() {
   const hostStart =
     room?.host._id === user._id ? (
       <div>
-        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+        <select value={category} onChange={(e) => {
+        setCategory(e.target.value);
+        setGameCategory(e.target.value);
+        }}>
           <option value="">-- Select a category --</option>
           <option value="Animals">Animals</option>
           <option value="People">People</option>

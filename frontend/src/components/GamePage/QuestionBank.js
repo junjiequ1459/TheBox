@@ -85,7 +85,7 @@ export const bank = [
     },
     {
         question: "What is the symbol for potassium?",
-        answer: "K"
+        answer: "k"
     },
     {
         question: "Which entry in the pokedex is Bulbasaur?",
@@ -108,7 +108,7 @@ export const bank = [
         answer: "venasaur"
     },
     {
-        question: "What is the final evolution of bulbasaur?",
+        question: "What is the second evolution of bulbasaur?",
         answer: "ivysaur"
     },
     {
