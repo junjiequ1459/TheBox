@@ -4,9 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { fetchRooms } from "../../store/rooms";
 import RoomItem from "./RoomItem";
-import {
-  Redirect
-} from "react-router-dom/cjs/react-router-dom.min";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 function RoomList() {
   const dispatch = useDispatch();
@@ -19,7 +17,6 @@ function RoomList() {
   ));
 
   useEffect(() => {
-    console.log('fetching rooms')
     dispatch(fetchRooms(searchValue));
   }, [searchValue, rooms.length]);
 
@@ -34,7 +31,7 @@ function RoomList() {
 
   if (usersRoom) return <Redirect to={`/room/${usersRoom._id}`} />;
   if (!currentUser) return <Redirect to="/login" />;
-  
+
   return (
     <>
       <ConsoleNavBar name={"room-list"} />

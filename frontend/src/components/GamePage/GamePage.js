@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import { useHistory } from "react-router-dom";
 import { saveGame } from "../../store/games";
 
-function GameModal({ question, answer, socket, roomId }) {
+function GameModal({ category, question, answer, socket, roomId }) {
   // const history = useHistory();
   const dispatch = useDispatch();
   const canvasRef = useRef(null);
@@ -28,6 +28,7 @@ function GameModal({ question, answer, socket, roomId }) {
       dispatch(
         saveGame({
           roomName: room.name,
+          answer: gameAnswer,
           winner: user._id,
           players: room.players,
         })
@@ -38,7 +39,12 @@ function GameModal({ question, answer, socket, roomId }) {
     }
     if (time === 0) {
       dispatch(
-        saveGame({ roomName: room.name, winner: null, players: room.players })
+        saveGame({
+          roomName: room.name,
+          answer: gameAnswer,
+          winner: null,
+          players: room.players,
+        })
       );
       socket.emit("end-game", roomId);
       // history.push("/roomlist");
@@ -46,7 +52,8 @@ function GameModal({ question, answer, socket, roomId }) {
     }
   }, [userAnswer, time]);
 
-  useEffect(() => { //Loads image
+  useEffect(() => {
+    //Loads image
     if (!question) {
       const img = new Image(50, 50);
       img.src = `../../${answer}.png`;
@@ -58,7 +65,7 @@ function GameModal({ question, answer, socket, roomId }) {
       };
     }
     if (question) {
-      setGameQuestion(question)
+      setGameQuestion(question);
     }
     setGameAnswer(answer);
     interval = setInterval(() => {
@@ -107,27 +114,26 @@ function GameModal({ question, answer, socket, roomId }) {
       canvas.height = 500;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.font = "40px Orbitron";
-      ctx.fillStyle = 'blanchedalmond';
-      var words = gameQuestion.split(' ');
-      var line = '';
+      ctx.fillStyle = "blanchedalmond";
+      var words = gameQuestion.split(" ");
+      var line = "";
       var x = 50;
       var y = 50;
-      for(var n = 0; n < words.length; n++) {
-        var testLine = line + words[n] + ' ';
+      for (var n = 0; n < words.length; n++) {
+        var testLine = line + words[n] + " ";
         var metrics = ctx.measureText(testLine);
         var testWidth = metrics.width;
         if (testWidth > canvas.width && n > 0) {
           ctx.fillText(line, x, y);
-          line = words[n] + ' ';
+          line = words[n] + " ";
           y += 50;
-        }
-        else {
+        } else {
           line = testLine;
         }
       }
       ctx.fillText(line, 0, y);
     }
-  }, [time, gameQuestion])
+  }, [time, gameQuestion]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -135,6 +141,7 @@ function GameModal({ question, answer, socket, roomId }) {
 
   return (
     <div id="canvas-div">
+      <h1 id="category-header">{category}</h1>
       {time > 10 ? (
         <h1 id="game-timer">{time}</h1>
       ) : (

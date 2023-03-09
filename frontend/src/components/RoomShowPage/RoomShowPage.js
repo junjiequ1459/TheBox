@@ -10,7 +10,7 @@ import { updateRoom } from "../../store/rooms";
 import GameModal from "../GamePage/GamePage.js";
 import { fetchGame } from "../../store/games";
 
-const socket = io();
+const socket = io("http://localhost:3002");
 
 function RoomShowPage() {
   const dispatch = useDispatch();
@@ -18,13 +18,18 @@ function RoomShowPage() {
   const { roomId } = useParams();
   const user = useSelector((state) => state.session.user);
   const room = useSelector((state) => state.rooms[roomId]);
-  const winner = useSelector((state) => state.games ? state.games.winner?.username : null)
+  const gameinfo = useSelector((state) => (state.games ? state.games : null));
+  const winner = gameinfo?.winner?.username;
+  const prevAnswer = gameinfo?.answer;
   const ifPlayer = room ? room.players : [];
   const players =
     ifPlayer.length === 0
       ? []
       : ifPlayer.map((player, i) => (
-          <li key={i}>
+          <li
+            key={i}
+            style={user?._id === player._id ? { color: "#008df8" } : {}}
+          >
             {" "}
             {player.username} ({player.wins} {player.wins < 2 ? "win" : "wins"})
           </li>
@@ -37,26 +42,31 @@ function RoomShowPage() {
 
   useEffect(() => {
     let pics;
+    let randomAnswer;
     switch (category) {
       case "Animals":
-         pics = ["capybara","penguin","hedgehog","sloth","loris"];
-         var randomAnswer = pics[Math.floor(Math.random() * pics.length)];
-         setAnswer(randomAnswer);
-         break;
+        pics = ["capybara", "penguin", "hedgehog", "sloth", "loris"];
+        randomAnswer = pics[Math.floor(Math.random() * pics.length)];
+        setAnswer(randomAnswer);
+        setQuestion(null);
+        break;
       case "People":
         pics = ["chak", "manny", "rex", "wilson", "zahi"];
-          var randomAnswer = pics[Math.floor(Math.random() * pics.length)];
-          setAnswer(randomAnswer);
+        randomAnswer = pics[Math.floor(Math.random() * pics.length)];
+        setAnswer(randomAnswer);
+        setQuestion(null);
         break;
       case "Places":
-         pics = ["paris","rome","newyorkcity","sydney","egypt"];
-         var randomAnswer = pics[Math.floor(Math.random() * pics.length)];
-         setAnswer(randomAnswer);
-         break;
+        pics = ["paris", "rome", "newyorkcity", "sydney", "egypt"];
+        randomAnswer = pics[Math.floor(Math.random() * pics.length)];
+        setAnswer(randomAnswer);
+        setQuestion(null);
+        break;
       case "Quiz":
-         var randomAnswer = bank[Math.floor(Math.random() * bank.length)]
-         setAnswer(randomAnswer.answer);
-         setQuestion(randomAnswer.question);
+        randomAnswer = bank[Math.floor(Math.random() * bank.length)];
+        setAnswer(randomAnswer.answer);
+        setQuestion(randomAnswer.question);
+        break;
       default:
         pics = ["", "", "", "", ""];
         break;
@@ -65,6 +75,7 @@ function RoomShowPage() {
 
   const game = hidden ? null : (
     <GameModal
+      category={category}
       answer={answer}
       question={question}
       socket={socket}
@@ -91,9 +102,9 @@ function RoomShowPage() {
     };
   }, []);
 
-  useEffect(()=> {
-    dispatch(fetchGame(room?.name))
-  },[winner])
+  useEffect(() => {
+    dispatch(fetchGame(room?.name));
+  }, [winner, prevAnswer]);
 
   if (user === undefined) {
     return <>still loading...</>;
@@ -123,7 +134,7 @@ function RoomShowPage() {
           <option value="Places">Places</option>
           <option value="Quiz">Quiz</option>
         </select>
-        {(category != ""  && room.players.length > 1) ? (
+        {category != "" && room.players.length > 1 ? (
           <button className="signup-button" onClick={handleStartGame}>
             START GAME
           </button>
@@ -143,6 +154,14 @@ function RoomShowPage() {
     </button>
   ) : null;
 
+  const gamedata = (
+    <>
+      {!winner && prevAnswer ? <h2> Draw </h2> : null}
+      {winner ? <h2> Previous Winner : {winner} </h2> : null}
+      {prevAnswer ? <h2> Previous Answer : {prevAnswer} </h2> : null}
+    </>
+  );
+
   return (
     <>
       <div>
@@ -152,7 +171,7 @@ function RoomShowPage() {
               <div className="room-show">
                 <h1> {room ? room.name : null}</h1>
                 <h2> Hosted by: {room ? room.host.username : null}</h2>
-                { winner ? <h2> Previous Winner: { winner }</h2> : null}
+                {gamedata}
                 <ul>
                   Players in room ({players ? players.length : null}/
                   {room ? room.size : null}){players ? players : null}

@@ -7,6 +7,10 @@ const gameSchema = new Schema(
       type: String,
       require: true,
     },
+    answer: {
+      type: String,
+      require: true,
+    },
     winner: {
       type: Schema.Types.ObjectId,
       ref: "User",
