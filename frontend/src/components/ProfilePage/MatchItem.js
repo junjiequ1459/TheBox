@@ -18,8 +18,8 @@ function MatchItem({ userId, game }) {
   return (
     <li>
       <div className="roomname-wins-container">
-        <h2 id="roomname-title-match">Room : {game?.roomName}</h2>
-        <h2 id="roomname-title-match">Answer : {game?.answer}</h2>
+        <h2 id="roomname-title-match">Room: {game?.roomName}</h2>
+        <h2 id="roomname-title-match">Answer: {game?.answer}</h2>
         <ul>
           <p id="player-list-title">Players</p>: {userItems}
         </ul>
