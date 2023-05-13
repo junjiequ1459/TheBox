@@ -34,7 +34,7 @@ After joining a room, users will be directed to the room lobby where they will w
 
 ![image](https://github.com/junjiequ1459/TheBox/assets/30753677/c4d9bf5b-46af-495c-8f8e-d3176a43cdde)
 
-Once the host initiates the game, a broadcast will be sent to all subscribed users via Websockets, starting the game simultaneously for everyone and eliminating any unfair advantages. The games all currently follows a similar format where users race to be the first to guess the image that slowly zooms out to reveal the complete picture. The game ends immediately when any player guesses the correct answer, and all users are returned to the lobby with updated lobby information.
+Once the host initiates the game, a broadcast will be sent to all subscribed users via Websockets, starting the game simultaneously for everyone and eliminating any unfair advantages. The games currently all follow a similar format where users race to be the first to guess the image that slowly zooms out to reveal the complete picture. The game ends immediately when any player guesses the correct answer, and all users are returned to the lobby with updated lobby information.
 
 ## User Profiles
 
