@@ -4,23 +4,34 @@
 
 TheBox is a fullstack MERN party game app that allows you to chat and play with friends.
 
-# Background and Overview
+## Background and Overview
 
 The Box delivers the fun of party games to your electronic devices. We provide a selection of entertaining games that are ideal for any social occasion and are created for friends and family to enjoy together. The Box is the app for you if you want to spice up a family gathering, mark a significant event, or just hang out with pals.
 
-We will need to
+## Technologies and libraries used:
+- Javascript
+- MongoDB
+- Express.js
+- React/Redux
+- Node.js
+- AWS
+- Websockets
 
-- Create user auth, player stats
+# A peek into the box:
 
-- Provide full CRUD for user lobbies
+## Create or join a game
 
-- Chat functionality
+After creating an account, users can start playing by either creating their own game room or joining an existing one through the lobby. Each game room listed in the lobby displays the name of the room, the name of the host, and the current number of players in the room. Users can easily browse through the lobby list and select the game room they want to join and start playing.
 
-- Implement game(s)
+![image](https://github.com/junjiequ1459/TheBox/assets/30753677/dd577c1d-0580-453f-bad1-6ad33b4b5f75)
 
-# Functionality and MVP
+## Live chat and game
 
-### 1. Hosting - (2/20) 1 day
+After joining a game, users will be directed to the game lobby where they will wait for the host to start the game. The lobby displays important information such as the name of the host, the previous winner, the previous answer, and the current players in the lobby with their respective win count. The game lobby also includes a real-time chat feature, powered by Websocket, allowing users to communicate with other players in the lobby. This feature enables users to discuss previous games or plan strategies for upcoming games.
+
+![image](https://github.com/junjiequ1459/TheBox/assets/30753677/1bc9d6d5-b550-4541-a4fa-4f1c763bd5bb)
+
+
 ### 2. User Auth - (2/20) 1 day
    We will have demo logins to navigate the website
    Without logging in the user cannot play the game
@@ -38,6 +49,9 @@ We will need to
    The profile page will have a users information and a match history plus win percentage
 ### 7. Production ReadMe - (2/24) 1 day
    Production ReadMe
+   
+   
+### Users
 
 # Group Members and Work Breakdown
 
