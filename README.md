@@ -1,7 +1,6 @@
 # TheBox
 
-### Live Link:
-https://the-box.onrender.com/
+### Live Link: [TheBox](https://the-box.social/)
 
 TheBox is a fullstack MERN party game app that allows you to chat and play with friends.
 
