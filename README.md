@@ -54,10 +54,16 @@ The Box also features a global leaderboard, a place where the top players of our
 
 ## Roles
 
-Team Lead and CSS styler - Rex
+Team Lead and CSS - Rex
 
 Frontend Lead- Kevin
 
 Fullstack Flex - Joey
 
 Backend Lead and Git Manager - Zahi
+
+# Future Features
+
+- More games
+
+
