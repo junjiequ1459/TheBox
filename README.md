@@ -8,14 +8,13 @@ TheBox is a fullstack MERN party game app that allows you to chat and play with 
 
 The Box delivers the fun of party games to your electronic devices. We provide a selection of entertaining games that are ideal for any social occasion and are created for friends and family to enjoy together. The Box is the app for you if you want to spice up a family gathering, mark a significant event, or just hang out with pals.
 
-## Technologies and libraries used:
-- Javascript
-- MongoDB
-- Express.js
-- React/Redux
+## Technologies and libraries:
+
+- MongoDB / Express.js
+- React / Redux
 - Node.js
-- AWS
-- Websockets
+- Websocket
+- AWS 
 
 # A peek into the box:
 
@@ -25,92 +24,40 @@ After creating an account, users can start playing by either creating their own 
 
 ![image](https://github.com/junjiequ1459/TheBox/assets/30753677/dd577c1d-0580-453f-bad1-6ad33b4b5f75)
 
-## Live chat and game
+## Game lobby
 
-After joining a game, users will be directed to the game lobby where they will wait for the host to start the game. The lobby displays important information such as the name of the host, the previous winner, the previous answer, and the current players in the lobby with their respective win count. The game lobby also includes a real-time chat feature, powered by Websocket, allowing users to communicate with other players in the lobby. This feature enables users to discuss previous games or plan strategies for upcoming games.
+After joining a room, users will be directed to the room lobby where they will wait for the host to start the game, a room can hold up to four people but this number is decided by the host. The lobby displays important information such as the name of the host, the previous winner, the previous answer, and the current players in the lobby with their respective win count. The game lobby also includes a real-time chat feature, powered by Websocket, allowing users to communicate with other players in the lobby. This feature enables users to discuss previous games or plan strategies for upcoming games.
 
 ![image](https://github.com/junjiequ1459/TheBox/assets/30753677/1bc9d6d5-b550-4541-a4fa-4f1c763bd5bb)
 
+## Playing games!
 
-### 2. User Auth - (2/20) 1 day
-   We will have demo logins to navigate the website
-   Without logging in the user cannot play the game
-### 3. Rooms/Lobby - (2/21) 1 day
-   Users will be able to create a lobby or rooms to wait for enough people to start the game
-   Logged in users can join existing lobbies
-### 4. Game - (2/22) 2 days
-   The main feature, the game can be played with multiple people
-   Only users logged in can play the game
-### 5. Sockets - (2/22) 2 days
-   Sockets will allow all players to simultaneously play the game and update for everyone
-   Users within the same lobby will be subscribed and listening to any updates
-### 6. Profile - (2/23) 1 day
-   Users will have their own profile page
-   The profile page will have a users information and a match history plus win percentage
-### 7. Production ReadMe - (2/24) 1 day
-   Production ReadMe
-   
-   
-### Users
+![image](https://github.com/junjiequ1459/TheBox/assets/30753677/c4d9bf5b-46af-495c-8f8e-d3176a43cdde)
 
-# Group Members and Work Breakdown
+Once the host initiates the game, a broadcast will be sent to all subscribed users via Websockets, starting the game simultaneously for everyone and eliminating any unfair advantages. The games all currently follows a similar format where users race to be the first to guess the image that slowly zooms out to reveal the complete picture. The game ends immediately when any player guesses the correct answer, and all users are returned to the lobby with updated lobby information.
 
-## Work Breakdown
+## User Profiles
 
-### Roles
+As users play more and more games, they may want to go and look at their statistics or previous games, this is where the profile page comes into play.
+
+![image](https://github.com/junjiequ1459/TheBox/assets/30753677/681076e9-08e5-4aa6-97e1-b03a4121aeba)
+
+The profile page displays crucial information such as the user's win/loss ratio, providing insights into their gameplay performance. It also shows the match history, enabling users to identify patterns and areas for improvement in their previous games. This is also where users can upload their profile picture through AWS to personalize their profile. Overall, the profile page offers a comprehensive view of a user's gameplay and progress, making it an invaluable tool for self-improvement and interaction with other players.
+
+##Leaderboard
+
+![image](https://github.com/junjiequ1459/TheBox/assets/30753677/f66afeb5-50d7-4d79-91ad-85429f11e66f)
+
+The Box also features a global leaderboard, a place where the top players of our game are recognized for their impressive skills and strategy. It's a display of the best of the best, showcasing those who have earned their place through determination and hard work. So, take on the challenge and see where you stand among the best players of our game. Who knows, you might just surprise yourself and earn a spot on the leaderboard.
+
+# Group Members
+
+## Roles
 
 Team Lead and CSS styler - Rex
 
-Frontend - Kevin
+Frontend Lead- Kevin
 
 Fullstack Flex - Joey
 
-Backend and Git Manager - Zahi
-
-### Monday
-
-Build React app - Kevin, Rex
-
-Build express backend app - Joey, Zahi
-
-Finish User Auth and style including Profiles - All
-
-Investigate Websockets - Joey
-
-### Tuesday
-
-Create CRUD for rooms/lobbies - ALL
-
-Backend - Joey, Zahi
-
-Frontend - Kevin, Rex(Styler)
-
-Brainstorm games - Rex
-
-### Wednesday
-
-Start and play game functionality - ALL
-
-Backend - Joey, Zahi
-
-Frontend - Kevin, Rex
-
-Setup Sockets - Joey
-
-### Thursday
-
-Polish app
-
-Backend - Joey, Zahi
-
-Frontend - Kevin, Rex(Styler)
-
-# Technologies and Technical Challenges
-
-MongoDB/Express - We are using MongoDB for our backend database to hold informations such as user's information, states, games and etc.
-
-React/Node.js - We are using React for our frontend
-
-Websocket - For multiplayer games and chatboxes
-
-AWS - An object storage space to store and retrieve data. Mainly for our pictures.
+Backend Lead and Git Manager - Zahi
