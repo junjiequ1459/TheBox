@@ -42,9 +42,9 @@ As users play more and more games, they may want to go and look at their statist
 
 ![image](https://github.com/junjiequ1459/TheBox/assets/30753677/681076e9-08e5-4aa6-97e1-b03a4121aeba)
 
-The profile page displays crucial information such as the user's win/loss ratio, providing insights into their gameplay performance. It also shows the match history, enabling users to identify patterns and areas for improvement in their previous games. This is also where users can upload their profile picture through AWS to personalize their profile. Overall, the profile page offers a comprehensive view of a user's gameplay and progress, making it an invaluable tool for self-improvement and interaction with other players.
+The profile page displays crucial information such as the user's win/loss ratio, providing insights into their gameplay performance. It also shows their match history, enabling users to identify patterns and areas for improvement in their previous games. This is also where users are able to upload a profile picture through AWS to personalize their page. Overall, the profile page offers a comprehensive view of a user's gameplay and progress, making it a tool for self-improvement and interaction with other players.
 
-##Leaderboard
+## Leaderboard
 
 ![image](https://github.com/junjiequ1459/TheBox/assets/30753677/f66afeb5-50d7-4d79-91ad-85429f11e66f)
 
